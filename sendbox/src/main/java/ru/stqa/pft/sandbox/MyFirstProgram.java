@@ -18,14 +18,9 @@ public class MyFirstProgram {
         System.out.println("Distance equal: " + distance0(x1, x2, y1, y2));
 
 
-        Point p1 = new Point();
-        Point p2 = new Point();
-        p1.x=11;
-        p1.y=5;
-        p2.x=12;
-        p2.y=5;
+        Point p1 = new Point(11, 5);
+        Point p2 = new Point(12, 5);
         System.out.println("Distance equal: " + distance(p1, p2));
-
     }
 
     public static void hello(String somebody){
