@@ -35,7 +35,7 @@ public class GroupCreationTests {
     public void testGroupCreation() throws Exception {
 
         goToGroupPage();
-        wd.findElement(By.name("new")).click();
+        initGroupCreation();
         wd.findElement(By.name("group_name")).click();
         wd.findElement(By.name("group_name")).clear();
         wd.findElement(By.name("group_name")).sendKeys("group1");
@@ -46,6 +46,10 @@ public class GroupCreationTests {
         wd.findElement(By.name("submit")).click();
         wd.findElement(By.linkText("group page")).click();
         wd.findElement(By.linkText("Logout")).click();
+    }
+
+    private void initGroupCreation() {
+        wd.findElement(By.name("new")).click();
     }
 
     private void goToGroupPage() {
