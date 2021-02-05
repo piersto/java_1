@@ -1,14 +1,18 @@
 package ru.stqa.pft.dcom;
 
+import java.util.concurrent.TimeUnit;
 import org.testng.annotations.*;
-
+import static org.testng.Assert.*;
 import org.openqa.selenium.*;
+import org.openqa.selenium.firefox.FirefoxDriver;
 
 public class OpenSalleDeNouvellesPageTests {
     private WebDriver wd;
 
-    @BeforeMethod(alwaysRun = true)
+    @BeforeClass(alwaysRun = true)
     public void setUp() throws Exception {
+        wd = new FirefoxDriver();
+        wd.manage().timeouts().implicitlyWait(30, TimeUnit.SECONDS);
     }
 
     @Test
@@ -20,7 +24,7 @@ public class OpenSalleDeNouvellesPageTests {
         wd.findElement(By.id("titrePage")).click();
     }
 
-    @AfterMethod(alwaysRun = true)
+    @AfterClass(alwaysRun = true)
     public void tearDown() throws Exception {
         wd.quit();
     }
