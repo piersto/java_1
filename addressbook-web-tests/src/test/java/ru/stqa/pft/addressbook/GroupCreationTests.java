@@ -4,11 +4,8 @@ import java.util.concurrent.TimeUnit;
 
 import org.testng.annotations.*;
 
-import static org.testng.Assert.*;
-
 import org.openqa.selenium.*;
 import org.openqa.selenium.firefox.FirefoxDriver;
-import org.openqa.selenium.support.ui.Select;
 
 public class GroupCreationTests {
     private WebDriver wd;
@@ -18,16 +15,16 @@ public class GroupCreationTests {
         wd = new FirefoxDriver();
         wd.manage().timeouts().implicitlyWait(30, TimeUnit.SECONDS);
         wd.get("http://localhost/addressbook/");
-        login();
+        login("admin", "secret");
     }
 
-    private void login() {
+    private void login(String username, String password) {
         wd.findElement(By.name("user")).click();
         wd.findElement(By.name("user")).clear();
-        wd.findElement(By.name("user")).sendKeys("admin");
+        wd.findElement(By.name("user")).sendKeys(username);
         wd.findElement(By.name("pass")).click();
         wd.findElement(By.name("pass")).clear();
-        wd.findElement(By.name("pass")).sendKeys("secret");
+        wd.findElement(By.name("pass")).sendKeys(password);
         wd.findElement(By.xpath("//input[@value='Login']")).click();
     }
 
@@ -36,16 +33,28 @@ public class GroupCreationTests {
 
         goToGroupPage();
         initGroupCreation();
+        fillGroupForm("group1", "header1", "footer");
+        submitGroupCreation();
+        returnToGroupPage();
+        wd.findElement(By.linkText("Logout")).click();
+    }
+
+    private void returnToGroupPage() {
+        wd.findElement(By.linkText("group page")).click();
+    }
+
+    private void submitGroupCreation() {
+        wd.findElement(By.name("submit")).click();
+    }
+
+    private void fillGroupForm(String name, String header, String footer) {
         wd.findElement(By.name("group_name")).click();
         wd.findElement(By.name("group_name")).clear();
-        wd.findElement(By.name("group_name")).sendKeys("group1");
+        wd.findElement(By.name("group_name")).sendKeys(name);
         wd.findElement(By.name("group_header")).clear();
-        wd.findElement(By.name("group_header")).sendKeys("header1");
+        wd.findElement(By.name("group_header")).sendKeys(header);
         wd.findElement(By.name("group_footer")).clear();
-        wd.findElement(By.name("group_footer")).sendKeys("comment1");
-        wd.findElement(By.name("submit")).click();
-        wd.findElement(By.linkText("group page")).click();
-        wd.findElement(By.linkText("Logout")).click();
+        wd.findElement(By.name("group_footer")).sendKeys(footer);
     }
 
     private void initGroupCreation() {
