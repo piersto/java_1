@@ -6,7 +6,7 @@ import static org.testng.Assert.*;
 import org.openqa.selenium.*;
 import org.openqa.selenium.firefox.FirefoxDriver;
 
-public class AddUserTests {
+public class ContactCreationTests {
   private WebDriver wd;
 
 
