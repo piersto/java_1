@@ -31,7 +31,21 @@ public class AddUserTests {
   @Test
   public void testAddUserTests() throws Exception {
 
-    wd.findElement(By.linkText("add new")).click();
+    initContactCreation();
+    fillContactForm();
+    submitContactCreation();
+    returnToHomePage();
+  }
+
+  private void returnToHomePage() {
+    wd.findElement(By.linkText("home page")).click();
+  }
+
+  private void submitContactCreation() {
+    wd.findElement(By.name("submit")).click();
+  }
+
+  private void fillContactForm() {
     wd.findElement(By.name("firstname")).click();
     wd.findElement(By.name("firstname")).clear();
     wd.findElement(By.name("firstname")).sendKeys("Masha");
@@ -53,8 +67,10 @@ public class AddUserTests {
     wd.findElement(By.name("email")).click();
     wd.findElement(By.name("email")).clear();
     wd.findElement(By.name("email")).sendKeys("mpetrova@gmail.com");
-    wd.findElement(By.name("submit")).click();
-    wd.findElement(By.linkText("home page")).click();
+  }
+
+  private void initContactCreation() {
+    wd.findElement(By.linkText("add new")).click();
   }
 
   @AfterClass(alwaysRun = true)
