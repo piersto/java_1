@@ -1,7 +1,6 @@
 package ru.stqa.pft.addressbook;
 
-import org.testng.annotations.*;
-import org.openqa.selenium.*;
+import org.testng.annotations.Test;
 
 public class GroupDeletionTests extends TestBase {
 
