@@ -13,6 +13,6 @@ public class ModifyContactTests extends TestBase {
         app.initContactModification();
         app.fillContactForm(new ContactData("Masha prosto Kvasha", "Ivanovna", "Petrova", "QA Analyst", "CBC", "Montreal", "555-666-7777", "mpetrova@gmail.com"));
         app.submitContactModification();
-        app.returnToHomePage();
+        app.getNavigationHelper().returnToHomePage();
     }
 }

@@ -12,6 +12,7 @@ public class ApplicationManager {
     FirefoxDriver wd;
 
 
+    private NavigationHelper navigationHelper;
     private GroupHelper groupHelper;
 
     public void init() {
@@ -19,6 +20,7 @@ public class ApplicationManager {
         wd.manage().timeouts().implicitlyWait(30, TimeUnit.SECONDS);
         wd.get("http://localhost/addressbook/");
         groupHelper = new GroupHelper(wd);
+        navigationHelper = new NavigationHelper(wd);
         login("admin", "secret");
     }
 
@@ -30,10 +32,6 @@ public class ApplicationManager {
         wd.findElement(By.name("pass")).clear();
         wd.findElement(By.name("pass")).sendKeys(password);
         wd.findElement(By.xpath("//input[@value='Login']")).click();
-    }
-
-    public void goToGroupPage() {
-        wd.findElement(By.linkText("groups")).click();
     }
 
     public void stop() {
@@ -69,11 +67,7 @@ public class ApplicationManager {
     }
 
     public void initContactModification() {
-      wd.findElement(By.xpath("//img[@alt='Edit']")).click();
-    }
-
-    public void returnToHomePage() {
-        wd.findElement(By.linkText("home page")).click();
+        wd.findElement(By.xpath("//img[@alt='Edit']")).click();
     }
 
     public void submitContactCreation() {
@@ -111,10 +105,14 @@ public class ApplicationManager {
     }
 
     public void submitContactModification() {
-      wd.findElement(By.name("update")).click();
+        wd.findElement(By.name("update")).click();
     }
 
     public GroupHelper getGroupHelper() {
         return groupHelper;
+    }
+
+    public NavigationHelper getNavigationHelper() {
+        return navigationHelper;
     }
 }
