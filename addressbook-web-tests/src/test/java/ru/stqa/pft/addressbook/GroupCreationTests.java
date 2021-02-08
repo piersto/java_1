@@ -1,7 +1,7 @@
 package ru.stqa.pft.addressbook;
 
 import org.testng.annotations.*;
-import org.openqa.selenium.*;
+
 
 public class GroupCreationTests extends TestBase {
 
@@ -13,6 +13,6 @@ public class GroupCreationTests extends TestBase {
         fillGroupForm(new GroupData("group1", "header1", "footer"));
         submitGroupCreation();
         returnToGroupPage();
-        wd.findElement(By.linkText("Logout")).click();
+        // wd.findElement(By.linkText("Logout")).click();
     }
 }
