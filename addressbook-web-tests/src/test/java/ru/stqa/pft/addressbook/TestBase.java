@@ -97,4 +97,12 @@ public class TestBase {
     protected void selectContact() {
         wd.findElement(By.name("selected[]")).click();
     }
+
+    protected void updateGroup() {
+      wd.findElement(By.name("update")).click();
+    }
+
+    protected void initGroupModification() {
+      wd.findElement(By.name("edit")).click();
+    }
 }
