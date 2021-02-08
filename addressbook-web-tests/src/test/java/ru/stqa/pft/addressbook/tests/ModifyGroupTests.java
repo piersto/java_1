@@ -10,10 +10,10 @@ public class ModifyGroupTests extends TestBase{
   public void testModifyGroup() throws Exception {
 
     app.goToGroupPage();
-    app.selectGroup();
-    app.initGroupModification();
-    app.fillGroupForm(new GroupData("group11", "header11", "footer11"));
-    app.updateGroup();
+    app.getGroupHelper().selectGroup();
+    app.getGroupHelper().initGroupModification();
+    app.getGroupHelper().fillGroupForm(new GroupData("group11", "header11", "footer11"));
+    app.getGroupHelper().updateGroup();
   }
 }
 
