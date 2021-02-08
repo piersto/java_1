@@ -148,4 +148,8 @@ public class TestBase {
     protected void initContactCreation() {
         wd.findElement(By.linkText("add new")).click();
     }
+
+    protected void submitContactModification() {
+      wd.findElement(By.name("update")).click();
+    }
 }
