@@ -9,10 +9,10 @@ public class ModifyContactTests extends TestBase {
 
     @Test
     public void testModifyContact() throws Exception {
-        app.selectContact();
-        app.initContactModification();
-        app.fillContactForm(new ContactData("Masha prosto Kvasha", "Ivanovna", "Petrova", "QA Analyst", "CBC", "Montreal", "555-666-7777", "mpetrova@gmail.com"));
-        app.submitContactModification();
+        app.getContactHelper().selectContact();
+        app.getContactHelper().initContactModification();
+        app.getContactHelper().fillContactForm(new ContactData("Masha prosto Kvasha", "Ivanovna", "Petrova", "QA Analyst", "CBC", "Montreal", "555-666-7777", "mpetrova@gmail.com"));
+        app.getContactHelper().submitContactModification();
         app.getNavigationHelper().returnToHomePage();
     }
 }
