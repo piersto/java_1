@@ -4,7 +4,6 @@ import org.testng.annotations.*;
 import org.openqa.selenium.*;
 
 public class ModifyGroupTests extends TestBase{
-  private WebDriver wd;
 
   @Test
   public void testModifyGroup() throws Exception {

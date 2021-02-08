@@ -105,4 +105,8 @@ public class TestBase {
     protected void initGroupModification() {
       wd.findElement(By.name("edit")).click();
     }
+
+    protected void initContactModification() {
+      wd.findElement(By.xpath("//img[@alt='Edit']")).click();
+    }
 }
