@@ -4,7 +4,7 @@ import org.testng.annotations.Test;
 import ru.stqa.pft.addressbook.model.ContactData;
 
 
-public class ModifyContactTests extends TestBase {
+public class ContactModificationTests extends TestBase {
 
 
     @Test

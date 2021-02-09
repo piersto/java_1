@@ -4,7 +4,7 @@ import org.testng.annotations.*;
 import ru.stqa.pft.addressbook.model.GroupData;
 
 
-public class ModifyGroupTests extends TestBase{
+public class GroupModificationTests extends TestBase{
 
   @Test
   public void testModifyGroup() throws Exception {
@@ -14,6 +14,7 @@ public class ModifyGroupTests extends TestBase{
     app.getGroupHelper().initGroupModification();
     app.getGroupHelper().fillGroupForm(new GroupData("group11", "header11", "footer11"));
     app.getGroupHelper().updateGroup();
+    app.getGroupHelper().returnToGroupPage();
   }
 }
 
