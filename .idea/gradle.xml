@@ -16,32 +16,10 @@
       </GradleProjectSettings>
       <GradleProjectSettings>
         <option name="distributionType" value="DEFAULT_WRAPPED" />
-        <option name="externalProjectPath" value="$PROJECT_DIR$/addressbook-web-tests-2" />
+        <option name="externalProjectPath" value="$PROJECT_DIR$/sendbox/src/test/java/ru/stqa/pft/sandbox" />
         <option name="modules">
           <set>
-            <option value="$PROJECT_DIR$/addressbook-web-tests-2" />
-          </set>
-        </option>
-      </GradleProjectSettings>
-      <GradleProjectSettings>
-        <option name="delegatedBuild" value="false" />
-        <option name="testRunner" value="PLATFORM" />
-        <option name="distributionType" value="DEFAULT_WRAPPED" />
-        <option name="externalProjectPath" value="$PROJECT_DIR$/d.com" />
-        <option name="modules">
-          <set>
-            <option value="$PROJECT_DIR$/d.com" />
-          </set>
-        </option>
-      </GradleProjectSettings>
-      <GradleProjectSettings>
-        <option name="delegatedBuild" value="false" />
-        <option name="testRunner" value="PLATFORM" />
-        <option name="distributionType" value="DEFAULT_WRAPPED" />
-        <option name="externalProjectPath" value="$PROJECT_DIR$/sendbox" />
-        <option name="modules">
-          <set>
-            <option value="$PROJECT_DIR$/sendbox" />
+            <option value="$PROJECT_DIR$/sendbox/src/test/java/ru/stqa/pft/sandbox" />
           </set>
         </option>
       </GradleProjectSettings>
