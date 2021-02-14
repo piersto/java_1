@@ -4,6 +4,7 @@ import org.openqa.selenium.By;
 import org.openqa.selenium.NoSuchElementException;
 import org.openqa.selenium.WebDriver;
 import org.openqa.selenium.support.ui.Select;
+import org.testng.Assert;
 import ru.stqa.pft.addressbook.model.ContactData;
 
 public class ContactHelper extends HelperBase {
@@ -29,7 +30,7 @@ public class ContactHelper extends HelperBase {
         click(By.name("submit"));
     }
 
-    public void fillContactForm(ContactData contactData) {
+    public void fillContactForm(ContactData contactData, boolean creation) {
         type(By.name("firstname"), contactData.getFirstname());
 
         type(By.name("middlename"), contactData.getMiddlename());
@@ -46,8 +47,13 @@ public class ContactHelper extends HelperBase {
 
         type(By.name("email"), contactData.getEmail());
 
-        if (isElementPresent(By.name("new_group"))) {
+        // If we create contact:
+        if (creation) {
             new Select(wd.findElement(By.name("new_group"))).selectByVisibleText(contactData.getGroup());
+        }
+        // Else- we modify contact so 'new_group' shouldn't be on the page and we assert it's not there.
+        else {
+            Assert.assertFalse(isElementPresent(By.name("new_group")));
         }
     }
 
