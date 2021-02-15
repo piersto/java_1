@@ -9,11 +9,11 @@ public class ContactModificationTests extends TestBase {
 
     @Test
     public void testModifyContact() {
-        if (!app.getContactHelper().isThereAContact()) {
+        if (! app.getContactHelper().isThereAContact()) {
             app.getContactHelper().initContactCreation();
             app.getContactHelper().createContact(new ContactData("Masha",
-                    null, "Petrova", null,
-                    null, "Montreal", null,
+                    "Ivanovna", "Petrova", "QA Analyst",
+                    "CBC", "Montreal", "111-222-3333",
                     "mpetrova@gmail.com", "[none]"), true);
             app.getNavigationHelper().returnToHomePage();
         }
@@ -21,9 +21,10 @@ public class ContactModificationTests extends TestBase {
             app.getContactHelper().selectContact();
             app.getContactHelper().initContactModification();
             app.getContactHelper().fillContactForm(new ContactData("Masha prosto Kvasha", "Ivanovna",
-                    "Petrova3", "QA Analyst", "CBC", "Montreal",
-                    "555-666-7777", "mpetrova@gmail.com", "[none]"), false);
-            //app.getNavigationHelper().returnToHomePage();
+                    "Dubrova", "QA Analyst", "CBC", "Montreal",
+                    "444-555-666", "mpetrova@YAHOO.com", "[none]"), false);
+            app.getContactHelper().submitContactModification();
+            app.getNavigationHelper().returnToHomePage();
         }
 
 }
