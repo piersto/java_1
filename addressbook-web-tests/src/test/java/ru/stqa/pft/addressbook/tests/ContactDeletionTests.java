@@ -1,11 +1,20 @@
 package ru.stqa.pft.addressbook.tests;
 
 import org.testng.annotations.Test;
+import ru.stqa.pft.addressbook.model.ContactData;
 
 public class ContactDeletionTests extends TestBase {
 
     @Test
     public void testContactDeletion() {
+        if (! app.getContactHelper().isThereAContact()){
+            app.getContactHelper().initContactCreation();
+            app.getContactHelper().createContact(new ContactData("Masha",
+                    "Ivanovna", "Petrova", "QA Analyst",
+                    "CBC", "Montreal", "555-666-7777",
+                    "mpetrova@gmail.com", "[none]"), true);
+            app.getNavigationHelper().returnToHomePage();
+        }
         app.getContactHelper().selectContact();
         app.getContactHelper().deleteSelectedContacts();
     }

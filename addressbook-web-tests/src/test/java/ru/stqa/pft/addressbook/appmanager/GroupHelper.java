@@ -46,7 +46,7 @@ public class GroupHelper extends HelperBase {
 
     public void createGroup(GroupData group) {
         initGroupCreation();
-        // Instead of fix data, will be used parameter = group
+        // Instead of fix data, parameter = group is used
         fillGroupForm(group);
         submitGroupCreation();
         returnToGroupPage();
