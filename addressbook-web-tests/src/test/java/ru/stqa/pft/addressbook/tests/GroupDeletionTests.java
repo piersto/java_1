@@ -14,7 +14,7 @@ public class GroupDeletionTests extends TestBase {
         if (! app.getGroupHelper().isThereAGroup()) {
             app.getGroupHelper().createGroup(new GroupData("test1", "header1", "footer1"));
         }
-        app.getGroupHelper().selectGroup();
+        app.getGroupHelper().selectGroup(0);
         app.getGroupHelper().deleteSelectedGroups();
         app.getGroupHelper().returnToGroupPage();
         int after = app.getGroupHelper().getGroupCount();
