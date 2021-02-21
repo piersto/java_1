@@ -19,7 +19,7 @@ public class ContactModificationTests extends TestBase {
             app.getNavigationHelper().returnToHomePage();
         }
             int before = app.getContactHelper().getContactCount();
-            app.getContactHelper().selectContact();
+            app.getContactHelper().selectContact(before - 1);
             app.getContactHelper().initContactModification();
             app.getContactHelper().fillContactForm(new ContactData("Masha prosto Kvasha", "Ivanovna",
                     "Dubrova", "QA Analyst", "CBC", "Montreal",
