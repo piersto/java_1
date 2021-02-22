@@ -20,6 +20,7 @@ public class ContactHelper extends HelperBase {
     public void deleteSelectedContacts() {
         click(By.xpath("//input[@value='Delete']"));
         wd.switchTo().alert().accept();
+        click(By.id("logo"));
     }
 
     public void selectContact(int index) {
