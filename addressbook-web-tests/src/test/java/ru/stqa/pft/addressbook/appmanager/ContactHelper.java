@@ -88,7 +88,7 @@ public class ContactHelper extends HelperBase {
         List<ContactData> contacts = new ArrayList<ContactData>();
         // Определяем строку в таблице из которой будем брать имя и фамилию
         List<WebElement> rows = wd.findElements(By.cssSelector("tr[name='entry']"));
-        // Теперь проходим по этим строкам в цикле
+        // Теперь проходим по этим строкам в цикле и берём имя и фамилию
         for (WebElement row : rows) {
             String lastname = row.findElement(By.cssSelector("td:nth-child(2)")).getText();
             String firstname = row.findElement(By.cssSelector("td:nth-child(3)")).getText();
