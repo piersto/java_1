@@ -4,6 +4,7 @@ import org.testng.Assert;
 import org.testng.annotations.*;
 import ru.stqa.pft.addressbook.model.GroupData;
 
+import java.util.HashSet;
 import java.util.List;
 
 
@@ -21,11 +22,23 @@ public class GroupModificationTests extends TestBase{
     // Берём размер списка и вычитаем из него единицу
     app.getGroupHelper().selectGroup(before.size() -1);
     app.getGroupHelper().initGroupModification();
-    app.getGroupHelper().fillGroupForm(new GroupData("group11", "header11", "footer11"));
+    // Сделаем локальную переменную, что бы два раза не прописывать список
+    // И добавим в неё id группы, которую мы модифицировали: before.get(before.size() -1).getId()
+    GroupData group = new GroupData(before.get(before.size() -1).getId(), "group11", "header11", "footer11");
+
+    app.getGroupHelper().fillGroupForm(group);
     app.getGroupHelper().updateGroup();
     app.getGroupHelper().returnToGroupPage();
     List<GroupData> after = app.getGroupHelper().getGroupList();
     Assert.assertEquals(after.size(), before.size());
+
+    // Старый список перед сравнением надо модифицировать -- удалить последний элемент
+    before.remove(before.size() -1);
+    // А вместо него добавим тот, который должен появиться после модификации = new GroupData("group11", "header11", "footer11")
+    before.add(group);
+
+    Assert.assertEquals(new HashSet<Object>(before), new HashSet<Object>(after));
+
   }
 }
 
