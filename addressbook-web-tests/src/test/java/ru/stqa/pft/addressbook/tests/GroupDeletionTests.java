@@ -15,10 +15,14 @@ public class GroupDeletionTests extends TestBase {
             app.getGroupHelper().createGroup(new GroupData("test1", "header1", "footer1"));
         }
         List<GroupData> before = app.getGroupHelper().getGroupList();
-        app.getGroupHelper().selectGroup(0);
+        app.getGroupHelper().selectGroup(before.size() - 1);
         app.getGroupHelper().deleteSelectedGroups();
         app.getGroupHelper().returnToGroupPage();
         List<GroupData> after = app.getGroupHelper().getGroupList();
         Assert.assertEquals(after.size(), before.size() - 1);
+        // Удаляем из списка before группу с тем же идексом, что и у удалённой = before.size - 1
+        before.remove(before.size() - 1);
+        // Добавили в GroupData метод equals и удалили из кода луп, так как этот метод сам умеет его делать
+        Assert.assertEquals(before, after);
     }
 }
