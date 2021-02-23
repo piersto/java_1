@@ -91,10 +91,13 @@ public class ContactHelper extends HelperBase {
         List<WebElement> rows = wd.findElements(By.cssSelector("tr[name='entry']"));
         // Теперь проходим по этим строкам в цикле и берём имя и фамилию
         for (WebElement row : rows) {
+            String id = row.findElement(By.cssSelector("td:nth-child(1)")).getAttribute("value");
             String lastname = row.findElement(By.cssSelector("td:nth-child(2)")).getText();
             String firstname = row.findElement(By.cssSelector("td:nth-child(3)")).getText();
+
+
             // Создаём объект типа ContactData
-            ContactData contact = new ContactData(lastname, null, firstname,null,
+            ContactData contact = new ContactData(id, lastname, null, firstname,null,
                     null, null, null, null, null);
             // И добавляем в этот объект текст, который прочитал в строках
             contacts.add(contact);
