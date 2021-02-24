@@ -24,23 +24,16 @@ public class ContactCreationTests extends TestBase {
         app.getNavigationHelper().returnToHomePage();
         List<ContactData> after = app.getContactHelper().getContactList();
         Assert.assertEquals(after.size(), before.size() +1);
-
+/*
         int max = 0;
         for (ContactData c : after) {
             if (c.getId() > max) {
                 max = c.getId();
             }
         }
-
-        Comparator<? super ContactData> byId = new Comparator<ContactData>() {
-            @Override
-            public int compare(ContactData o1, ContactData o2) {
-                return Integer.compare(o1.getId(), o2.getId());
-            }
-        };
-        int max1 = after.stream().max(byId).get().getId();
-
-        contact.setId(max1);
+*/
+        // Находим max Id, и добавляем в contact
+        contact.setId(after.stream().max((o1, o2) -> Integer.compare(o1.getId(), o2.getId())).get().getId());
         before.add(contact);
         Assert.assertEquals(new HashSet<Object>(before), new HashSet<Object>(after));
     }
