@@ -91,7 +91,8 @@ public class ContactHelper extends HelperBase {
         List<WebElement> rows = wd.findElements(By.cssSelector("tr[name='entry']"));
         // Теперь проходим по этим строкам в цикле и берём имя и фамилию
         for (WebElement row : rows) {
-            String id = row.findElement(By.cssSelector("td:nth-child(1) input")).getAttribute("value");
+            int id = Integer.parseInt(row.findElement(By.cssSelector("td:nth-child(1) input")).
+                                                                    getAttribute("value"));
             String lastname = row.findElement(By.cssSelector("td:nth-child(3)")).getText();
             String firstname = row.findElement(By.cssSelector("td:nth-child(2)")).getText();
 
