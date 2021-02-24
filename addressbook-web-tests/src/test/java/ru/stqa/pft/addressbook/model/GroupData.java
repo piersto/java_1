@@ -21,7 +21,7 @@ public class GroupData {
 
     // Если группа передаётся без id, то будет использоваться этот конструктор
     public GroupData(String name, String header, String footer) {
-        this.id = 0;
+        this.id = Integer.MAX_VALUE;
         this.name = name;
         this.header = header;
         this.footer = footer;
@@ -48,12 +48,12 @@ public class GroupData {
         if (this == o) return true;
         if (o == null || getClass() != o.getClass()) return false;
         GroupData groupData = (GroupData) o;
-        return id == groupData.id && Objects.equals(name, groupData.name);
+        return Objects.equals(name, groupData.name);
     }
 
     @Override
     public int hashCode() {
-        return Objects.hash(id, name);
+        return Objects.hash(name);
     }
 
     @Override
