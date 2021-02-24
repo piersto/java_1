@@ -17,17 +17,19 @@ public class ContactModificationTests extends TestBase {
         {
             app.getContactHelper().initContactCreation();
             app.getContactHelper().createContact(new ContactData("Masha",
-                    "Ivanovna", "Petrova", "QA Analyst",
-                    "CBC", "Montreal", "111-222-3333",
-                    "mpetrova@gmail.com", "[none]"), true);
+                    null, "Petrova", null,
+                    null, null, null,
+                    null, "[none]"), true);
             app.getNavigationHelper().returnToHomePage();
         }
             List<ContactData> before = app.getContactHelper().getContactList();
-            app.getContactHelper().selectContact(before.size() - 1);
-            app.getContactHelper().initContactModification();
-            ContactData contact = new ContactData(before.get(before.size() - 1).getId(),"Masha prosto Kvasha", "Ivanovna",
-                    "Dubrova", "QA Analyst", "CBC", "Montreal",
-                    "444-555-666", "mpetrova@YAHOO.com", "[none]");
+            // app.getContactHelper().selectContact(before.size() - 1);
+            app.getContactHelper().initContactModification(before.size() - 1);
+            // Делаем локальную переменную, так как использовать будем не один раз
+            ContactData contact = new ContactData(before.get(before.size() - 1).getId(),"Maria",
+                    null,  "Ivanova", null, null, null,
+                    null, null, "[none]");
+
             app.getContactHelper().fillContactForm(contact, false);
             app.getContactHelper().submitContactModification();
             app.getNavigationHelper().returnToHomePage();
