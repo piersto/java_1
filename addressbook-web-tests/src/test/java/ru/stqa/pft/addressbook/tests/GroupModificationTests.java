@@ -11,30 +11,27 @@ import java.util.List;
 
 public class GroupModificationTests extends TestBase{
 
-  @Test
-  public void testModifyGroupSortedLists() {
-
+  @BeforeMethod
+  public void insurePreconditions() {
     app.getNavigationHelper().goToGroupPage();
-
     if (! app.getGroupHelper().isThereAGroup()) {
       app.getGroupHelper().createGroup(new GroupData("test1", "header1", "footer1"));
     }
-    List<GroupData> before = app.getGroupHelper().getGroupList();
-    // Берём размер списка и вычитаем из него единицу
-    app.getGroupHelper().selectGroup(before.size() -1);
-    app.getGroupHelper().initGroupModification();
-    // Сделаем локальную переменную, что бы два раза не прописывать список
-    // И добавим в неё id группы, которую мы модифицировали: before.get(before.size() -1).getId()
-    GroupData group = new GroupData(before.get(before.size() -1).getId(), "group11", "header11", "footer11");
+  }
 
-    app.getGroupHelper().fillGroupForm(group);
-    app.getGroupHelper().updateGroup();
-    app.getGroupHelper().returnToGroupPage();
+  @Test
+  public void testModifyGroupSortedLists() {
+
+    List<GroupData> before = app.getGroupHelper().getGroupList();
+    // Берём размер списка и вычитаем из него единицу и помещаем в переменную index
+    int index = before.size() -1;
+    GroupData group = new GroupData(before.get(index).getId(), "group11", "header11", "footer11");
+    app.getGroupHelper().modifyGroup(index, group);
     List<GroupData> after = app.getGroupHelper().getGroupList();
     Assert.assertEquals(after.size(), before.size());
 
-    // Старый список перед сравнением надо модифицировать -- удалить последний элемент
-    before.remove(before.size() -1);
+    // Старый список перед сравнением надо модифицировать -- удалить элемент по индексу
+    before.remove(index);
     // А вместо него добавим тот, который должен появиться после модификации = new GroupData("group11", "header11", "footer11")
     before.add(group);
 

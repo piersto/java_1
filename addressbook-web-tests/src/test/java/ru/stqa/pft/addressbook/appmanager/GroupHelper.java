@@ -48,6 +48,14 @@ public class GroupHelper extends HelperBase {
         click(By.name("edit"));
     }
 
+    public void modifyGroup(int index, GroupData group) {
+        selectGroup(index);
+        initGroupModification();
+        fillGroupForm(group);
+        updateGroup();
+        returnToGroupPage();
+    }
+
     public void createGroup(GroupData group) {
         initGroupCreation();
         // Instead of fix data, parameter = group is used
