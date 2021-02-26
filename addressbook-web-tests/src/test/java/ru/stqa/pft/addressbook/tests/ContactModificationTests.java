@@ -19,7 +19,7 @@ public class ContactModificationTests extends TestBase {
                     null, "Petrova", null,
                     null, null, null,
                     null, "[none]"), true);
-            app.getNavigationHelper().returnToHomePage();
+            app.goTo().returnToHomePage();
         }
         List<ContactData> before = app.getContactHelper().getContactList();
         // app.getContactHelper().selectContact(before.size() - 1);
@@ -31,7 +31,7 @@ public class ContactModificationTests extends TestBase {
 
         app.getContactHelper().fillContactForm(contact, false);
         app.getContactHelper().submitContactModification();
-        app.getNavigationHelper().returnToHomePage();
+        app.goTo().returnToHomePage();
         List<ContactData> after = app.getContactHelper().getContactList();
         Assert.assertEquals(after.size(), before.size());
 
@@ -54,7 +54,7 @@ public class ContactModificationTests extends TestBase {
                     null, "Petrova", null,
                     null, null, null,
                     null, "[none]"), true);
-            app.getNavigationHelper().returnToHomePage();
+            app.goTo().returnToHomePage();
         }
             List<ContactData> before = app.getContactHelper().getContactList();
             // app.getContactHelper().selectContact(before.size() - 1);
@@ -66,7 +66,7 @@ public class ContactModificationTests extends TestBase {
 
             app.getContactHelper().fillContactForm(contact, false);
             app.getContactHelper().submitContactModification();
-            app.getNavigationHelper().returnToHomePage();
+            app.goTo().returnToHomePage();
         List<ContactData> after = app.getContactHelper().getContactList();
         Assert.assertEquals(after.size(), before.size());
 

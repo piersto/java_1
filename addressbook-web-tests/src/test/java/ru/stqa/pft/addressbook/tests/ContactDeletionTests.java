@@ -16,7 +16,7 @@ public class ContactDeletionTests extends TestBase {
                     "Ivanovna", "Petrova", "QA Analyst",
                     "CBC", "Montreal", "555-666-7777",
                     "mpetrova@gmail.com", "[none]"), true);
-            app.getNavigationHelper().returnToHomePage();
+            app.goTo().returnToHomePage();
         }
         List<ContactData> before = app.getContactHelper().getContactList();
         // Так как before теперь список, а не int, то его длинну получаем через size()

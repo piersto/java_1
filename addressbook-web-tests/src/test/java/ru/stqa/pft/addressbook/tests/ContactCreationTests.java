@@ -20,7 +20,7 @@ public class ContactCreationTests extends TestBase {
                 "555-666-7777", "mpetrova@gmail.com", "[none]");
 
         app.getContactHelper().createContact(contact, true);
-        app.getNavigationHelper().returnToHomePage();
+        app.goTo().returnToHomePage();
         List<ContactData> after = app.getContactHelper().getContactList();
         Assert.assertEquals(after.size(), before.size() +1);
 
@@ -45,7 +45,7 @@ public class ContactCreationTests extends TestBase {
                 "555-666-7777", "mpetrova@gmail.com", "[none]");
 
         app.getContactHelper().createContact(contact, true);
-        app.getNavigationHelper().returnToHomePage();
+        app.goTo().returnToHomePage();
         List<ContactData> after = app.getContactHelper().getContactList();
         Assert.assertEquals(after.size(), before.size() +1);
 /*
