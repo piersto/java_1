@@ -32,9 +32,6 @@ public class ContactCreationTests extends TestBase {
         Assert.assertEquals(before, after);
     }
 
-
-
-
     @Test
     public void testAddContact() {
         List<ContactData> before = app.getContactHelper().getContactList();

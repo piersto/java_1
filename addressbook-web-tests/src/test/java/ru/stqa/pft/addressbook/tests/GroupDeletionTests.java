@@ -20,14 +20,15 @@ public class GroupDeletionTests extends TestBase {
     @Test
     public void testDeleteGroup() {
         List<GroupData> before = app.group().list();
-        app.group().selectGroup(before.size() - 1);
-        app.group().deleteSelectedGroups();
-        app.group().returnToGroupPage();
+        int index = before.size() - 1;
+        app.group().delete(index);
         List<GroupData> after = app.group().list();
         Assert.assertEquals(after.size(), before.size() - 1);
         // Удаляем из списка before группу с тем же идексом, что и у удалённой = before.size - 1
-        before.remove(before.size() - 1);
+        before.remove(index);
         // Добавили в GroupData метод equals и удалили из кода луп, так как этот метод сам умеет его делать
         Assert.assertEquals(before, after);
     }
+
+
 }
