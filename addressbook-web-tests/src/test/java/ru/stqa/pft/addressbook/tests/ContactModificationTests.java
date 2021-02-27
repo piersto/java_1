@@ -1,6 +1,7 @@
 package ru.stqa.pft.addressbook.tests;
 
 import org.testng.Assert;
+import org.testng.annotations.BeforeMethod;
 import org.testng.annotations.Test;
 import ru.stqa.pft.addressbook.model.ContactData;
 
@@ -9,9 +10,8 @@ import java.util.*;
 
 public class ContactModificationTests extends TestBase {
 
-
-    @Test
-    public void testModifyContactSorted() {
+    @BeforeMethod
+    public void ensurePreconditions(){
         if (! app.getContactHelper().isThereAContact())
         {
             app.getContactHelper().initContactCreation();
@@ -21,21 +21,23 @@ public class ContactModificationTests extends TestBase {
                     null, "[none]"), true);
             app.goTo().returnToHomePage();
         }
+    }
+
+    @Test
+    public void testModifyContactSorted() {
         List<ContactData> before = app.getContactHelper().getContactList();
-        // app.getContactHelper().selectContact(before.size() - 1);
-        app.getContactHelper().initContactModification(before.size() - 1);
+        int index = before.size() - 1;
         // Делаем локальную переменную, так как использовать будем не один раз
-        ContactData contact = new ContactData(before.get(before.size() - 1).getId(),"Maria",
+        ContactData contact = new ContactData(before.get(index).getId(),"Maria",
                 null,  "Ivanova", null, null, null,
                 null, null, "[none]");
-
-        app.getContactHelper().fillContactForm(contact, false);
-        app.getContactHelper().submitContactModification();
+        // app.getContactHelper().selectContact(before.size() - 1);
+        app.getContactHelper().modifyContact(index, contact);
         app.goTo().returnToHomePage();
         List<ContactData> after = app.getContactHelper().getContactList();
         Assert.assertEquals(after.size(), before.size());
 
-        before.remove(before.size() - 1);
+        before.remove(index);
         before.add(contact);
 
         Comparator<? super ContactData> byId = (c1, c2) -> Integer.compare(c1.getId(), c2.getId());
@@ -44,6 +46,8 @@ public class ContactModificationTests extends TestBase {
         // Сравниваем упорядоченные списки
         Assert.assertEquals(before, after);
     }
+
+
 
     @Test
     public void testModifyContact() {
