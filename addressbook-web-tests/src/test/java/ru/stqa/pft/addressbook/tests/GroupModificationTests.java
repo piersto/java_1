@@ -15,7 +15,7 @@ public class GroupModificationTests extends TestBase{
   public void insurePreconditions() {
     app.goTo().groupPage();
     if (app.group().list().size() == 0) {
-      app.group().create(new GroupData("test1", "header1", "footer1"));
+      app.group().create(new GroupData().withName("Group name"));
     }
   }
 
@@ -25,7 +25,8 @@ public class GroupModificationTests extends TestBase{
     List<GroupData> before = app.group().list();
     // Берём размер списка и вычитаем из него единицу и помещаем в переменную index
     int index = before.size() -1;
-    GroupData group = new GroupData(before.get(index).getId(), "group11", "header11", "footer11");
+    GroupData group = new GroupData().withId(before.get(index).getId()).
+            withName("group11").withHeader("header11").withFooter("footer11");
     app.group().modify(index, group);
     List<GroupData> after = app.group().list();
     Assert.assertEquals(after.size(), before.size());
@@ -49,7 +50,7 @@ public class GroupModificationTests extends TestBase{
     app.goTo().groupPage();
 
     if (! app.group().isThereAGroup()) {
-      app.group().create(new GroupData("test1", "header1", "footer1"));
+      app.group().create(new GroupData().withName("Group name"));
     }
     List<GroupData> before = app.group().list();
     // Берём размер списка и вычитаем из него единицу
@@ -57,7 +58,8 @@ public class GroupModificationTests extends TestBase{
     app.group().initGroupModification();
     // Сделаем локальную переменную, что бы два раза не прописывать список
     // И добавим в неё id группы, которую мы модифицировали: before.get(before.size() -1).getId()
-    GroupData group = new GroupData(before.get(before.size() -1).getId(), "group11", "header11", "footer11");
+    GroupData group = new GroupData().withId(before.get(before.size() -1).getId()).
+            withName("group11").withHeader("header11").withFooter("footer11");
 
     app.group().fillGroupForm(group);
     app.group().updateGroup();

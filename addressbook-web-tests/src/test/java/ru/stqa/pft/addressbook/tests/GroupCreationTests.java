@@ -15,7 +15,7 @@ public class GroupCreationTests extends TestBase {
     public void testGroupCreationSortedLists() {
         app.goTo().groupPage();
         List<GroupData> before = app.group().list();
-        GroupData group = new GroupData("test1", "header1", "footer1");
+        GroupData group = new GroupData().withName("Test 2").withHeader("New header").withFooter("New Footer");
         app.group().create(group);
         List<GroupData> after = app.group().list();
         // Сравниваем пока только размеры списков:
@@ -34,7 +34,7 @@ public class GroupCreationTests extends TestBase {
     public void testGroupCreation() {
         app.goTo().groupPage();
         List<GroupData> before = app.group().list();
-        GroupData group = new GroupData("test1", "header1", "footer1");
+        GroupData group = new GroupData().withName("Test1");
         app.group().create(group);
         List<GroupData> after = app.group().list();
         // Сравниваем пока только размеры списков:
@@ -45,7 +45,7 @@ public class GroupCreationTests extends TestBase {
         На выходе этой функции будет макс объект - то есть группа с максимальным id.
         И нам остаётся только взять её id.
  */
-        group.setId(after.stream().max((o1, o2) -> Integer.compare(o1.getId(), o2.getId())).get().getId());
+        group.withId(after.stream().max((o1, o2) -> Integer.compare(o1.getId(), o2.getId())).get().getId());
 
         // Добавляем в старый список ту группу, которую мы только что добавили в приложение
         before.add(group);
