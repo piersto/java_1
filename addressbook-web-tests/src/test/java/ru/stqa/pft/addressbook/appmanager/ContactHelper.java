@@ -16,7 +16,8 @@ public class ContactHelper extends HelperBase {
         super(wd);
     }
 
-    public void deleteSelectedContacts() {
+    public void delete(int index) {
+        selectContact(index);
         click(By.xpath("//input[@value='Delete']"));
         wd.switchTo().alert().accept();
         wd.findElement(By.cssSelector("div.msgbox"));
@@ -70,13 +71,13 @@ public class ContactHelper extends HelperBase {
         click(By.name("update"));
     }
 
-    public void modifyContact(int index, ContactData contact) {
+    public void modify(int index, ContactData contact) {
         initContactModification(index);
         fillContactForm(contact, false);
         submitContactModification();
     }
 
-    public void createContact(ContactData contact, boolean creation) {
+    public void create(ContactData contact, boolean creation) {
         fillContactForm(contact, true);
         submitContactCreation();
     }
@@ -90,7 +91,7 @@ public class ContactHelper extends HelperBase {
 
     }
 
-    public List<ContactData> getContactList() {
+    public List<ContactData> list() {
         // Создаём список который будем заполнять
         List<ContactData> contacts = new ArrayList<ContactData>();
         // Определяем строку в таблице из которой будем брать имя и фамилию

@@ -12,16 +12,16 @@ public class ContactCreationTests extends TestBase {
 
     @Test
     public void testAddContactSorted() {
-        List<ContactData> before = app.getContactHelper().getContactList();
-        app.getContactHelper().initContactCreation();
+        List<ContactData> before = app.contact().list();
+        app.contact().initContactCreation();
 
         ContactData contact = new ContactData("Masha", "Ivanovna",
                 "Petrova", "QA Analyst", "CBC", "Montreal",
                 "555-666-7777", "mpetrova@gmail.com", "[none]");
 
-        app.getContactHelper().createContact(contact, true);
-        app.goTo().returnToHomePage();
-        List<ContactData> after = app.getContactHelper().getContactList();
+        app.contact().create(contact, true);
+        app.goTo().homePage();
+        List<ContactData> after = app.contact().list();
         Assert.assertEquals(after.size(), before.size() +1);
 
         before.add(contact);
@@ -34,16 +34,16 @@ public class ContactCreationTests extends TestBase {
 
     @Test
     public void testAddContact() {
-        List<ContactData> before = app.getContactHelper().getContactList();
-        app.getContactHelper().initContactCreation();
+        List<ContactData> before = app.contact().list();
+        app.contact().initContactCreation();
 
         ContactData contact = new ContactData("Masha", "Ivanovna",
                 "Petrova", "QA Analyst", "CBC", "Montreal",
                 "555-666-7777", "mpetrova@gmail.com", "[none]");
 
-        app.getContactHelper().createContact(contact, true);
-        app.goTo().returnToHomePage();
-        List<ContactData> after = app.getContactHelper().getContactList();
+        app.contact().create(contact, true);
+        app.goTo().homePage();
+        List<ContactData> after = app.contact().list();
         Assert.assertEquals(after.size(), before.size() +1);
 /*
         int max = 0;

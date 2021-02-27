@@ -11,26 +11,25 @@ public class ContactDeletionTests extends TestBase {
 
     @BeforeMethod
     public void ensurePreconditions(){
-        if (! app.getContactHelper().isThereAContact())
+        if (app.contact().list().size() == 0)
         {
-            app.getContactHelper().initContactCreation();
-            app.getContactHelper().createContact(new ContactData("Masha",
+            app.contact().initContactCreation();
+            app.contact().create(new ContactData("Masha",
                     null, "Petrova", null,
                     null, null, null,
                     null, "[none]"), true);
-            app.goTo().returnToHomePage();
+            app.goTo().homePage();
         }
     }
 
     @Test
     public void testContactDeletion() {
-        List<ContactData> before = app.getContactHelper().getContactList();
-        // Так как before теперь список, а не int, то его длинну получаем через size()
-        app.getContactHelper().selectContact(before.size() -1);
-        app.getContactHelper().deleteSelectedContacts();
-        List<ContactData> after = app.getContactHelper().getContactList();
+        List<ContactData> before = app.contact().list();
+        int index = before.size() -1;
+        app.contact().delete(index);
+        List<ContactData> after = app.contact().list();
         Assert.assertEquals(after.size(), before.size() -1);
-        before.remove(before.size() -1);
+        before.remove(index);
         Assert.assertEquals(before, after);
     }
 }

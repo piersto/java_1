@@ -12,29 +12,30 @@ public class ContactModificationTests extends TestBase {
 
     @BeforeMethod
     public void ensurePreconditions(){
-        if (! app.getContactHelper().isThereAContact())
+        if (app.contact().list().size() == 0)
         {
-            app.getContactHelper().initContactCreation();
-            app.getContactHelper().createContact(new ContactData("Masha",
+            app.contact().initContactCreation();
+            app.contact().create(new ContactData("Masha",
                     null, "Petrova", null,
                     null, null, null,
                     null, "[none]"), true);
-            app.goTo().returnToHomePage();
+            app.goTo().homePage();
         }
     }
 
     @Test
     public void testModifyContactSorted() {
-        List<ContactData> before = app.getContactHelper().getContactList();
+        List<ContactData> before = app.contact().list();
+        // Номер (index) контакта, которого будем удалять
         int index = before.size() - 1;
         // Делаем локальную переменную, так как использовать будем не один раз
         ContactData contact = new ContactData(before.get(index).getId(),"Maria",
                 null,  "Ivanova", null, null, null,
                 null, null, "[none]");
         // app.getContactHelper().selectContact(before.size() - 1);
-        app.getContactHelper().modifyContact(index, contact);
-        app.goTo().returnToHomePage();
-        List<ContactData> after = app.getContactHelper().getContactList();
+        app.contact().modify(index, contact);
+        app.goTo().homePage();
+        List<ContactData> after = app.contact().list();
         Assert.assertEquals(after.size(), before.size());
 
         before.remove(index);
@@ -51,27 +52,27 @@ public class ContactModificationTests extends TestBase {
 
     @Test
     public void testModifyContact() {
-        if (! app.getContactHelper().isThereAContact())
+        if (! app.contact().isThereAContact())
         {
-            app.getContactHelper().initContactCreation();
-            app.getContactHelper().createContact(new ContactData("Masha",
+            app.contact().initContactCreation();
+            app.contact().create(new ContactData("Masha",
                     null, "Petrova", null,
                     null, null, null,
                     null, "[none]"), true);
-            app.goTo().returnToHomePage();
+            app.goTo().homePage();
         }
-            List<ContactData> before = app.getContactHelper().getContactList();
+            List<ContactData> before = app.contact().list();
             // app.getContactHelper().selectContact(before.size() - 1);
-            app.getContactHelper().initContactModification(before.size() - 1);
+            app.contact().initContactModification(before.size() - 1);
             // Делаем локальную переменную, так как использовать будем не один раз
             ContactData contact = new ContactData(before.get(before.size() - 1).getId(),"Maria",
                     null,  "Ivanova", null, null, null,
                     null, null, "[none]");
 
-            app.getContactHelper().fillContactForm(contact, false);
-            app.getContactHelper().submitContactModification();
-            app.goTo().returnToHomePage();
-        List<ContactData> after = app.getContactHelper().getContactList();
+            app.contact().fillContactForm(contact, false);
+            app.contact().submitContactModification();
+            app.goTo().homePage();
+        List<ContactData> after = app.contact().list();
         Assert.assertEquals(after.size(), before.size());
 
         before.remove(before.size() - 1);
