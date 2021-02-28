@@ -6,6 +6,7 @@ import org.testng.annotations.Test;
 import ru.stqa.pft.addressbook.model.GroupData;
 
 import java.util.List;
+import java.util.Set;
 
 public class GroupDeletionTests extends TestBase {
 
@@ -16,6 +17,19 @@ public class GroupDeletionTests extends TestBase {
             app.group().create(new GroupData().
                     withName("Group name").withHeader("Header").withFooter("Footer"));
         }
+    }
+
+    @Test
+    public void testDeleteGroupSet() {
+        Set<GroupData> before = app.group().all();
+        GroupData deletedGroup = before.iterator().next();
+        app.group().delete(deletedGroup);
+        Set<GroupData> after = app.group().all();
+        Assert.assertEquals(after.size(), before.size() - 1);
+        // Удаляем из списка before группу с тем же идексом, что и у удалённой = before.size - 1
+        before.remove(deletedGroup);
+        // Добавили в GroupData метод equals и удалили из кода луп, так как этот метод сам умеет его делать
+        Assert.assertEquals(before, after);
     }
 
     @Test
