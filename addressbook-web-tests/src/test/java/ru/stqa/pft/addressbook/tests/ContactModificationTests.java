@@ -49,8 +49,6 @@ public class ContactModificationTests extends TestBase {
         Assert.assertEquals(before, after);
     }
 
-
-
     @Test
     public void testModifyContact() {
         if (! app.contact().isThereAContact())

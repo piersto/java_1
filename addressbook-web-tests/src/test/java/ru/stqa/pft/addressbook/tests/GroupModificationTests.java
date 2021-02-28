@@ -7,6 +7,7 @@ import ru.stqa.pft.addressbook.model.GroupData;
 import java.util.Comparator;
 import java.util.HashSet;
 import java.util.List;
+import java.util.Set;
 
 
 public class GroupModificationTests extends TestBase{
@@ -20,6 +21,26 @@ public class GroupModificationTests extends TestBase{
   }
 
   @Test
+  public void testModifyGroupSortedListsSet() {
+
+    Set<GroupData> before = app.group().all();
+    GroupData modifiedGroup = before.iterator().next();
+
+    GroupData group = new GroupData().withId(modifiedGroup.getId()).
+            withName("group11").withHeader("header11").withFooter("footer11");
+    app.group().modify(group);
+    Set<GroupData> after = app.group().all();
+    Assert.assertEquals(after.size(), before.size());
+
+    // Старый список перед сравнением надо модифицировать -- удалить элемент по индексу
+    before.remove(modifiedGroup);
+    // А вместо него добавим тот, который должен появиться после модификации = new GroupData("group11", "header11", "footer11")
+    before.add(group);
+    Assert.assertEquals(before, after);
+
+  }
+
+  @Test
   public void testModifyGroupSortedLists() {
 
     List<GroupData> before = app.group().list();
@@ -27,7 +48,7 @@ public class GroupModificationTests extends TestBase{
     int index = before.size() -1;
     GroupData group = new GroupData().withId(before.get(index).getId()).
             withName("group11").withHeader("header11").withFooter("footer11");
-    app.group().modify(index, group);
+    app.group().modifyByIndex(index, group);
     List<GroupData> after = app.group().list();
     Assert.assertEquals(after.size(), before.size());
 

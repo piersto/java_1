@@ -54,7 +54,15 @@ public class GroupHelper extends HelperBase {
         click(By.name("edit"));
     }
 
-    public void modify(int index, GroupData group) {
+    public void modify(GroupData group) {
+        selectGroupById(group.getId());
+        initGroupModification();
+        fillGroupForm(group);
+        updateGroup();
+        returnToGroupPage();
+    }
+
+    public void modifyByIndex(int index, GroupData group) {
         selectGroup(index);
         initGroupModification();
         fillGroupForm(group);
