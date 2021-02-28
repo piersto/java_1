@@ -1,16 +1,15 @@
 package ru.stqa.pft.addressbook.tests;
-
 import org.hamcrest.CoreMatchers;
 import org.hamcrest.MatcherAssert;
 import org.testng.Assert;
 import org.testng.annotations.*;
 import ru.stqa.pft.addressbook.model.GroupData;
-
 import java.util.Comparator;
 import java.util.HashSet;
 import java.util.List;
 import java.util.Set;
-
+import static org.hamcrest.CoreMatchers.equalTo;
+import static org.hamcrest.MatcherAssert.*;
 
 public class GroupCreationTests extends TestBase {
 
@@ -23,11 +22,12 @@ public class GroupCreationTests extends TestBase {
         Set<GroupData> after = app.group().all();
         // Сравниваем пока только размеры списков:
         Assert.assertEquals(after.size(), before.size() + 1);
+        assertThat(after.size(), equalTo(before.size() +1) );
         // Добавляем в старый список ту группу, которую мы только что добавили в приложение
         group.withId(after.stream().mapToInt((g) ->g.getId()).max().getAsInt());
         before.add(group);
         Assert.assertEquals(before, after);
-        MatcherAssert.assertThat(after, CoreMatchers.equalTo(before));
+        assertThat(after, equalTo(before));
     }
 
     @Test
