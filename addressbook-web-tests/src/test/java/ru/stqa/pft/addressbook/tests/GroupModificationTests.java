@@ -3,11 +3,16 @@ package ru.stqa.pft.addressbook.tests;
 import org.testng.Assert;
 import org.testng.annotations.*;
 import ru.stqa.pft.addressbook.model.GroupData;
+import ru.stqa.pft.addressbook.model.Groups;
 
 import java.util.Comparator;
 import java.util.HashSet;
 import java.util.List;
 import java.util.Set;
+
+import static org.hamcrest.CoreMatchers.*;
+import static org.hamcrest.MatcherAssert.*;
+import static org.testng.Assert.assertEquals;
 
 
 public class GroupModificationTests extends TestBase{
@@ -21,7 +26,19 @@ public class GroupModificationTests extends TestBase{
   }
 
   @Test
-  public void testModifyGroupSortedListsSet() {
+  public void testModifyGroupSet56() {
+    Groups before = app.group().all();
+    GroupData modifiedGroup = before.iterator().next();
+    GroupData group = new GroupData().withId(modifiedGroup.getId()).
+            withName("group11").withHeader("header11").withFooter("footer11");
+    app.group().modify(group);
+    Groups after = app.group().all();
+    assertEquals(after.size(), before.size());
+    assertThat(after, equalTo(before.without(modifiedGroup).WithAdded(group)));
+  }
+
+  @Test
+  public void testModifyGroupSet() {
 
     Set<GroupData> before = app.group().all();
     GroupData modifiedGroup = before.iterator().next();
@@ -30,14 +47,13 @@ public class GroupModificationTests extends TestBase{
             withName("group11").withHeader("header11").withFooter("footer11");
     app.group().modify(group);
     Set<GroupData> after = app.group().all();
-    Assert.assertEquals(after.size(), before.size());
+    assertEquals(after.size(), before.size());
 
     // Старый список перед сравнением надо модифицировать -- удалить элемент по индексу
     before.remove(modifiedGroup);
     // А вместо него добавим тот, который должен появиться после модификации = new GroupData("group11", "header11", "footer11")
     before.add(group);
-    Assert.assertEquals(before, after);
-
+    assertEquals(before, after);
   }
 
   @Test
@@ -50,7 +66,7 @@ public class GroupModificationTests extends TestBase{
             withName("group11").withHeader("header11").withFooter("footer11");
     app.group().modifyByIndex(index, group);
     List<GroupData> after = app.group().list();
-    Assert.assertEquals(after.size(), before.size());
+    assertEquals(after.size(), before.size());
 
     // Старый список перед сравнением надо модифицировать -- удалить элемент по индексу
     before.remove(index);
@@ -61,7 +77,7 @@ public class GroupModificationTests extends TestBase{
     before.sort(byId);
     after.sort(byId);
 
-    Assert.assertEquals(before, after);
+    assertEquals(before, after);
 
   }
 
@@ -86,14 +102,14 @@ public class GroupModificationTests extends TestBase{
     app.group().updateGroup();
     app.group().returnToGroupPage();
     List<GroupData> after = app.group().list();
-    Assert.assertEquals(after.size(), before.size());
+    assertEquals(after.size(), before.size());
 
     // Старый список перед сравнением надо модифицировать -- удалить последний элемент
     before.remove(before.size() -1);
     // А вместо него добавим тот, который должен появиться после модификации = new GroupData("group11", "header11", "footer11")
     before.add(group);
 
-    Assert.assertEquals(new HashSet<Object>(before), new HashSet<Object>(after));
+    assertEquals(new HashSet<Object>(before), new HashSet<Object>(after));
 
   }
 }
