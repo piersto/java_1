@@ -14,10 +14,10 @@ public class ContactDeletionTests extends TestBase {
         if (app.contact().list().size() == 0)
         {
             app.contact().initContactCreation();
-            app.contact().create(new ContactData("Masha",
-                    null, "Petrova", null,
-                    null, null, null,
-                    null, "[none]"), true);
+            app.contact().create(new ContactData().
+                    withFirstname("Masha").withMiddlename("Ivanovna").withLastname("Petrova").
+                    withTitle("QA Analyst").withCompany("CBC").withAddress("Montreal").withHomephone("555-666-7777").
+                    withEmail("mpetrova@gmail.com").withGroup("[none]"), true);
             app.goTo().homePage();
         }
     }

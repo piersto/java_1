@@ -15,10 +15,10 @@ public class ContactModificationTests extends TestBase {
         if (app.contact().list().size() == 0)
         {
             app.contact().initContactCreation();
-            app.contact().create(new ContactData("Masha",
-                    null, "Petrova", null,
-                    null, null, null,
-                    null, "[none]"), true);
+            app.contact().create(new ContactData().
+                    withFirstname("Masha").withMiddlename("Ivanovna").withLastname("Petrova").
+                    withTitle("QA Analyst").withCompany("CBC").withAddress("Montreal").withHomephone("555-666-7777").
+                    withEmail("mpetrova@gmail.com").withGroup("[none]"), true);
             app.goTo().homePage();
         }
     }
@@ -29,9 +29,10 @@ public class ContactModificationTests extends TestBase {
         // Номер (index) контакта, которого будем удалять
         int index = before.size() - 1;
         // Делаем локальную переменную, так как использовать будем не один раз
-        ContactData contact = new ContactData(before.get(index).getId(),"Maria",
-                null,  "Ivanova", null, null, null,
-                null, null, "[none]");
+        ContactData contact = new ContactData().
+                withFirstname("Masha").withMiddlename("Ivanovna").withLastname("Petrova").
+                withTitle("QA Analyst").withCompany("CBC").withAddress("Montreal").
+                withHomephone("555-666-7777").withEmail("mpetrova@gmail.com").withGroup("[none]");
         // app.getContactHelper().selectContact(before.size() - 1);
         app.contact().modify(index, contact);
         app.goTo().homePage();
@@ -55,19 +56,26 @@ public class ContactModificationTests extends TestBase {
         if (! app.contact().isThereAContact())
         {
             app.contact().initContactCreation();
-            app.contact().create(new ContactData("Masha",
-                    null, "Petrova", null,
-                    null, null, null,
-                    null, "[none]"), true);
+            app.contact().create(new ContactData().
+                    withFirstname("Masha").withMiddlename("Ivanovna").withLastname("Petrova").
+                    withTitle("QA Analyst").withCompany("CBC").withAddress("Montreal").withHomephone("555-666-7777").
+                    withEmail("mpetrova@gmail.com").withGroup("[none]"), true);
             app.goTo().homePage();
         }
             List<ContactData> before = app.contact().list();
             // app.getContactHelper().selectContact(before.size() - 1);
             app.contact().initContactModification(before.size() - 1);
             // Делаем локальную переменную, так как использовать будем не один раз
-            ContactData contact = new ContactData(before.get(before.size() - 1).getId(),"Maria",
-                    null,  "Ivanova", null, null, null,
-                    null, null, "[none]");
+            ContactData contact = new ContactData().withId(before.get(before.size() - 1).getId()).
+                                            withFirstname("Masha").
+                                         withMiddlename("Ivanovna").
+                                    withLastname("Petrova").
+                                 withTitle("QA Analyst").
+                             withCompany("CBC").
+                         withAddress("Montreal").
+                     withHomephone("555-666-7777").
+                 withEmail("mpetrova@gmail.com").
+               withGroup("[none]");
 
             app.contact().fillContactForm(contact, false);
             app.contact().submitContactModification();

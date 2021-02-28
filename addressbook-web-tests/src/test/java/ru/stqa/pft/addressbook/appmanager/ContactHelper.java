@@ -102,13 +102,7 @@ public class ContactHelper extends HelperBase {
                                                                     getAttribute("value"));
             String lastname = row.findElement(By.cssSelector("td:nth-child(2)")).getText();
             String firstname = row.findElement(By.cssSelector("td:nth-child(3)")).getText();
-
-
-            // Создаём объект типа ContactData
-            ContactData contact = new ContactData(id, firstname, null, lastname,null,
-                    null, null, null, null, null);
-            // И добавляем в этот объект текст, который прочитал в строках
-            contacts.add(contact);
+            contacts.add(new ContactData().withId(id).withFirstname(firstname).withLastname(lastname));
         }
         return contacts;
     }

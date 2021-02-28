@@ -15,9 +15,10 @@ public class ContactCreationTests extends TestBase {
         List<ContactData> before = app.contact().list();
         app.contact().initContactCreation();
 
-        ContactData contact = new ContactData("Masha", "Ivanovna",
-                "Petrova", "QA Analyst", "CBC", "Montreal",
-                "555-666-7777", "mpetrova@gmail.com", "[none]");
+        ContactData contact = new ContactData().
+                withFirstname("Masha").withMiddlename("Ivanovna").withLastname("Petrova").
+                withTitle("QA Analyst").withCompany("CBC").withAddress("Montreal").withHomephone("555-666-7777").
+                withEmail("mpetrova@gmail.com").withGroup("[none]");
 
         app.contact().create(contact, true);
         app.goTo().homePage();
@@ -37,9 +38,10 @@ public class ContactCreationTests extends TestBase {
         List<ContactData> before = app.contact().list();
         app.contact().initContactCreation();
 
-        ContactData contact = new ContactData("Masha", "Ivanovna",
-                "Petrova", "QA Analyst", "CBC", "Montreal",
-                "555-666-7777", "mpetrova@gmail.com", "[none]");
+        ContactData contact = new ContactData().
+                withFirstname("Masha").withMiddlename("Ivanovna").withLastname("Petrova").
+                withTitle("QA Analyst").withCompany("CBC").withAddress("Montreal").withHomephone("555-666-7777").
+                withEmail("mpetrova@gmail.com").withGroup("[none]");;
 
         app.contact().create(contact, true);
         app.goTo().homePage();
@@ -54,7 +56,7 @@ public class ContactCreationTests extends TestBase {
         }
 */
         // Находим max Id, и добавляем в contact
-        contact.setId(after.stream().max((o1, o2) -> Integer.compare(o1.getId(), o2.getId())).get().getId());
+        contact.withId(after.stream().max((o1, o2) -> Integer.compare(o1.getId(), o2.getId())).get().getId());
         before.add(contact);
         Assert.assertEquals(new HashSet<Object>(before), new HashSet<Object>(after));
     }
