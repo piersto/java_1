@@ -7,9 +7,25 @@ import ru.stqa.pft.addressbook.model.GroupData;
 import java.util.Comparator;
 import java.util.HashSet;
 import java.util.List;
+import java.util.Set;
 
 
 public class GroupCreationTests extends TestBase {
+
+    @Test
+    public void testGroupCreationSortedSet() {
+        app.goTo().groupPage();
+        Set<GroupData> before = app.group().all();
+        GroupData group = new GroupData().withName("Test 2").withHeader("New header").withFooter("New Footer");
+        app.group().create(group);
+        Set<GroupData> after = app.group().all();
+        // Сравниваем пока только размеры списков:
+        Assert.assertEquals(after.size(), before.size() + 1);
+        // Добавляем в старый список ту группу, которую мы только что добавили в приложение
+        group.withId(after.stream().mapToInt((g) ->g.getId()).max().getAsInt());
+        before.add(group);
+        Assert.assertEquals(before, after);
+    }
 
     @Test
     public void testGroupCreationSortedLists() {
