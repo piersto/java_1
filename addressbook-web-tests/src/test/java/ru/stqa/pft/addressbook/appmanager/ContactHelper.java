@@ -26,8 +26,21 @@ public class ContactHelper extends HelperBase {
         click(By.id("logo"));
     }
 
+    public void delete(ContactData contact) {
+        selectContactById(contact.getId());
+        click(By.xpath("//input[@value='Delete']"));
+        wd.switchTo().alert().accept();
+        wd.findElement(By.cssSelector("div.msgbox"));
+        click(By.id("logo"));
+    }
+
     public void selectContact(int index) {
+
         wd.findElements(By.name("selected[]")).get(index).click();
+    }
+
+    public void selectContactById(int id) {
+        wd.findElement(By.cssSelector("tr[name='entry'] input[value ='" + id + "']")).click();
     }
 
     public void initContactModification(int index) {
@@ -123,4 +136,6 @@ public class ContactHelper extends HelperBase {
         }
         return contacts;
     }
+
+
 }

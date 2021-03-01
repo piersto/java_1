@@ -6,6 +6,7 @@ import org.testng.annotations.Test;
 import ru.stqa.pft.addressbook.model.ContactData;
 
 import java.util.List;
+import java.util.Set;
 
 public class ContactDeletionTests extends TestBase {
 
@@ -20,6 +21,17 @@ public class ContactDeletionTests extends TestBase {
                     withEmail("mpetrova@gmail.com").withGroup("[none]"), true);
             app.goTo().homePage();
         }
+    }
+
+    @Test
+    public void testContactDeletion56() {
+        Set<ContactData> before = app.contact().all();
+        ContactData deletedContact = before.iterator().next();
+        app.contact().delete(deletedContact);
+        Set<ContactData> after = app.contact().all();
+        Assert.assertEquals(after.size(), before.size() -1);
+        before.remove(deletedContact);
+        Assert.assertEquals(before, after);
     }
 
     @Test
