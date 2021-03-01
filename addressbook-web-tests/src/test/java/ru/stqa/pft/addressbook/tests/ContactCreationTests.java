@@ -7,8 +7,30 @@ import ru.stqa.pft.addressbook.model.ContactData;
 import java.util.Comparator;
 import java.util.HashSet;
 import java.util.List;
+import java.util.Set;
 
 public class ContactCreationTests extends TestBase {
+
+
+    @Test
+    public void testAddContactSorted56() {
+        Set<ContactData> before = app.contact().all();
+        app.contact().initContactCreation();
+
+        ContactData contact = new ContactData().
+                withFirstname("Masha").withMiddlename("Ivanovna").withLastname("Petrova").
+                withTitle("QA Analyst").withCompany("CBC").withAddress("Montreal").withHomephone("555-666-7777").
+                withEmail("mpetrova@gmail.com").withGroup("[none]");
+
+        app.contact().create(contact, true);
+        app.goTo().homePage();
+        Set<ContactData> after = app.contact().all();
+        Assert.assertEquals(after.size(), before.size() +1);
+
+        contact.withId(after.stream().mapToInt((c) -> c.getId()).max().getAsInt());
+        before.add(contact);
+        Assert.assertEquals(before, after);
+    }
 
     @Test
     public void testAddContactSorted() {
