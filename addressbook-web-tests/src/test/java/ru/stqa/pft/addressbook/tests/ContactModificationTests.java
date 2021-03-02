@@ -24,6 +24,28 @@ public class ContactModificationTests extends TestBase {
     }
 
     @Test
+    public void testModifyContactSorted56() {
+        Set<ContactData> before = app.contact().all();
+        ContactData modifiedContact = before.iterator().next();
+
+        // Делаем локальную переменную, так как использовать будем не один раз
+        ContactData contact = new ContactData().withId(modifiedContact.getId()).
+                withFirstname("Masha").withMiddlename("Ivanovna").withLastname("Petrova").
+                withTitle("QA Analyst").withCompany("CBC").withAddress("Montreal").
+                withHomephone("555-666-7777").withEmail("mpetrova@gmail.com").withGroup("[none]");
+        // app.getContactHelper().selectContact(before.size() - 1);
+        app.contact().modifyById(contact);
+        app.goTo().homePage();
+        Set<ContactData> after = app.contact().all();
+        Assert.assertEquals(after.size(), before.size());
+
+        before.remove(modifiedContact);
+        before.add(contact);
+        // Сравниваем упорядоченные sets
+        Assert.assertEquals(before, after);
+    }
+
+    @Test
     public void testModifyContactSorted() {
         List<ContactData> before = app.contact().list();
         // Номер (index) контакта, которого будем удалять
