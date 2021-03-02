@@ -3,18 +3,21 @@ package ru.stqa.pft.addressbook.tests;
 import org.testng.Assert;
 import org.testng.annotations.Test;
 import ru.stqa.pft.addressbook.model.ContactData;
+import ru.stqa.pft.addressbook.model.Contacts;
 
 import java.util.Comparator;
 import java.util.HashSet;
 import java.util.List;
-import java.util.Set;
+
+import static org.hamcrest.CoreMatchers.equalTo;
+import static org.hamcrest.MatcherAssert.assertThat;
 
 public class ContactCreationTests extends TestBase {
 
 
     @Test
     public void testAddContactSorted56() {
-        Set<ContactData> before = app.contact().all();
+        Contacts before = app.contact().all();
         app.contact().initContactCreation();
 
         ContactData contact = new ContactData().
@@ -24,12 +27,11 @@ public class ContactCreationTests extends TestBase {
 
         app.contact().create(contact, true);
         app.goTo().homePage();
-        Set<ContactData> after = app.contact().all();
-        Assert.assertEquals(after.size(), before.size() +1);
+        Contacts after = app.contact().all();
+        assertThat(after.size(), equalTo(before.size() + 1));
+        assertThat(after, equalTo(before.withAdded(contact.
+                withId(after.stream().mapToInt((c) -> c.getId()).max().getAsInt()))));
 
-        contact.withId(after.stream().mapToInt((c) -> c.getId()).max().getAsInt());
-        before.add(contact);
-        Assert.assertEquals(before, after);
     }
 
     @Test
@@ -45,7 +47,7 @@ public class ContactCreationTests extends TestBase {
         app.contact().create(contact, true);
         app.goTo().homePage();
         List<ContactData> after = app.contact().list();
-        Assert.assertEquals(after.size(), before.size() +1);
+        Assert.assertEquals(after.size(), before.size() + 1);
 
         before.add(contact);
 
@@ -63,12 +65,13 @@ public class ContactCreationTests extends TestBase {
         ContactData contact = new ContactData().
                 withFirstname("Masha").withMiddlename("Ivanovna").withLastname("Petrova").
                 withTitle("QA Analyst").withCompany("CBC").withAddress("Montreal").withHomephone("555-666-7777").
-                withEmail("mpetrova@gmail.com").withGroup("[none]");;
+                withEmail("mpetrova@gmail.com").withGroup("[none]");
+        ;
 
         app.contact().create(contact, true);
         app.goTo().homePage();
         List<ContactData> after = app.contact().list();
-        Assert.assertEquals(after.size(), before.size() +1);
+        Assert.assertEquals(after.size(), before.size() + 1);
 /*
         int max = 0;
         for (ContactData c : after) {

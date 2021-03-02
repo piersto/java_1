@@ -6,11 +6,9 @@ import org.openqa.selenium.WebElement;
 import org.openqa.selenium.support.ui.Select;
 import org.testng.Assert;
 import ru.stqa.pft.addressbook.model.ContactData;
-
+import ru.stqa.pft.addressbook.model.Contacts;
 import java.util.ArrayList;
-import java.util.HashSet;
 import java.util.List;
-import java.util.Set;
 
 public class ContactHelper extends HelperBase {
 
@@ -130,9 +128,9 @@ public class ContactHelper extends HelperBase {
         }
         return contacts;
     }
-    public Set<ContactData> all() {
+    public Contacts all() {
         // Создаём список который будем заполнять
-        Set<ContactData> contacts = new HashSet<ContactData>();
+        Contacts contacts = new Contacts();
         // Определяем строку в таблице из которой будем брать имя и фамилию
         List<WebElement> rows = wd.findElements(By.cssSelector("tr[name='entry']"));
         // Теперь проходим по этим строкам в цикле и берём имя и фамилию
