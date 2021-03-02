@@ -1,22 +1,21 @@
 package ru.stqa.pft.addressbook.tests;
-import org.hamcrest.CoreMatchers;
-import org.hamcrest.MatcherAssert;
+
 import org.testng.Assert;
-import org.testng.annotations.*;
+import org.testng.annotations.Test;
 import ru.stqa.pft.addressbook.model.GroupData;
 import ru.stqa.pft.addressbook.model.Groups;
 
 import java.util.Comparator;
 import java.util.HashSet;
 import java.util.List;
-import java.util.Set;
+
 import static org.hamcrest.CoreMatchers.equalTo;
-import static org.hamcrest.MatcherAssert.*;
+import static org.hamcrest.MatcherAssert.assertThat;
 
 public class GroupCreationTests extends TestBase {
 
     @Test
-    public void testGroupCreationSorted56() {
+    public void testGroupCreation56() {
         app.goTo().groupPage();
         Groups before = (Groups) app.group().all();
         GroupData group = new GroupData().withName("Test 2").withHeader("New header").withFooter("New Footer");
@@ -24,11 +23,11 @@ public class GroupCreationTests extends TestBase {
         Groups after = (Groups) app.group().all();
         // Сравниваем пока только размеры списков:
         Assert.assertEquals(after.size(), before.size() + 1);
-        assertThat(after.size(), equalTo(before.size() +1) );
+        assertThat(after.size(), equalTo(before.size() + 1));
         // Добавляем в старый список ту группу, которую мы только что добавили в приложение
 
         assertThat(after, equalTo(before.WithAdded(group.withId(after.stream().
-                mapToInt((g) ->g.getId()).max().getAsInt()))));
+                mapToInt((g) -> g.getId()).max().getAsInt()))));
     }
 
     @Test

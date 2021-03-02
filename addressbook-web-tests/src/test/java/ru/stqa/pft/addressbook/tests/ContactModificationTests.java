@@ -4,16 +4,21 @@ import org.testng.Assert;
 import org.testng.annotations.BeforeMethod;
 import org.testng.annotations.Test;
 import ru.stqa.pft.addressbook.model.ContactData;
+import ru.stqa.pft.addressbook.model.Contacts;
 
-import java.util.*;
+import java.util.Comparator;
+import java.util.HashSet;
+import java.util.List;
+
+import static org.hamcrest.CoreMatchers.equalTo;
+import static org.hamcrest.MatcherAssert.assertThat;
 
 
 public class ContactModificationTests extends TestBase {
 
     @BeforeMethod
-    public void ensurePreconditions(){
-        if (app.contact().all().size() == 0)
-        {
+    public void ensurePreconditions() {
+        if (app.contact().all().size() == 0) {
             app.contact().initContactCreation();
             app.contact().create(new ContactData().
                     withFirstname("Masha").withMiddlename("Ivanovna").withLastname("Petrova").
@@ -24,8 +29,8 @@ public class ContactModificationTests extends TestBase {
     }
 
     @Test
-    public void testModifyContactSorted56() {
-        Set<ContactData> before = app.contact().all();
+    public void testModifyContact56() {
+        Contacts before = app.contact().all();
         ContactData modifiedContact = before.iterator().next();
 
         // Делаем локальную переменную, так как использовать будем не один раз
@@ -33,20 +38,15 @@ public class ContactModificationTests extends TestBase {
                 withFirstname("Masha").withMiddlename("Ivanovna").withLastname("Petrova").
                 withTitle("QA Analyst").withCompany("CBC").withAddress("Montreal").
                 withHomephone("555-666-7777").withEmail("mpetrova@gmail.com").withGroup("[none]");
-        // app.getContactHelper().selectContact(before.size() - 1);
         app.contact().modifyById(contact);
         app.goTo().homePage();
-        Set<ContactData> after = app.contact().all();
+        Contacts after = app.contact().all();
         Assert.assertEquals(after.size(), before.size());
-
-        before.remove(modifiedContact);
-        before.add(contact);
-        // Сравниваем упорядоченные sets
-        Assert.assertEquals(before, after);
+        assertThat(after, equalTo(before.without(modifiedContact).withAdded(contact)));
     }
 
     @Test
-    public void testModifyContactSorted() {
+    public void testModifyContactSortedList() {
         List<ContactData> before = app.contact().list();
         // Номер (index) контакта, которого будем удалять
         int index = before.size() - 1;
@@ -55,7 +55,6 @@ public class ContactModificationTests extends TestBase {
                 withFirstname("Masha").withMiddlename("Ivanovna").withLastname("Petrova").
                 withTitle("QA Analyst").withCompany("CBC").withAddress("Montreal").
                 withHomephone("555-666-7777").withEmail("mpetrova@gmail.com").withGroup("[none]");
-        // app.getContactHelper().selectContact(before.size() - 1);
         app.contact().modify(index, contact);
         app.goTo().homePage();
         List<ContactData> after = app.contact().list();
@@ -73,8 +72,7 @@ public class ContactModificationTests extends TestBase {
 
     @Test
     public void testModifyContact() {
-        if (! app.contact().isThereAContact())
-        {
+        if (!app.contact().isThereAContact()) {
             app.contact().initContactCreation();
             app.contact().create(new ContactData().
                     withFirstname("Masha").withMiddlename("Ivanovna").withLastname("Petrova").
@@ -82,24 +80,23 @@ public class ContactModificationTests extends TestBase {
                     withEmail("mpetrova@gmail.com").withGroup("[none]"), true);
             app.goTo().homePage();
         }
-            List<ContactData> before = app.contact().list();
-            // app.getContactHelper().selectContact(before.size() - 1);
-            app.contact().initContactModification(before.size() - 1);
-            // Делаем локальную переменную, так как использовать будем не один раз
-            ContactData contact = new ContactData().withId(before.get(before.size() - 1).getId()).
-                                            withFirstname("Masha").
-                                         withMiddlename("Ivanovna").
-                                    withLastname("Petrova").
-                                 withTitle("QA Analyst").
-                             withCompany("CBC").
-                         withAddress("Montreal").
-                     withHomephone("555-666-7777").
-                 withEmail("mpetrova@gmail.com").
-               withGroup("[none]");
+        List<ContactData> before = app.contact().list();
+        app.contact().initContactModification(before.size() - 1);
+        // Делаем локальную переменную, так как использовать будем не один раз
+        ContactData contact = new ContactData().withId(before.get(before.size() - 1).getId()).
+                withFirstname("Masha").
+                withMiddlename("Ivanovna").
+                withLastname("Petrova").
+                withTitle("QA Analyst").
+                withCompany("CBC").
+                withAddress("Montreal").
+                withHomephone("555-666-7777").
+                withEmail("mpetrova@gmail.com").
+                withGroup("[none]");
 
-            app.contact().fillContactForm(contact, false);
-            app.contact().submitContactModification();
-            app.goTo().homePage();
+        app.contact().fillContactForm(contact, false);
+        app.contact().submitContactModification();
+        app.goTo().homePage();
         List<ContactData> after = app.contact().list();
         Assert.assertEquals(after.size(), before.size());
 
@@ -107,6 +104,6 @@ public class ContactModificationTests extends TestBase {
         before.add(contact);
         // Преобразовываем списки в о множества (set)
         Assert.assertEquals(new HashSet<Object>(before), new HashSet<Object>(after));
-        }
+    }
 
 }

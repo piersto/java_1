@@ -16,7 +16,7 @@ public class ContactCreationTests extends TestBase {
 
 
     @Test
-    public void testAddContactSorted56() {
+    public void testAddContact56() {
         Contacts before = app.contact().all();
         app.contact().initContactCreation();
 
@@ -35,7 +35,7 @@ public class ContactCreationTests extends TestBase {
     }
 
     @Test
-    public void testAddContactSorted() {
+    public void testAddContactSortedList() {
         List<ContactData> before = app.contact().list();
         app.contact().initContactCreation();
 
