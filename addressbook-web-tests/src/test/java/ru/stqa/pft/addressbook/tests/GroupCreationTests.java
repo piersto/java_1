@@ -20,14 +20,24 @@ public class GroupCreationTests extends TestBase {
         Groups before = (Groups) app.group().all();
         GroupData group = new GroupData().withName("Test 2").withHeader("New header").withFooter("New Footer");
         app.group().create(group);
-        Groups after = (Groups) app.group().all();
         // Сравниваем пока только размеры списков:
-        Assert.assertEquals(after.size(), before.size() + 1);
-        assertThat(after.size(), equalTo(before.size() + 1));
+        assertThat(app.group().count(), equalTo(before.size() + 1));
+        Groups after = app.group().all();
         // Добавляем в старый список ту группу, которую мы только что добавили в приложение
-
         assertThat(after, equalTo(before.WithAdded(group.withId(after.stream().
                 mapToInt((g) -> g.getId()).max().getAsInt()))));
+    }
+
+    @Test
+    public void testBadGroupCreation() {
+        app.goTo().groupPage();
+        Groups before = (Groups) app.group().all();
+        GroupData group = new GroupData().withName("Test 2'");
+        app.group().create(group);
+        // Сравниваем пока только размеры списков:
+        assertThat(app.group().count(), equalTo(before.size()));
+        Groups after = app.group().all();
+        assertThat(after, equalTo(before));
     }
 
     @Test
@@ -42,11 +52,9 @@ public class GroupCreationTests extends TestBase {
 
         // Добавляем в старый список ту группу, которую мы только что добавили в приложение
         before.add(group);
-
         Comparator<? super GroupData> byId = (g1, g2) -> Integer.compare(g1.getId(), g2.getId());
         before.sort(byId);
         after.sort(byId);
-
         Assert.assertEquals(before, after);
     }
 
