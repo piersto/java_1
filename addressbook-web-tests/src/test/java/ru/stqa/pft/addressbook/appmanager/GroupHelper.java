@@ -60,6 +60,7 @@ public class GroupHelper extends HelperBase {
         initGroupModification();
         fillGroupForm(group);
         updateGroup();
+        groupCache = null;
         returnToGroupPage();
     }
 
@@ -68,6 +69,7 @@ public class GroupHelper extends HelperBase {
         initGroupModification();
         fillGroupForm(group);
         updateGroup();
+        groupCache = null;
         returnToGroupPage();
     }
 
@@ -76,18 +78,21 @@ public class GroupHelper extends HelperBase {
         // Instead of fix data, parameter = group is used
         fillGroupForm(group);
         submitGroupCreation();
+        groupCache = null;
         returnToGroupPage();
     }
 
     public void delete(int index) {
         selectGroup(index);
         deleteSelectedGroups();
+        groupCache = null;
         returnToGroupPage();
     }
 
     public void delete(GroupData group) {
         selectGroupById(group.getId());
         deleteSelectedGroups();
+        groupCache = null;
         returnToGroupPage();
     }
     public boolean isThereAGroup() {
@@ -111,8 +116,13 @@ public class GroupHelper extends HelperBase {
         return groups;
     }
 
+    private Groups groupCache = null;
+
     public Groups all() {
-        Groups groups = new Groups();
+        if (groupCache != null){
+            return new Groups(groupCache);
+        }
+        groupCache = new Groups();
                 // Пробегаем по всем вебэлементам,которые находятс по указанному локатору
         List<WebElement> elements = wd.findElements(By.cssSelector("span.group"));
         for (WebElement element : elements) {
@@ -120,9 +130,9 @@ public class GroupHelper extends HelperBase {
             String name = element.getText();
             int id = Integer.parseInt(element.findElement(By.tagName("input")).getAttribute("value"));
             // Создаем объект типа GroupData и добавляем созданный объект в список
-            groups.add(new GroupData().withId(id).withName(name));
+            groupCache.add(new GroupData().withId(id).withName(name));
         }
-        return groups;
+        return new Groups(groupCache);
     }
 
 
