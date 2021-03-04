@@ -139,7 +139,11 @@ public class ContactHelper extends HelperBase {
                     getAttribute("value"));
             String lastname = row.findElement(By.cssSelector("td:nth-child(2)")).getText();
             String firstname = row.findElement(By.cssSelector("td:nth-child(3)")).getText();
-            contacts.add(new ContactData().withId(id).withFirstname(firstname).withLastname(lastname));
+            String allPhones = row.findElement(By.cssSelector("td:nth-child(6)")).getText();
+            String[] phones = allPhones.split("\n");
+            contacts.add(new ContactData().withId(id).withFirstname(firstname).
+                    withLastname(lastname).withHomephone(phones[0]).withMobilephone(phones[1]).
+                    withWorkphone(phones[2]));
         }
         return contacts;
     }

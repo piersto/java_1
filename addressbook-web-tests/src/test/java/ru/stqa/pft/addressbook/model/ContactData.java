@@ -61,7 +61,6 @@ public class ContactData {
         return workphone;
     }
 
-
     public ContactData withMobilephone(String mobilephone) {
         this.mobilephone = mobilephone;
         return this;
@@ -71,7 +70,6 @@ public class ContactData {
         this.workphone = workphone;
         return this;
     }
-
 
     public ContactData withFirstname(String firstname) {
         this.firstname = firstname;
