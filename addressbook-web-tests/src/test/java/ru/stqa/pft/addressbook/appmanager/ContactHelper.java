@@ -140,13 +140,12 @@ public class ContactHelper extends HelperBase {
             String lastname = row.findElement(By.cssSelector("td:nth-child(2)")).getText();
             String firstname = row.findElement(By.cssSelector("td:nth-child(3)")).getText();
             String allPhones = row.findElement(By.cssSelector("td:nth-child(6)")).getText();
-            String[] phones = allPhones.split("\n");
+            //String[] phones = allPhones.split("\n");
             contacts.add(new ContactData().withId(id).withFirstname(firstname).
-                    withLastname(lastname).withHomephone(phones[0]).withMobilephone(phones[1]).
-                    withWorkphone(phones[2]));
+                    withLastname(lastname).withAllPhones(allPhones));
         }
         return contacts;
-    }
+         }
 
     public ContactData infoFromEditForm(ContactData contact) {
         initContactModificationById(contact.getId());
