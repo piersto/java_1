@@ -32,20 +32,19 @@ public class ContactMailTests extends TestBase {
         app.goTo().homePage();
         ContactData contact = app.contact().all().iterator().next();
         ContactData contactInfoFromEditForm = app.contact().infoFromEditForm(contact);
-       assertThat(contact.getAllMails(), equalTo(mergeMails(contactInfoFromEditForm)));
+        assertThat(contact.getAllMails(), equalTo(mergeMails(contactInfoFromEditForm)));
 
     }
 
-   private String mergeMails(ContactData contact) {
+    private String mergeMails(ContactData contact) {
         return Arrays.asList(
-                        contact.getEmail(),
-                        contact.getEmail2().
+                contact.getEmail(),
+                contact.getEmail2().
                         concat(contact.getEmail3()))
-
-                        .stream().filter(s -> !s.equals(""))
-                            .map(ContactMailTests::cleaned)
-                        .collect(Collectors.joining("\n"));
-   }
+                .stream().filter(s -> !s.equals(""))
+                .map(ContactMailTests::cleaned)
+                .collect(Collectors.joining("\n"));
+    }
 
     public static String cleaned(String mail) {
         return mail.replaceAll("\\s", "");
