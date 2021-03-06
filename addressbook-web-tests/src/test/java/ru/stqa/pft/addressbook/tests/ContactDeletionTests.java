@@ -36,7 +36,18 @@ public class ContactDeletionTests extends TestBase {
         assertThat(after, equalTo(before.without(deletedContact)));
     }
 
-    @Test
+
+
+
+
+
+
+
+
+
+
+
+    @Test (enabled = false)
     public void testContactDeletion() {
         List<ContactData> before = app.contact().list();
         int index = before.size() - 1;

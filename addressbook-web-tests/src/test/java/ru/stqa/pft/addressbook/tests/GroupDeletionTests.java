@@ -34,6 +34,16 @@ public class GroupDeletionTests extends TestBase {
         assertThat(after, equalTo(before.without(deletedGroup)));
     }
 
+
+
+
+
+
+
+
+
+
+
     @Test
     public void testDeleteGroupSet() {
         Set<GroupData> before = app.group().all();
@@ -47,7 +57,7 @@ public class GroupDeletionTests extends TestBase {
         assertEquals(before, after);
     }
 
-    @Test
+    @Test (enabled = false)
     public void testDeleteGroupSortedList() {
         List<GroupData> before = app.group().list();
         int index = before.size() - 1;

@@ -45,7 +45,18 @@ public class ContactModificationTests extends TestBase {
         assertThat(after, equalTo(before.without(modifiedContact).withAdded(contact)));
     }
 
-    @Test
+
+
+
+
+
+
+
+
+
+
+
+    @Test (enabled = false)
     public void testModifyContactSortedList() {
         List<ContactData> before = app.contact().list();
         // Номер (index) контакта, которого будем удалять

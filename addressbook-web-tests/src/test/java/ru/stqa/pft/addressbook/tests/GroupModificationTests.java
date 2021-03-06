@@ -37,6 +37,18 @@ public class GroupModificationTests extends TestBase {
         assertThat(after, equalTo(before.without(modifiedGroup).WithAdded(group)));
     }
 
+
+
+
+
+
+
+
+
+
+
+
+
     @Test
     public void testModifyGroupSet() {
 
@@ -56,7 +68,7 @@ public class GroupModificationTests extends TestBase {
         assertEquals(before, after);
     }
 
-    @Test
+    @Test (enabled = false)
     public void testModifyGroupSortedLists() {
 
         List<GroupData> before = app.group().list();
