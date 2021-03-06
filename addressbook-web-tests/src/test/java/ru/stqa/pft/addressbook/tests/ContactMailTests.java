@@ -20,8 +20,8 @@ public class ContactMailTests extends TestBase {
                     withFirstname("Masha").
                     withLastname("Petrova").
                     withEmail("1@gmail.com").
-                    withEmail2("2@gamil.com").
-                    withEmail3("3@gmail.com").
+                    withEmail2("2@yahoo.com").
+                    withEmail3("3@mail.com").
                     withGroup("[none]"), true);
             app.goTo().homePage();
         }

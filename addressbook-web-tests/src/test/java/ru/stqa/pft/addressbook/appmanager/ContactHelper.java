@@ -143,9 +143,10 @@ public class ContactHelper extends HelperBase {
             String firstname = row.findElement(By.cssSelector("td:nth-child(3)")).getText();
             String allPhones = row.findElement(By.cssSelector("td:nth-child(6)")).getText();
             String allMails = row.findElement(By.cssSelector("td:nth-child(5)")).getText();
+            String address = row.findElement(By.cssSelector("td:nth-child(4)")).getText();
             //String[] phones = allPhones.split("\n");
             contacts.add(new ContactData().withId(id).withFirstname(firstname).
-                    withLastname(lastname).withAllPhones(allPhones).withAllMails(allMails));
+                    withLastname(lastname).withAllPhones(allPhones).withAllMails(allMails).withAddress(address));
         }
         return contacts;
     }
