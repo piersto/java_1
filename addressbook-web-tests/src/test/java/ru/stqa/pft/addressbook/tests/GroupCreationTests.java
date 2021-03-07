@@ -1,47 +1,43 @@
 package ru.stqa.pft.addressbook.tests;
 
 import org.testng.Assert;
+import org.testng.annotations.DataProvider;
 import org.testng.annotations.Test;
 import ru.stqa.pft.addressbook.model.GroupData;
 import ru.stqa.pft.addressbook.model.Groups;
 
-import java.util.Comparator;
-import java.util.HashSet;
-import java.util.List;
+import java.util.*;
 
 import static org.hamcrest.CoreMatchers.equalTo;
 import static org.hamcrest.MatcherAssert.assertThat;
 
 public class GroupCreationTests extends TestBase {
 
-    @Test
-    public void testGroupCreation56() {
-        String[] names = new String[] {"test1", "test2", "test3"};
-        for (String name: names) {
-            app.goTo().groupPage();
-            Groups before = (Groups) app.group().all();
-            GroupData group = new GroupData().withName(name).withHeader("New header").withFooter("New Footer");
-            app.group().create(group);
-            // Сравниваем пока только размеры списков:
-            assertThat(app.group().count(), equalTo(before.size() + 1));
-            Groups after = app.group().all();
-            // Добавляем в старый список ту группу, которую мы только что добавили в приложение
-            assertThat(after, equalTo(before.WithAdded(group.withId(after.stream().
-                    mapToInt((g) -> g.getId()).max().getAsInt()))));
-        }
+    @DataProvider
+    public Iterator<Object[]> validGroups() {
+        List<Object[]> list = new ArrayList<Object[]>();
+        list.add(new Object[] {new  GroupData().withName("test1").withHeader("header1").withFooter("footer1")});
+        list.add(new Object[] {new  GroupData().withName("test2").withHeader("header2").withFooter("footer2")});
+        list.add(new Object[] {new  GroupData().withName("test3").withHeader("header3").withFooter("footer3")});
+
+        return list.iterator();
+    }
+
+    @Test(dataProvider = "validGroups")
+    public void testGroupCreation56(GroupData group) {
+        app.goTo().groupPage();
+        Groups before = (Groups) app.group().all();
+        app.group().create(group);
+        // Сравниваем пока только размеры списков:
+        assertThat(app.group().count(), equalTo(before.size() + 1));
+        Groups after = app.group().all();
+        // Добавляем в старый список ту группу, которую мы только что добавили в приложение
+        assertThat(after, equalTo(before.WithAdded(group.withId(after.stream().
+                mapToInt((g) -> g.getId()).max().getAsInt()))));
     }
 
 
-
-
-
-
-
-
-
-
-
-    @Test (enabled = false)
+    @Test(enabled = false)
     public void testBadGroupCreation() {
         // Группа с ' в названии создаться не может, так что этот тест фактически неисправен
         app.goTo().groupPage();
@@ -54,7 +50,7 @@ public class GroupCreationTests extends TestBase {
         assertThat(after, equalTo(before));
     }
 
-    @Test (enabled = false)
+    @Test(enabled = false)
     public void testGroupCreationSortedLists() {
         app.goTo().groupPage();
         List<GroupData> before = app.group().list();
