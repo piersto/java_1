@@ -85,9 +85,9 @@ public class GroupDataGenerator {
             List<GroupData> groups = new ArrayList<GroupData>();
             for (int i = 0; i < count; i++) {
                 groups.add(new GroupData()
-                        .withName(String.format("Name %s", i))
-                        .withHeader(String.format("Header %s", i))
-                        .withFooter(String.format("Footer %s", i)));
+                        .withName(String.format("Name1 %s", i))
+                        .withHeader(String.format("Header1 %s", i))
+                        .withFooter(String.format("Footer1 %s", i)));
             }
             return groups;
     }
