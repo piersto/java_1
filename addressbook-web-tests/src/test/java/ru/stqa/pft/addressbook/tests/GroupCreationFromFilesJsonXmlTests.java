@@ -53,7 +53,7 @@ public class GroupCreationFromFilesJsonXmlTests extends TestBase {
 
 
     @Test(dataProvider = "validGroupsFromJson")
-    public void testGroupCreationFromFile(GroupData group) {
+    public void testGroupCreationFromJson(GroupData group) {
         app.goTo().groupPage();
         Groups before = app.group().all();
         app.group().create(group);
