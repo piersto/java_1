@@ -35,8 +35,8 @@ public class GroupDataGenerator {
             jCommander.usage();
             return;
         }
-            generator.run();
-        }
+        generator.run();
+    }
 
     private void run() throws IOException {
         List<GroupData> groups = generateGroups(count);
@@ -81,14 +81,14 @@ public class GroupDataGenerator {
         writer.close();
     }
 
-        private List<GroupData> generateGroups (int count) {
-            List<GroupData> groups = new ArrayList<GroupData>();
-            for (int i = 0; i < count; i++) {
-                groups.add(new GroupData()
-                        .withName(String.format("Name1 %s", i))
-                        .withHeader(String.format("Header1 %s", i))
-                        .withFooter(String.format("Footer1 %s", i)));
-            }
-            return groups;
+    private List<GroupData> generateGroups (int count) {
+        List<GroupData> groups = new ArrayList<GroupData>();
+        for (int i = 0; i < count; i++) {
+            groups.add(new GroupData()
+                    .withName(String.format("Name %s", i))
+                    .withHeader(String.format("Header %s", i))
+                    .withFooter(String.format("Footer %s", i)));
+        }
+        return groups;
     }
 }
