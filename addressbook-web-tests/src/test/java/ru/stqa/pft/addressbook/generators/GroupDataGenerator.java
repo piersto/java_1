@@ -76,7 +76,7 @@ public class GroupDataGenerator {
         Writer writer = new FileWriter(file);
         for (GroupData group : groups) {
             writer.write
-                    (String.format("%s,%s,%s\n", group.getName(), group.getHeader(), group.getFooter()));
+                    (String.format("%s;%s;%s\n", group.getName(), group.getHeader(), group.getFooter()));
         }
         writer.close();
     }
