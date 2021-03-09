@@ -17,7 +17,7 @@ public class GroupCreationTests extends TestBase {
     @DataProvider
     public Iterator<Object[]> validGroups() throws IOException {
         List<Object[]> list = new ArrayList<Object[]>();
-        BufferedReader reader = new BufferedReader(new FileReader(new File("src/test/resources/groups.json")));
+        BufferedReader reader = new BufferedReader(new FileReader(new File("src/test/resources/groups.csv")));
         String line = reader.readLine();
         while (line != null) {
             String[] split = line.split(";");
@@ -28,7 +28,7 @@ public class GroupCreationTests extends TestBase {
     }
 
     @Test(dataProvider = "validGroups")
-    public void testGroupCreation56(GroupData group) {
+    public void testGroupCreationFromCsv(GroupData group) {
         app.goTo().groupPage();
         Groups before = app.group().all();
         app.group().create(group);
