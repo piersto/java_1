@@ -57,6 +57,7 @@ public class GroupDataGenerator {
     private void saveAsJson(List<GroupData> groups, File file) throws IOException {
         Gson gson = new GsonBuilder().setPrettyPrinting().excludeFieldsWithoutExposeAnnotation().create();
         String json = gson.toJson(groups);
+        // Этот трай будет закрывать файл автоматически. См saveAsXml, там эта функция прописана руками writer.close()
         try (Writer writer = new FileWriter(file))
         {
             writer.write(json);
