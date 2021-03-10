@@ -174,5 +174,4 @@ public class ContactHelper extends HelperBase {
                 .withEmail3(email3)
                 .withAddress(address);
     }
-
 }

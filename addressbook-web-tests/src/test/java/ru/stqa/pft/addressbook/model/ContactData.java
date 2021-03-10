@@ -208,4 +208,5 @@ public class ContactData {
     public int hashCode() {
         return Objects.hash(id, firstname, lastname);
     }
+
 }
