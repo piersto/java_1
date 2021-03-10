@@ -73,9 +73,10 @@ public class ContactHelper extends HelperBase {
 
         // If we create contact:
         if (creation) {
-            new Select(wd.findElement(By.name("new_group"))).selectByVisibleText(contactData.getGroup());
+            if (contactData.getGroup() != null) {
+                new Select(wd.findElement(By.name("new_group"))).selectByVisibleText(contactData.getGroup());
+            }
         }
-        // Else- we modify contact so 'new_group' shouldn't be on the page and we assert it's not there.
         else {
             Assert.assertFalse(isElementPresent(By.name("new_group")));
         }
