@@ -1,5 +1,7 @@
 package ru.stqa.pft.addressbook.tests;
 
+import org.slf4j.Logger;
+import org.slf4j.LoggerFactory;
 import org.testng.Assert;
 import org.testng.annotations.DataProvider;
 import org.testng.annotations.Test;
@@ -14,14 +16,17 @@ import static org.hamcrest.MatcherAssert.assertThat;
 
 public class GroupCreationTests extends TestBase {
 
+
     @DataProvider
     public Iterator<Object[]> validGroups() throws IOException {
         List<Object[]> list = new ArrayList<Object[]>();
-        BufferedReader reader = new BufferedReader(new FileReader(new File("src/test/resources/groups.csv")));
+        BufferedReader reader = new BufferedReader(new FileReader
+                                            (new File("src/test/resources/groups.csv")));
         String line = reader.readLine();
         while (line != null) {
             String[] split = line.split(";");
-            list.add(new Object[] {new GroupData().withName(split[0]).withHeader(split[1]).withFooter(split[2])});
+            list.add(new Object[] {new GroupData().withName(split[0])
+                                                    .withHeader(split[1]).withFooter(split[2])});
             line = reader.readLine();
         }
         return list.iterator();
@@ -38,6 +43,7 @@ public class GroupCreationTests extends TestBase {
         // Добавляем в старый список ту группу, которую мы только что добавили в приложение
         assertThat(after, equalTo(before.WithAdded(group.withId(after.stream().
                 mapToInt((g) -> g.getId()).max().getAsInt()))));
+
     }
 
 
@@ -93,5 +99,5 @@ public class GroupCreationTests extends TestBase {
         before.add(group);
         Assert.assertEquals(new HashSet<Object>(before), new HashSet<Object>(after));
     }
-    
+
 }

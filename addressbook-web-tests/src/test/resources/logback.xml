@@ -1,0 +1,23 @@
+<configuration>
+    <!-- always a good activate OnConsoleStatusListener -->
+
+    <timestamp key="bySecond" datePattern="yyyyMMdd'T'HHmmss"/>
+
+    <appender name="FILE" class="ch.qos.logback.core.FileAppender">
+        <file>test-${bySecond}.log</file>
+        <append>true</append>
+        <!-- set immediateFlush to false for much higher logging throughput -->
+            <encoder>
+            <pattern>%-4relative [%thread] %-5level %logger{35} - %msg%n</pattern>
+        </encoder>
+    </appender>
+
+    <appender name="STDOUT" class="ch.qos.logback.core.ConsoleAppender">
+        <encoder>
+            <pattern>%h %l %u %user %date "%r" %s %b</pattern>
+        </encoder>
+    </appender>
+
+    <appender-ref ref="FILE" />
+    <appender-ref ref="STDOUT" />
+</configuration>
