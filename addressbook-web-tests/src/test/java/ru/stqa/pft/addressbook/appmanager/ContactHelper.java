@@ -74,7 +74,8 @@ public class ContactHelper extends HelperBase {
         // If we create contact:
         if (creation) {
             if (contactData.getGroup() != null) {
-                new Select(wd.findElement(By.name("new_group"))).selectByVisibleText(contactData.getGroup());
+                new Select(wd.findElement(By.name("new_group")))
+                        .selectByVisibleText(contactData.getGroup());
             }
         }
         else {

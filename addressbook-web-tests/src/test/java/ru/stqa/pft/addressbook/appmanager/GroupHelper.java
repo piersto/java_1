@@ -108,7 +108,8 @@ public class GroupHelper extends HelperBase {
         List<WebElement> elements = wd.findElements(By.cssSelector("span.group"));
         for (WebElement element : elements) {
             String name = element.getText();
-            int id = Integer.parseInt(element.findElement(By.tagName("input")).getAttribute("value"));
+            int id = Integer.parseInt(element.findElement(By.tagName("input"))
+                    .getAttribute("value"));
             // Создаем объект типа GroupData и добавляем созданный объект в список
             groups.add(new GroupData().withId(id).withName(name));
         }
@@ -127,12 +128,11 @@ public class GroupHelper extends HelperBase {
         for (WebElement element : elements) {
             // Для каждого элемента вытаскиваем имя и id группы
             String name = element.getText();
-            int id = Integer.parseInt(element.findElement(By.tagName("input")).getAttribute("value"));
+            int id = Integer.parseInt(element.findElement(By.tagName("input"))
+                    .getAttribute("value"));
             // Создаем объект типа GroupData и добавляем созданный объект в список
             groupCache.add(new GroupData().withId(id).withName(name));
         }
         return new Groups(groupCache);
     }
-
-
 }
