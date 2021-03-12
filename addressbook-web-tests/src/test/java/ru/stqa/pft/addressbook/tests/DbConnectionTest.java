@@ -13,7 +13,7 @@ public class DbConnectionTest {
 
         try {
             conn = DriverManager
-                            .getConnection("jdbc:mysql:3306//localhost/addressbook?user=root&password=");
+                            .getConnection("jdbc:mysql//localhost:3306/addressbook?user=root&password=");
 
             Statement st = conn.createStatement();
             ResultSet rs = st.executeQuery
