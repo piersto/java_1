@@ -20,7 +20,9 @@ dependencies {
     implementation 'com.thoughtworks.xstream:xstream:1.4.15'
     implementation 'com.google.code.gson:gson:2.8.6'
     implementation 'ch.qos.logback:logback-classic:1.1.5'
-    implementation 'mysql:mysql-connector-java:8.0.23'}
+    implementation 'mysql:mysql-connector-java:8.0.23'
+    implementation 'org.hibernate:hibernate-core:5.4.22.Final'}
+
 
 task testGroups(type: Test) {
     useTestNG {
