@@ -7,12 +7,12 @@ import org.hibernate.boot.registry.StandardServiceRegistry;
 import org.hibernate.boot.registry.StandardServiceRegistryBuilder;
 import ru.stqa.pft.addressbook.model.GroupData;
 import ru.stqa.pft.addressbook.model.Groups;
-
 import java.util.List;
 
 public class DbHelper {
-
     private final SessionFactory sessionFactory;
+    public DbHelper()
+    {
 
     // A SessionFactory is set up once for an application!
     final StandardServiceRegistry registry = new StandardServiceRegistryBuilder()
@@ -20,6 +20,7 @@ public class DbHelper {
             .build();
     sessionFactory = new MetadataSources( registry ).buildMetadata().buildSessionFactory();
     }
+
     public Groups groups() {
         Session session = sessionFactory.openSession();
         session.beginTransaction();
