@@ -233,6 +233,12 @@ public class ContactData {
                 ", firstname='" + firstname + '\'' +
                 ", lastname='" + lastname + '\'' +
                 ", address='" + address + '\'' +
+                ", email='" + email + '\'' +
+                ", email2='" + email2 + '\'' +
+                ", email3='" + email3 + '\'' +
+                ", home='" + homephone + '\'' +
+                ", mobile='" + mobilephone + '\'' +
+                ", work='" + workphone + '\'' +
                 '}';
     }
 
