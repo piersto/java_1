@@ -53,8 +53,7 @@ public class ApplicationManager {
         contactHelper = new ContactHelper(wd);
         sessionHelper = new SessionHelper(wd);
         sessionHelper.login(properties.getProperty("web.adminLogin"),
-                            properties.getProperty("web.adminPassword"));
-        dbHelper = new DbHelper();
+        properties.getProperty("web.adminPassword"));
     }
 
     public void stop() {

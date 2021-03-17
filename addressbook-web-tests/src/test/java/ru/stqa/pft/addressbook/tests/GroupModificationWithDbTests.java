@@ -7,11 +7,11 @@ import ru.stqa.pft.addressbook.model.Groups;
 
 import static org.hamcrest.CoreMatchers.equalTo;
 import static org.hamcrest.MatcherAssert.assertThat;
-import static ru.stqa.pft.addressbook.tests.TestBase.app;
 
-public class GroupModificationWithDbTests {
+public class GroupModificationWithDbTests extends TestBase{
 
     @BeforeMethod
+
     public void insurePreconditions() {
         if (app.db().groups().size() == 0) {
             app.goTo().groupPage();
