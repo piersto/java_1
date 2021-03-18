@@ -5,6 +5,7 @@ import org.testng.annotations.BeforeMethod;
 import org.testng.annotations.Test;
 import ru.stqa.pft.addressbook.model.ContactData;
 import ru.stqa.pft.addressbook.model.Contacts;
+import ru.stqa.pft.addressbook.model.Groups;
 
 import java.util.Comparator;
 import java.util.HashSet;
@@ -18,6 +19,7 @@ public class ContactModificationTests extends TestBase {
 
     @BeforeMethod
     public void ensurePreconditions() {
+        Groups groups = app.db().groups();
         if (app.db().contacts().size() == 0) {
             app.contact().initContactCreation();
             app.contact().create(new ContactData()
@@ -30,13 +32,14 @@ public class ContactModificationTests extends TestBase {
                     .withHomephone("11111111")
                     .withMobilephone("222222")
                     .withWorkphone("3333333")
-                    .withGroup("[none]"), true);
+                    .inGroup(groups.iterator().next()), true);
             app.goTo().homePage();
         }
     }
 
     @Test
     public void testModifyContact74() {
+        Groups groups = app.db().groups();
         Contacts before = app.db().contacts();
         ContactData modifiedContact = before.iterator().next();
 
@@ -51,7 +54,7 @@ public class ContactModificationTests extends TestBase {
                 .withHomephone("11111111")
                 .withMobilephone("222222")
                 .withWorkphone("3333333")
-                .withGroup("[none]");
+                .inGroup(groups.iterator().next());
         app.contact().modifyById(contact);
         app.goTo().homePage();
 
@@ -73,6 +76,7 @@ public class ContactModificationTests extends TestBase {
 
     @Test (enabled = false)
     public void testModifyContactSortedList() {
+        Groups groups = app.db().groups();
         List<ContactData> before = app.contact().list();
         // Номер (index) контакта, которого будем удалять
         int index = before.size() - 1;
@@ -80,7 +84,8 @@ public class ContactModificationTests extends TestBase {
         ContactData contact = new ContactData().
                 withFirstname("Masha").withMiddlename("Ivanovna").withLastname("Petrova").
                 withTitle("QA Analyst").withCompany("CBC").withAddress("Montreal").
-                withHomephone("555-666-7777").withEmail("mpetrova@gmail.com").withGroup("[none]");
+                withHomephone("555-666-7777").withEmail("mpetrova@gmail.com")
+                .inGroup(groups.iterator().next());
         app.contact().modify(index, contact);
         app.goTo().homePage();
         List<ContactData> after = app.contact().list();
@@ -98,12 +103,14 @@ public class ContactModificationTests extends TestBase {
 
     @Test(enabled = false)
     public void testModifyContact() {
+        Groups groups = app.db().groups();
         if (!app.contact().isThereAContact()) {
             app.contact().initContactCreation();
             app.contact().create(new ContactData().
                     withFirstname("Masha").withMiddlename("Ivanovna").withLastname("Petrova").
                     withTitle("QA Analyst").withCompany("CBC").withAddress("Montreal").withHomephone("555-666-7777").
-                    withEmail("mpetrova@gmail.com").withGroup("[none]"), true);
+                    withEmail("mpetrova@gmail.com")
+                    .inGroup(groups.iterator().next()), true);
             app.goTo().homePage();
         }
         List<ContactData> before = app.contact().list();
@@ -117,8 +124,8 @@ public class ContactModificationTests extends TestBase {
                 withCompany("CBC").
                 withAddress("Montreal").
                 withHomephone("555-666-7777").
-                withEmail("mpetrova@gmail.com").
-                withGroup("[none]");
+                withEmail("mpetrova@gmail.com")
+               .inGroup(groups.iterator().next());
 
         app.contact().fillContactForm(contact, false);
         app.contact().submitContactModification();
