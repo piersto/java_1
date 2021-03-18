@@ -31,4 +31,5 @@ public class GroupModificationWithDbTests extends TestBase{
         Groups after = app.db().groups();
         assertThat(after, equalTo(before.without(modifiedGroup).WithAdded(group)));
     }
+
 }
