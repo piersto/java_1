@@ -8,10 +8,16 @@ import org.testng.annotations.AfterSuite;
 import org.testng.annotations.BeforeMethod;
 import org.testng.annotations.BeforeSuite;
 import ru.stqa.pft.addressbook.appmanager.ApplicationManager;
+import ru.stqa.pft.addressbook.model.GroupData;
+import ru.stqa.pft.addressbook.model.Groups;
 
 import java.io.IOException;
 import java.lang.reflect.Method;
 import java.util.Arrays;
+import java.util.stream.Collectors;
+
+import static org.hamcrest.CoreMatchers.equalTo;
+import static org.hamcrest.MatcherAssert.assertThat;
 
 public class TestBase {
 
@@ -41,5 +47,15 @@ public class TestBase {
     public void logTestStop(Method m) {
         logger.info("Stop test " + m.getName());
 
+    }
+
+    public void verifyGroupListInUi() {
+
+        Groups dbGroups = app.db().groups();
+        Groups uiGroups = app.group().all();
+        assertThat(uiGroups, equalTo(dbGroups.stream()
+                        .map((g) -> new GroupData().withId(g.getId())
+                        .withName(g.getName()))
+                        .collect(Collectors.toSet())));
     }
 }
