@@ -66,10 +66,15 @@ public class ContactData {
     @Type(type = "text")
     private String photo;
 
-
-
-    public File getPhoto() {
+    public File getPhoto()
+        {
+        if (photo == null)
+        {
+            return null;
+        }
+    else {
         return new File(photo) ;
+    }
     }
 
     public String getAllMails() {
