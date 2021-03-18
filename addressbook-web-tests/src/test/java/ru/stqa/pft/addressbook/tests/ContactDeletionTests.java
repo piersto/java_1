@@ -26,8 +26,6 @@ public class ContactDeletionTests extends TestBase {
         }
     }
 
-
-
     @Test
     public void testContactDeletion74() {
         Contacts before = app.db().contacts();
