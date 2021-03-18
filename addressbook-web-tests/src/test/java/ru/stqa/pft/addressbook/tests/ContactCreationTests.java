@@ -20,7 +20,7 @@ public class ContactCreationTests extends TestBase {
     public void testCreateContact74() {
         Contacts before = app.db().contacts();
         app.contact().initContactCreation();
-        File photo = new File("src/test/resources/2.png");
+        //File photo = new File("src/test/resources/2.png");
         ContactData contact = new ContactData()
                 .withFirstname("Masha")
                 .withLastname("Petrova")
@@ -31,8 +31,8 @@ public class ContactCreationTests extends TestBase {
                 .withEmail3("3@1.com")
                 .withHomephone("11111111")
                 .withMobilephone("222222")
-                .withWorkphone("3333333")
-                .withPhoto(photo);
+                .withWorkphone("3333333");
+               // .withPhoto(photo);
 
         app.contact().create(contact, true);
         app.goTo().homePage();
