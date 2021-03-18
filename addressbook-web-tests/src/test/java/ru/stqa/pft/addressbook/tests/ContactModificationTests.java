@@ -29,7 +29,7 @@ public class ContactModificationTests extends TestBase {
     }
 
     @Test
-    public void testModifyContact56() {
+    public void testModifyContact74() {
         Contacts before = app.db().contacts();
         ContactData modifiedContact = before.iterator().next();
 
