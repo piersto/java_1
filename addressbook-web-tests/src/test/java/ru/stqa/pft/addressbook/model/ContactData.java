@@ -4,6 +4,7 @@ import com.google.gson.annotations.Expose;
 import com.thoughtworks.xstream.annotations.XStreamAlias;
 import com.thoughtworks.xstream.annotations.XStreamOmitField;
 import org.hibernate.annotations.Type;
+
 import javax.persistence.*;
 import java.io.File;
 import java.util.Objects;
@@ -227,6 +228,37 @@ public class ContactData {
     }
 
     @Override
+    public boolean equals(Object o) {
+        if (this == o) return true;
+        if (o == null || getClass() != o.getClass()) return false;
+        ContactData that = (ContactData) o;
+        return id == that.id && Objects.equals(firstname, that.firstname)
+                && Objects.equals(middlename, that.middlename)
+                && Objects.equals(lastname, that.lastname)
+                && Objects.equals(title, that.title)
+                && Objects.equals(company, that.company)
+                && Objects.equals(address, that.address)
+                && Objects.equals(homephone, that.homephone)
+                && Objects.equals(mobilephone, that.mobilephone)
+                && Objects.equals(workphone, that.workphone)
+                && Objects.equals(email, that.email)
+                && Objects.equals(email2, that.email2)
+                && Objects.equals(email3, that.email3)
+                && Objects.equals(group, that.group)
+                && Objects.equals(allPhones, that.allPhones)
+                && Objects.equals(allMails, that.allMails)
+                && Objects.equals(photo, that.photo);
+    }
+
+    @Override
+    public int hashCode() {
+        return Objects.hash(id, firstname, middlename, lastname,
+                title, company, address, homephone, mobilephone,
+                workphone, email, email2, email3, group, allPhones,
+                allMails, photo);
+    }
+
+    @Override
     public String toString() {
         return "ContactData{" +
                 "id='" + id + '\'' +
@@ -242,16 +274,4 @@ public class ContactData {
                 '}';
     }
 
-    @Override
-    public boolean equals(Object o) {
-        if (this == o) return true;
-        if (o == null || getClass() != o.getClass()) return false;
-        ContactData that = (ContactData) o;
-        return id == that.id && Objects.equals(firstname, that.firstname) && Objects.equals(lastname, that.lastname);
-    }
-
-    @Override
-    public int hashCode() {
-        return Objects.hash(id, firstname, lastname);
-    }
 }

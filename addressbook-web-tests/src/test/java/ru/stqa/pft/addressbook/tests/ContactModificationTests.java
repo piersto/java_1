@@ -18,7 +18,7 @@ public class ContactModificationTests extends TestBase {
 
     @BeforeMethod
     public void ensurePreconditions() {
-        if (app.contact().all().size() == 0) {
+        if (app.db().contacts().size() == 0) {
             app.contact().initContactCreation();
             app.contact().create(new ContactData().
                     withFirstname("Masha").withMiddlename("Ivanovna").withLastname("Petrova").
@@ -30,7 +30,7 @@ public class ContactModificationTests extends TestBase {
 
     @Test
     public void testModifyContact56() {
-        Contacts before = app.contact().all();
+        Contacts before = app.db().contacts();
         ContactData modifiedContact = before.iterator().next();
 
         // Делаем локальную переменную, так как использовать будем не один раз
@@ -40,7 +40,7 @@ public class ContactModificationTests extends TestBase {
                 withHomephone("555-666-7777").withEmail("mpetrova@gmail.com").withGroup("[none]");
         app.contact().modifyById(contact);
         app.goTo().homePage();
-        Contacts after = app.contact().all();
+        Contacts after = app.db().contacts();
         Assert.assertEquals(after.size(), before.size());
         assertThat(after, equalTo(before.without(modifiedContact).withAdded(contact)));
     }
