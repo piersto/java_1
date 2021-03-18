@@ -14,51 +14,65 @@ import java.util.Objects;
 @Table(name = "addressbook")
 @XStreamAlias("contact")
 public class ContactData {
+
     @Id
     @Column(name = "id")
     @XStreamOmitField
     private int id = Integer.MAX_VALUE;
+
     @Column(name = "firstname")
     @Expose
     private String firstname;
+
     private String middlename;
+
     @Column(name = "lastname")
     @Expose
     private String lastname;
     private String title;
     private String company;
+
     @Expose
     @Column(name = "address")
     @Type(type = "text")
     private String address;
+
     @Column(name = "home")
     @Type(type = "text")
     @Expose
     private String homephone;
+
     @Column(name = "mobile")
     @Type(type = "text")
     @Expose
     private String mobilephone;
+
     @Column(name = "work")
     @Type(type = "text")
     @Expose
     private String workphone;
+
     @Expose
     @Column(name = "email")
     @Type(type = "text")
     private String email;
+
     @Expose
     @Column(name = "email2")
     @Type(type = "text")
     private String email2;
+
     @Expose
     @Column(name = "email3")
     @Type(type = "text")
     private String email3;
+
     @Transient
     private String group;
+
     @Transient
     private String allPhones;
+
     @Transient
     private String allMails;
 
@@ -66,15 +80,12 @@ public class ContactData {
     @Type(type = "text")
     private String photo;
 
-    public File getPhoto()
-        {
-        if (photo == null)
-        {
+    public File getPhoto() {
+        if (photo == null) {
             return null;
+        } else {
+            return new File(photo);
         }
-    else {
-        return new File(photo) ;
-    }
     }
 
     public String getAllMails() {

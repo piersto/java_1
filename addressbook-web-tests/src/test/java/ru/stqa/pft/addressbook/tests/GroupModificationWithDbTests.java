@@ -8,7 +8,7 @@ import ru.stqa.pft.addressbook.model.Groups;
 import static org.hamcrest.CoreMatchers.equalTo;
 import static org.hamcrest.MatcherAssert.assertThat;
 
-public class GroupModificationWithDbTests extends TestBase{
+public class GroupModificationWithDbTests extends TestBase {
 
     @BeforeMethod
 
@@ -34,7 +34,6 @@ public class GroupModificationWithDbTests extends TestBase{
         assertThat(after, equalTo(before.without(modifiedGroup).WithAdded(group)));
         verifyGroupListInUi();
     }
-
 
 
 }
