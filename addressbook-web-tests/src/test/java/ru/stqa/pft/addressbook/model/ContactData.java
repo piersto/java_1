@@ -69,7 +69,7 @@ public class ContactData {
     @Type(type = "text")
     private String email3;
 
-    @ManyToMany
+    @ManyToMany(fetch = FetchType.EAGER)
     @JoinTable(name = "address_in_groups",
             joinColumns = @JoinColumn(name = "id"),
             inverseJoinColumns =  @JoinColumn(name = "group_id"))
