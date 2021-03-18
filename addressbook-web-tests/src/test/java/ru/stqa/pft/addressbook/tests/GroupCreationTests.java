@@ -29,7 +29,39 @@ public class GroupCreationTests extends TestBase {
         return list.iterator();
     }
 
-    @Test(dataProvider = "validGroups")
+    @Test
+    public void testGroupCreation74() {
+        app.goTo().groupPage();
+        Groups before = app.db().groups();
+        GroupData group = new GroupData().withName("Test 2'");
+        app.group().create(group);
+        // Сравниваем пока только размеры списков:
+        assertThat(app.group().count(), equalTo(before.size()));
+        Groups after = app.db().groups();
+        assertThat(after, equalTo(before));
+    }
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+    @Test(dataProvider = "validGroups", enabled = false)
     public void testGroupCreationFromCsv(GroupData group) {
         app.goTo().groupPage();
         Groups before = app.group().all();
