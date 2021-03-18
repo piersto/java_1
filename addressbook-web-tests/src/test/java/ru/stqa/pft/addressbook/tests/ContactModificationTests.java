@@ -20,16 +20,17 @@ public class ContactModificationTests extends TestBase {
     public void ensurePreconditions() {
         if (app.db().contacts().size() == 0) {
             app.contact().initContactCreation();
-            app.contact().create(new ContactData().
-                    withFirstname("Masha").
-                    withMiddlename("Ivanovna").
-                    withLastname("Petrova").
-                    withTitle("QA Analyst").
-                    withCompany("CBC").
-                    withAddress("Montreal").
-                    withHomephone("555-666-7777").
-                    withEmail("mpetrova@gmail.com").
-                    withGroup("[none]"), true);
+            app.contact().create(new ContactData()
+                    .withFirstname("Masha")
+                    .withLastname("Petrova")
+                    .withAddress("Montreal")
+                    .withEmail("1@1.com")
+                    .withEmail2("2@1.com")
+                    .withEmail3("3@1.com")
+                    .withHomephone("11111111")
+                    .withMobilephone("222222")
+                    .withWorkphone("3333333")
+                    .withGroup("[none]"), true);
             app.goTo().homePage();
         }
     }
@@ -40,10 +41,17 @@ public class ContactModificationTests extends TestBase {
         ContactData modifiedContact = before.iterator().next();
 
         // Делаем локальную переменную, так как использовать будем не один раз
-        ContactData contact = new ContactData().withId(modifiedContact.getId()).
-                withFirstname("Masha").withMiddlename("Ivanovna").withLastname("Petrova").
-                withTitle("QA Analyst").withCompany("CBC").withAddress("Montreal").
-                withHomephone("555-666-7777").withEmail("mpetrova@gmail.com").withGroup("[none]");
+        ContactData contact = new ContactData().withId(modifiedContact.getId())
+                .withFirstname("Masha")
+                .withLastname("Petrova")
+                .withAddress("Montreal")
+                .withEmail("1@1.com")
+                .withEmail2("2@1.com")
+                .withEmail3("3@1.com")
+                .withHomephone("11111111")
+                .withMobilephone("222222")
+                .withWorkphone("3333333")
+                .withGroup("[none]");
         app.contact().modifyById(contact);
         app.goTo().homePage();
 
