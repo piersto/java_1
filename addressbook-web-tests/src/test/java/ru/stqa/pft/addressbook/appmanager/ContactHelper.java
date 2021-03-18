@@ -79,9 +79,11 @@ public class ContactHelper extends HelperBase {
 
         // If we create contact:
         if (creation) {
-            if (contactData.getGroup() != null) {
+            if (contactData.getGroups().size() > 0) {
+                Assert.assertTrue(contactData.getGroups().size() == 1);
                 new Select(wd.findElement(By.name("new_group")))
-                        .selectByVisibleText(contactData.getGroup());
+                        // Извлекаем группу и берём у неё имя
+                        .selectByVisibleText(contactData.getGroups().iterator().next().getName());
             }
         }
         else {

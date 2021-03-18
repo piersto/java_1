@@ -3,21 +3,22 @@ package ru.stqa.pft.addressbook.tests;
 import org.testng.annotations.Test;
 import ru.stqa.pft.addressbook.model.ContactData;
 import ru.stqa.pft.addressbook.model.Contacts;
+import ru.stqa.pft.addressbook.model.Groups;
 
 import static org.hamcrest.CoreMatchers.equalTo;
 import static org.hamcrest.MatcherAssert.assertThat;
-import static ru.stqa.pft.addressbook.tests.TestBase.app;
 
-public class ContactAddContactToGroup extends TestBas{
+public class ContactAddContactToGroup extends TestBase{
 
     @Test
-    public void testCreateContact74() {
+    public void testAdddContactToGroup() {
+
+        Groups groups = app.db().groups();
         Contacts before = app.db().contacts();
-        app.contact().initContactCreation();
         ContactData contact = new ContactData()
                 .withFirstname("Masha")
                 .withLastname("Petrova")
-                .withGroup("[none]")
+                .inGroup(groups.iterator().next())
                 .withAddress("Montreal")
                 .withEmail("1@1.com")
                 .withEmail2("2@1.com")
@@ -26,6 +27,7 @@ public class ContactAddContactToGroup extends TestBas{
                 .withMobilephone("222222")
                 .withWorkphone("3333333");
 
+        app.contact().initContactCreation();
         app.contact().create(contact, true);
         app.goTo().homePage();
         Contacts after = app.db().contacts();

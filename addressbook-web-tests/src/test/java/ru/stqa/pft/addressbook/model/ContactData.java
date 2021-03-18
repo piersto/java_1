@@ -274,4 +274,10 @@ public class ContactData {
                 ", work='" + workphone + '\'' +
                 '}';
     }
+
+    public ContactData inGroup(GroupData group) {
+        groups.add(group);
+        return this;
+    }
+
 }
