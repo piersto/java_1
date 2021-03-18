@@ -4,6 +4,7 @@ import org.testng.Assert;
 import org.testng.annotations.Test;
 import ru.stqa.pft.addressbook.model.ContactData;
 import ru.stqa.pft.addressbook.model.Contacts;
+import ru.stqa.pft.addressbook.model.Groups;
 
 import java.io.File;
 import java.util.Comparator;
@@ -18,12 +19,13 @@ public class ContactCreationTests extends TestBase {
 
     @Test
     public void testCreateContact74() {
+        Groups groups = app.db().groups();
         Contacts before = app.db().contacts();
         app.contact().initContactCreation();
         ContactData contact = new ContactData()
                 .withFirstname("Masha")
                 .withLastname("Petrova")
-                .withGroup("[none]")
+                .inGroup(groups.iterator().next())
                 .withAddress("Montreal")
                 .withEmail("1@1.com")
                 .withEmail2("2@1.com")
@@ -59,13 +61,14 @@ public class ContactCreationTests extends TestBase {
 
     @Test(enabled = false)
     public void testCreateContactWithPhoto() {
+        Groups groups = app.db().groups();
         Contacts before = app.contact().all();
         app.contact().initContactCreation();
         File photo = new File("src/test/resources/2.png");
         ContactData contact = new ContactData()
                 .withFirstname("Masha")
                 .withLastname("Petrova")
-                .withGroup("[none]")
+                .inGroup(groups.iterator().next())
                 .withPhoto(photo);
 
         app.contact().create(contact, true);
@@ -79,14 +82,14 @@ public class ContactCreationTests extends TestBase {
 
     @Test(enabled = false)
     public void testAddContact56() {
+        Groups groups = app.db().groups();
         Contacts before = app.contact().all();
         app.contact().initContactCreation();
         File photo = new File("src/test/resources/2.png");
         ContactData contact = new ContactData()
                 .withFirstname("Masha")
                 .withLastname("Petrova")
-                .withGroup("[none]");
-
+                .inGroup(groups.iterator().next());
         app.contact().create(contact, true);
         app.goTo().homePage();
         Contacts after = app.contact().all();
@@ -111,13 +114,15 @@ public class ContactCreationTests extends TestBase {
 
     @Test(enabled = false)
     public void testAddContactSortedList() {
+        Groups groups = app.db().groups();
         List<ContactData> before = app.contact().list();
         app.contact().initContactCreation();
 
         ContactData contact = new ContactData().
                 withFirstname("Masha").withMiddlename("Ivanovna").withLastname("Petrova").
                 withTitle("QA Analyst").withCompany("CBC").withAddress("Montreal").withHomephone("555-666-7777").
-                withEmail("mpetrova@gmail.com").withGroup("[none]");
+                withEmail("mpetrova@gmail.com")
+                .inGroup(groups.iterator().next());
 
         app.contact().create(contact, true);
         app.goTo().homePage();
@@ -135,13 +140,15 @@ public class ContactCreationTests extends TestBase {
 
     @Test(enabled = false)
     public void testAddContact() {
+        Groups groups = app.db().groups();
         List<ContactData> before = app.contact().list();
         app.contact().initContactCreation();
 
         ContactData contact = new ContactData().
                 withFirstname("Masha").withMiddlename("Ivanovna").withLastname("Petrova").
                 withTitle("QA Analyst").withCompany("CBC").withAddress("Montreal").withHomephone("555-666-7777").
-                withEmail("mpetrova@gmail.com").withGroup("[none]");
+                withEmail("mpetrova@gmail.com")
+                .inGroup(groups.iterator().next());
         ;
 
         app.contact().create(contact, true);
