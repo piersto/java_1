@@ -258,5 +258,4 @@ public class ContactData {
                 ", work='" + workphone + '\'' +
                 '}';
     }
-
 }

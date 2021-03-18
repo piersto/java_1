@@ -21,9 +21,15 @@ public class ContactModificationTests extends TestBase {
         if (app.db().contacts().size() == 0) {
             app.contact().initContactCreation();
             app.contact().create(new ContactData().
-                    withFirstname("Masha").withMiddlename("Ivanovna").withLastname("Petrova").
-                    withTitle("QA Analyst").withCompany("CBC").withAddress("Montreal").withHomephone("555-666-7777").
-                    withEmail("mpetrova@gmail.com").withGroup("[none]"), true);
+                    withFirstname("Masha").
+                    withMiddlename("Ivanovna").
+                    withLastname("Petrova").
+                    withTitle("QA Analyst").
+                    withCompany("CBC").
+                    withAddress("Montreal").
+                    withHomephone("555-666-7777").
+                    withEmail("mpetrova@gmail.com").
+                    withGroup("[none]"), true);
             app.goTo().homePage();
         }
     }
@@ -40,6 +46,8 @@ public class ContactModificationTests extends TestBase {
                 withHomephone("555-666-7777").withEmail("mpetrova@gmail.com").withGroup("[none]");
         app.contact().modifyById(contact);
         app.goTo().homePage();
+
+
         Contacts after = app.db().contacts();
         Assert.assertEquals(after.size(), before.size());
         assertThat(after, equalTo(before.without(modifiedContact).withAdded(contact)));
@@ -81,7 +89,7 @@ public class ContactModificationTests extends TestBase {
         Assert.assertEquals(before, after);
     }
 
-    @Test
+    @Test(enabled = false)
     public void testModifyContact() {
         if (!app.contact().isThereAContact()) {
             app.contact().initContactCreation();

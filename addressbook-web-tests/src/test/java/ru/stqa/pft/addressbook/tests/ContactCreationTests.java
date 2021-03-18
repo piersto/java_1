@@ -25,6 +25,13 @@ public class ContactCreationTests extends TestBase {
                 .withFirstname("Masha")
                 .withLastname("Petrova")
                 .withGroup("[none]")
+                .withAddress("Montreal")
+                .withEmail("1@1.com")
+                .withEmail2("2@1.com")
+                .withEmail3("3@1.com")
+                .withHomephone("11111111")
+                .withMobilephone("222222")
+                .withWorkphone("3333333")
                 .withPhoto(photo);
 
         app.contact().create(contact, true);
@@ -37,7 +44,22 @@ public class ContactCreationTests extends TestBase {
     }
 
 
-    @Test
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+    @Test(enabled = false)
     public void testCreateContactWithPhoto() {
         Contacts before = app.contact().all();
         app.contact().initContactCreation();
@@ -113,7 +135,7 @@ public class ContactCreationTests extends TestBase {
     }
 
 
-    @Test
+    @Test(enabled = false)
     public void testAddContact() {
         List<ContactData> before = app.contact().list();
         app.contact().initContactCreation();
