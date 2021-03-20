@@ -11,14 +11,14 @@ import static org.hamcrest.MatcherAssert.assertThat;
 public class ContactAddContactToGroup extends TestBase{
 
     @Test
-    public void testAdddContactToGroup() {
+    public void testAddContactToGroup() {
 
         Groups groups = app.db().groups();
         Contacts before = app.db().contacts();
         ContactData contact = new ContactData()
                 .withFirstname("Masha")
                 .withLastname("Petrova")
-                .inGroup(groups.iterator().next())
+                // .inGroup(groups.iterator().next())
                 .withAddress("Montreal")
                 .withEmail("1@1.com")
                 .withEmail2("2@1.com")
