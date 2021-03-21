@@ -27,11 +27,11 @@ public class ContactAddContactToGroup extends TestBase{
     public void testContactAddToGroup() {
         app.goTo().homePage();
         ContactData contact = app.contact().all().iterator().next();
+        System.out.println(contact);
         // Select contact
         app.contact().selectContactById(contact.getId());
         // Click Add button
         app.contact().addContactToGroup();
-
     }
 }
 
