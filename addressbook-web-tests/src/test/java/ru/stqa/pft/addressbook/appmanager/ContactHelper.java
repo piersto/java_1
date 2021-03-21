@@ -95,9 +95,11 @@ public class ContactHelper extends HelperBase {
         click(By.linkText("add new"));
     }
 
-    public void submitContactModification() {
-        click(By.name("update"));
+    public void addContactToGroup() {
+        click(By.name("add"));
     }
+
+    public void submitContactModification() { click(By.name("update")); }
 
     public void modify(int index, ContactData contact) {
         initContactModification(index);
