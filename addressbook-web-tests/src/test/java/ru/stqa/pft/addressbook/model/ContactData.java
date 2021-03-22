@@ -251,12 +251,14 @@ public class ContactData {
         if (this == o) return true;
         if (o == null || getClass() != o.getClass()) return false;
         ContactData that = (ContactData) o;
-        return id == that.id && Objects.equals(firstname, that.firstname) && Objects.equals(lastname, that.lastname) && Objects.equals(address, that.address) && Objects.equals(homephone, that.homephone) && Objects.equals(mobilephone, that.mobilephone) && Objects.equals(workphone, that.workphone) && Objects.equals(email, that.email) && Objects.equals(email2, that.email2) && Objects.equals(email3, that.email3);
+        return id == that.id && Objects.equals(firstname, that.firstname)
+                && Objects.equals(lastname, that.lastname)
+                && Objects.equals(groups, that.groups);
     }
 
     @Override
     public int hashCode() {
-        return Objects.hash(id, firstname, lastname, address, homephone, mobilephone, workphone, email, email2, email3);
+        return Objects.hash(id, firstname, lastname, groups);
     }
 
     @Override
