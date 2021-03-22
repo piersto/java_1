@@ -21,7 +21,8 @@ dependencies {
     implementation 'com.google.code.gson:gson:2.8.6'
     implementation 'ch.qos.logback:logback-classic:1.1.5'
     implementation 'mysql:mysql-connector-java:8.0.23'
-    implementation 'org.hibernate:hibernate-core:5.4.22.Final'}
+    implementation 'org.hibernate:hibernate-core:5.4.22.Final'
+    implementation 'commons-net:commons-net:3.8.0'}
 
 
 task testGroups(type: Test) {
