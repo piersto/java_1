@@ -1,7 +1,7 @@
-package ru.stqa.pft.addressbook.appmanager;
+package ru.stqa.pft.mantis.appmanager;
+
 
 import org.apache.commons.net.ftp.FTPClient;
-
 import java.io.FileInputStream;
 import java.io.IOException;
 
