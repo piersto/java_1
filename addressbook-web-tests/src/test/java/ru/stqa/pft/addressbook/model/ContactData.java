@@ -252,8 +252,7 @@ public class ContactData {
         if (o == null || getClass() != o.getClass()) return false;
         ContactData that = (ContactData) o;
         return id == that.id && Objects.equals(firstname, that.firstname)
-                && Objects.equals(lastname, that.lastname)
-                && Objects.equals(groups, that.groups);
+                && Objects.equals(lastname, that.lastname);
     }
 
     @Override
