@@ -42,7 +42,7 @@ public class ApplicationManager {
         return new HttpSession(this);
     }
 
-    public Object getProperty(String key) {
+    public String getProperty(String key) {
         return properties.getProperty(key);
     }
 
