@@ -10,7 +10,7 @@ import ru.stqa.pft.addressbook.model.GroupData;
 import static org.hamcrest.CoreMatchers.equalTo;
 import static org.hamcrest.MatcherAssert.assertThat;
 
-public class ContactAddContactToGroup extends TestBase{
+public class ContactAddContactToGroupTests extends TestBase{
 
     @BeforeMethod
     public void ensurePreconditions() {
@@ -33,7 +33,6 @@ public class ContactAddContactToGroup extends TestBase{
         Contacts before = app.db().contacts();
         ContactData modifiedContact = before.iterator().next();
         System.out.println();
-
         app.goTo().homePage();
         ContactData contact = app.contact().all().iterator().next();
         System.out.println(contact);

@@ -32,6 +32,20 @@ public class ContactHelper extends HelperBase {
         click(By.id("logo"));
     }
 
+    public void deleteFromGroupById(ContactData contact) {
+        selectContactDetailsById(contact.getId());
+        clickOnGroupInContactDetails();
+        selectContactById(contact.getId());
+        clickRemoveFromGroup();
+        app.goTo().homePage();
+    }
+
+    public void modifyById(ContactData contact) {
+        initContactModificationById(contact.getId());
+        fillContactForm(contact, false);
+        submitContactModification();
+    }
+
     public void selectContact(int index) {
         wd.findElements(By.name("selected[]")).get(index).click();
     }
@@ -46,6 +60,18 @@ public class ContactHelper extends HelperBase {
     }
     public void initContactModificationById(int id) {
         wd.findElement(By.cssSelector(String.format("a[href ='edit.php?id=%s']", id))).click();
+    }
+
+    public void selectContactDetailsById(int id) {
+        wd.findElement(By.cssSelector(String.format("a[href ='php.php?id=%s']", id))).click();
+    }
+
+    public void clickOnGroupInContactDetails() {
+        click(By.cssSelector("#content > i > a"));
+    }
+
+    public void clickRemoveFromGroup() {
+        click(By.cssSelector("[name='remove']"));
     }
 
     public void submitContactCreation() {
@@ -103,12 +129,6 @@ public class ContactHelper extends HelperBase {
 
     public void modify(int index, ContactData contact) {
         initContactModification(index);
-        fillContactForm(contact, false);
-        submitContactModification();
-    }
-
-    public void modifyById(ContactData contact) {
-        initContactModificationById(contact.getId());
         fillContactForm(contact, false);
         submitContactModification();
     }
@@ -186,4 +206,6 @@ public class ContactHelper extends HelperBase {
                 .withEmail3(email3)
                 .withAddress(address);
     }
+
+
 }
