@@ -47,6 +47,10 @@ public class ContactHelper extends HelperBase {
         wd.findElements(By.name("selected[]")).get(index).click();
     }
 
+    public void selectFirstContact() {
+        wd.findElement(By.name("selected[]")).click();
+    }
+
     public void selectContactById(int id) {
         wd.findElement(By.cssSelector("tr[name='entry'] input[value ='" + id + "']")).click();
     }
@@ -60,7 +64,7 @@ public class ContactHelper extends HelperBase {
     }
 
     public void selectContactDetailsById(int id) {
-        wd.findElement(By.cssSelector(String.format("a[href ='php.php?id=%s']", id))).click();
+        wd.findElement(By.cssSelector(String.format("a[href ='view.php?id=%s']", id))).click();
     }
 
     public void clickOnGroupInContactDetails() {

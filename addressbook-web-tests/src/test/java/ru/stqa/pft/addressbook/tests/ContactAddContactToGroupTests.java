@@ -42,6 +42,7 @@ public class ContactAddContactToGroupTests extends TestBase{
         Assert.assertEquals(after.size(), before.size());
         assertThat(after, equalTo(before.without(contact).withAdded(modifiedContact)));
     }
+
 }
 
 
