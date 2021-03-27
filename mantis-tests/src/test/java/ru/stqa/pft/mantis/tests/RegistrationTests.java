@@ -10,6 +10,8 @@ import javax.mail.MessagingException;
 import java.io.IOException;
 import java.util.List;
 
+import static org.testng.AssertJUnit.assertTrue;
+
 public class RegistrationTests extends TestBase{
 
     @BeforeMethod
@@ -19,10 +21,16 @@ public class RegistrationTests extends TestBase{
 
     @Test
     public void testRegistration() throws IOException, MessagingException {
-        String email = "user1@localhost.localdomain";
-        app.registration().start("user1", email);
+
+        String user = "user2";
+        String password = "password";
+        String email = "user2@localhost.localdomain";
+
+        app.registration().start(user, email);
         List<MailMessage> mailMessages = app.mail().waitForMail(2, 30000);
-        findConfirmationLink(mailMessages, email);
+        String confirmationLink = findConfirmationLink(mailMessages, email);
+        app.registration().finish(confirmationLink, password);
+        assertTrue(app.newSession().login(user, password));
 
 
     }
