@@ -12,9 +12,7 @@ import java.util.List;
 
 public class ContactHelper extends HelperBase {
 
-    public ContactHelper(WebDriver wd) {
-        super(wd);
-    }
+    public ContactHelper(WebDriver wd) { super(wd);}
 
     public void delete(int index) {
         selectContact(index);
@@ -37,7 +35,6 @@ public class ContactHelper extends HelperBase {
         clickOnGroupInContactDetails();
         selectContactById(contact.getId());
         clickRemoveFromGroup();
-        app.goTo().homePage();
     }
 
     public void modifyById(ContactData contact) {

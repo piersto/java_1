@@ -32,14 +32,13 @@ public class ContactRemoveFromGroupTests extends TestBase{
     public void testContactRemoveFromGroup() {
         Contacts before = app.db().contacts();
         ContactData modifiedContact = before.iterator().next();
-
         app.goTo().homePage();
         ContactData contact = app.contact().all().iterator().next();
-
         // Click details button by id
         app.contact().selectContactDetailsById(contact.getId());
         // Click Add button
-        app.contact().addContactToGroup();
+        app.contact().deleteFromGroupById(contact);
+        app.goTo().homePage();
         Contacts after = app.db().contacts();
         Assert.assertEquals(after.size(), before.size());
         assertThat(after, equalTo(before.without(modifiedContact).withAdded(contact)));

@@ -47,7 +47,6 @@ public class ApplicationManager {
 
         wd.manage().timeouts().implicitlyWait(3, TimeUnit.SECONDS);
         wd.get(properties.getProperty("web.baseUrl"));
-
         groupHelper = new GroupHelper(wd);
         navigationHelper = new NavigationHelper(wd);
         contactHelper = new ContactHelper(wd);
