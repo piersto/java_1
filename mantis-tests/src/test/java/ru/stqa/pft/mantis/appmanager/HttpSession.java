@@ -34,8 +34,7 @@ public class HttpSession {
         CloseableHttpResponse response = httpclient.execute(post);
         String body = geTextFrom(response);
         return body.contains(String.format
-                ("<span class=\"label hidden-xs label-default arrowed\">%s</span>", username));
-
+                ("<a href=\"/mantisbt-2.25.0/account_page.php\">%s</a>", username));
     }
 
     private String geTextFrom(CloseableHttpResponse response) throws IOException {
