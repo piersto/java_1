@@ -22,9 +22,9 @@ public class RegistrationTests extends TestBase{
     @Test
     public void testRegistration() throws IOException, MessagingException {
 
-        String user = "user2";
+        String user = "user3";
         String password = "password";
-        String email = "user2@localhost.localdomain";
+        String email = "user3@localhost.localdomain";
 
         app.registration().start(user, email);
         List<MailMessage> mailMessages = app.mail().waitForMail(2, 30000);
