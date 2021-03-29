@@ -21,6 +21,7 @@ public class ChangePasswordToUserTests extends TestBase{
     public void testChangePasswordToUser() throws IOException, MessagingException {
 
         // Open Login page
+        app.openLoginPage();
 
         // Login as administrator
 
@@ -29,7 +30,9 @@ public class ChangePasswordToUserTests extends TestBase{
         // Click on user that is not administrator
 
         // Сохранить его username and email
-
+        String email = "ouou";
+        String password = "pass";
+        String user = "user";
         // Click 'Reset Password' button value="Reset Password"
 
         // Найти среди всех писем то, которое было отправлено на нужный адрес,

@@ -87,4 +87,8 @@ public class ApplicationManager {
         }
         return mailHelper;
     }
+
+    public void openLoginPage() {
+        wd.get(getProperty("web.baseUrl") + "/signup_page.php");
+    }
 }
