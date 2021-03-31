@@ -16,10 +16,12 @@ public class ApplicationManager {
     private final Properties properties;
     private WebDriver wd;
 
+
     private String browser;
     private RegistrationHelper registrationHelper;
     private FtpHelper ftp;
     private MailHelper mailHelper;
+    private AdminHelper adminHelper;
 
 
     public ApplicationManager(String browser)  {
