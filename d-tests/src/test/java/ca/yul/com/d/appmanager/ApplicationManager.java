@@ -29,7 +29,6 @@ public class ApplicationManager {
         properties.load(new FileReader
                 (new File(String.format("src/test/resources/%s.properties", target))));
 
-
         if (browser.equals(BrowserType.FIREFOX)) {
             wd = new FirefoxDriver();
         } else if (browser.equals(BrowserType.CHROME)) {
@@ -48,4 +47,11 @@ public class ApplicationManager {
         wd.quit();
     }
 
+    public SessionHelper session() {
+        return new SessionHelper(this);
+    }
+
+    public String getProperty(String key) {
+        return properties.getProperty(key);
+    }
 }
