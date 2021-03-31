@@ -6,5 +6,4 @@ public class AdminHelper extends HelperBase{
         super(app);
     }
 
-    
 }

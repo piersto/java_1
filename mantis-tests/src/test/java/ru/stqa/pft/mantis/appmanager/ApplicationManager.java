@@ -15,14 +15,11 @@ import java.util.concurrent.TimeUnit;
 public class ApplicationManager {
     private final Properties properties;
     private WebDriver wd;
-
-
     private String browser;
     private RegistrationHelper registrationHelper;
     private FtpHelper ftp;
     private MailHelper mailHelper;
     private AdminHelper adminHelper;
-
 
     public ApplicationManager(String browser)  {
         this.browser = browser;
@@ -33,6 +30,7 @@ public class ApplicationManager {
         String target = System.getProperty("target", "local");
         properties.load(new FileReader
                 (new File(String.format("src/test/resources/%s.properties", target))));
+        adminHelper = new AdminHelper();
     }
 
     public void stop() {
