@@ -6,6 +6,7 @@ import org.openqa.selenium.edge.EdgeDriver;
 import org.openqa.selenium.firefox.FirefoxDriver;
 import org.openqa.selenium.ie.InternetExplorerDriver;
 import org.openqa.selenium.remote.BrowserType;
+
 import java.io.File;
 import java.io.FileReader;
 import java.io.IOException;
@@ -19,8 +20,9 @@ public class ApplicationManager {
     private RegistrationHelper registrationHelper;
     private FtpHelper ftp;
     private MailHelper mailHelper;
+    private AdminHelper adminHelper;
 
-    public ApplicationManager(String browser)  {
+    public ApplicationManager(String browser) {
         this.browser = browser;
         properties = new Properties();
     }
@@ -29,12 +31,6 @@ public class ApplicationManager {
         String target = System.getProperty("target", "local");
         properties.load(new FileReader
                 (new File(String.format("src/test/resources/%s.properties", target))));
-    }
-
-    public void stop() {
-        if (wd != null) {
-            wd.quit();
-        }
     }
 
     public HttpSession newSession() {
@@ -52,13 +48,19 @@ public class ApplicationManager {
         return registrationHelper;
     }
 
+    public AdminHelper admin() {
+        if (adminHelper == null) {
+            adminHelper = new AdminHelper(this);
+        }
+        return adminHelper;
+    }
+
     public FtpHelper ftp() {
         if (ftp == null) {
             ftp = new FtpHelper(this);
         }
         return ftp;
     }
-
 
     public WebDriver getDriver() {
         if (wd == null) {
@@ -68,10 +70,9 @@ public class ApplicationManager {
                 wd = new ChromeDriver();
             } else if (browser.equals(BrowserType.IE)) {
                 wd = new InternetExplorerDriver();
-            } else if (browser.equals(BrowserType.EDGE)){
+            } else if (browser.equals(BrowserType.EDGE)) {
                 wd = new EdgeDriver();
             }
-
             wd.manage().timeouts().implicitlyWait(3, TimeUnit.SECONDS);
             wd.get(properties.getProperty("web.baseUrl"));
             properties.getProperty("web.adminPassword");
@@ -84,5 +85,11 @@ public class ApplicationManager {
             mailHelper = new MailHelper(this);
         }
         return mailHelper;
+    }
+
+    public void stop() {
+        if (wd != null) {
+            wd.quit();
+        }
     }
 }

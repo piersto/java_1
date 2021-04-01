@@ -21,7 +21,8 @@ public class ChangePasswordToUserTests extends TestBase{
     public void testChangePasswordToUser() throws IOException, MessagingException {
 
         // Open Login page
-        app.openLoginPage();
+
+        app.admin().openLoginPage();
 
         // Login as administrator
 
