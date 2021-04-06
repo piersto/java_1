@@ -19,22 +19,18 @@ public class ChangePasswordToUserTests extends TestBase{
 
     @Test
     public void testChangePasswordToUser() throws IOException, MessagingException {
-
         // Open Login page
-
         app.admin().openLoginPage();
-
         // Login as administrator
-
+        app.admin().login();
         // Go to http://localhost/mantisbt-2.25.0/manage_user_page.php
-
+        app.admin().openMangeUsersPage();
         // Click on user that is not administrator
-
+        app.admin().initPasswordChange("piersto");
         // Сохранить его username and email
-        String email = "ouou";
+        String email = "pstoiko@gmail.com";
         String password = "pass";
         String user = "user";
-        // Click 'Reset Password' button value="Reset Password"
 
         // Найти среди всех писем то, которое было отправлено на нужный адрес,
         // пройти по ссылке, изменить пароль
@@ -45,7 +41,6 @@ public class ChangePasswordToUserTests extends TestBase{
     }
 
     private String findConfirmationLink(List<MailMessage> mailMessages, String email) {
-
         // Сначала нужно найти среди всех писем то, которое было отправлено на нужный адрес:
         // mailMessages.stream()
         MailMessage mailMessage = mailMessages.stream()
