@@ -47,5 +47,4 @@ public class AdminHelper {
     public void logout() {
         wd.get(app.getProperty("web.baseUrl") + "logout_page.php");
     }
-
 }

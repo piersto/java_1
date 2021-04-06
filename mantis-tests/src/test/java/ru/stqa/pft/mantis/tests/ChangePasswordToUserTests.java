@@ -27,7 +27,7 @@ public class ChangePasswordToUserTests extends TestBase{
         app.admin().openMangeUsersPage();
         // Click on user that is not administrator
         app.admin().initPasswordChange("piersto");
-        //app.admin().logout();
+        app.admin().logout();
         String email = "pstoiko@localhost.localdomain";
         String password = "pass";
         String user = "user";
