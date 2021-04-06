@@ -27,11 +27,10 @@ public class ChangePasswordToUserTests extends TestBase{
         app.admin().openMangeUsersPage();
         // Click on user that is not administrator
         app.admin().initPasswordChange("piersto");
-        // Сохранить его username and email
-        String email = "pstoiko@gmail.com";
+        //app.admin().logout();
+        String email = "pstoiko@localhost.localdomain";
         String password = "pass";
         String user = "user";
-
         // Найти среди всех писем то, которое было отправлено на нужный адрес,
         // пройти по ссылке, изменить пароль
         List<MailMessage> mailMessages = app.mail().waitForMail(2, 30000);

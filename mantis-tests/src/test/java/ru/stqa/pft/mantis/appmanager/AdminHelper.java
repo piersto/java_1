@@ -43,4 +43,9 @@ public class AdminHelper {
         // Click 'Reset Password' button value="Reset Password"
         wd.findElement(By.cssSelector("fieldset > span > input")).click();
     }
+
+    public void logout() {
+        wd.get(app.getProperty("web.baseUrl") + "logout_page.php");
+    }
+
 }

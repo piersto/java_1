@@ -39,12 +39,12 @@ public class MailHelper {
 
             //Если почты не достаточно(мало), то попадаем сюда
             try {
-                Thread.sleep(10000);
+                Thread.sleep(30000);
             } catch (InterruptedException e) {
                 e.printStackTrace();
             }
         }
-        throw new Error("No mail :(");
+        throw new Error("NO MAiL FOUND!");
     }
 
     //Меетод переобразования реальных почтовых сообщений в модельные
