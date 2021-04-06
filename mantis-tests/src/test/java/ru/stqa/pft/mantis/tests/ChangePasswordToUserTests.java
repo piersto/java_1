@@ -19,13 +19,9 @@ public class ChangePasswordToUserTests extends TestBase{
 
     @Test
     public void testChangePasswordToUser() throws IOException, MessagingException {
-        // Open Login page
         app.admin().openLoginPage();
-        // Login as administrator
         app.admin().login();
-        // Go to http://localhost/mantisbt-2.25.0/manage_user_page.php
         app.admin().openMangeUsersPage();
-        // Click on user that is not administrator
         app.admin().initPasswordChange("piersto");
         app.admin().logout();
         String email = "pstoiko@localhost.localdomain";
