@@ -31,9 +31,9 @@ buildscript{
 apply plugin: 'no.nils.wsdl2java'
 
 wsdl2java {
-    wsdlDir = file("soup-sample/src/main/resources") // define to support incremental build
+    wsdlDir = file("/src/main/resources") // define to support incremental build
     wsdlsToGenerate = [   //  2d-array of wsdls and cxf-parameters
-                          ['soup-sample/src/main/resources/geoipservice.wsdl.xml'],
+                          ['$projectDir/src/main/resources/geoipservice.wsdl.xml'],
     ]
     cxfVersion = "3.3.1"
 }
