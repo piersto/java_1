@@ -6,6 +6,6 @@ public class GeoIpServiceTests {
 
     @Test
     public void testMyIp(){
-        new GeoIpService().get
+        //new GeoIpService().get
     }
 }
