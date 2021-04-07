@@ -31,11 +31,11 @@ buildscript{
 apply plugin: 'no.nils.wsdl2java'
 
 wsdl2java {
-    wsdlDir = file("src/main/resources") // define to support incremental build
+    wsdlDir = file("soup-sample/src/main/resources") // define to support incremental build
     wsdlsToGenerate = [   //  2d-array of wsdls and cxf-parameters
-                          ['src/main/resources/geoipservice.wsdl.xml'],
+                          ['soup-sample/src/main/resources/geoipservice.wsdl.xml'],
     ]
-    cxfVersion = "2.5.1"
+    cxfVersion = "3.3.1"
 }
 
 // Tasks to start test from command line:
