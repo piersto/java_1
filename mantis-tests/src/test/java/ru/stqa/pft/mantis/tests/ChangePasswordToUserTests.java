@@ -19,17 +19,19 @@ public class ChangePasswordToUserTests extends TestBase{
 
     @Test
     public void testChangePasswordToUser() throws IOException, MessagingException {
+
+        String email = "pstoiko@localhost.localdomain";
+        String password = "pass";
+        String user = "piersto";
         app.admin().openLoginPage();
         app.admin().login();
         app.admin().openMangeUsersPage();
-        app.admin().initPasswordChange("piersto");
+        app.admin().initPasswordChange(user);
         app.admin().logout();
-        String email = "pstoiko@localhost.localdomain";
-        String password = "pass";
-        String user = "user";
+
         // Найти среди всех писем то, которое было отправлено на нужный адрес,
         // пройти по ссылке, изменить пароль
-        List<MailMessage> mailMessages = app.mail().waitForMail(2, 30000);
+        List<MailMessage> mailMessages = app.mail().waitForMail(1, 30000);
         String confirmationLink = findConfirmationLink(mailMessages, email);
         app.registration().finish(confirmationLink, password);
         assertTrue(app.newSession().login(user, password));
