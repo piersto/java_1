@@ -20,6 +20,7 @@ dependencies {
     implementation 'commons-net:commons-net:3.8.0'
     implementation 'org.subethamail:subethasmtp:3.1.7'
     implementation 'ru.lanwen.verbalregex:java-verbal-expressions:1.8'
+    implementation 'biz.futureware.mantis:mantis-axis-soap-client:1.2.19'
 }
 
 
