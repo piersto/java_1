@@ -29,7 +29,7 @@ public class RestTests {
 
     private Set<Issue> getIssues() throws IOException {
         String json = getExecutor().execute(Request
-                .Get("http://demo.bugify.com/api/issues.json")).returnContent().asString();
+                .Get("https://bugify.stqa.ru/api/issues.json")).returnContent().asString();
         JsonElement parsed = new JsonParser().parse(json);
         JsonElement issues = parsed.getAsJsonObject().get("issues");
         return new Gson().fromJson(issues, new TypeToken<Set<Issue>>(){}.getType());
@@ -37,12 +37,12 @@ public class RestTests {
 
     private Executor getExecutor() {
         return  Executor.newInstance()
-                .auth("ad348266150ab4beafbfa5e67ec06368", "");
+                .auth("288f44776e7bec4bf44fdfeb1e646490", "");
     }
 
     private int createIssue(Issue newIssue) throws IOException {
         String json = getExecutor().execute(Request
-                .Post("http://demo.bugify.com/api/issues.json")
+                .Post("https://bugify.stqa.ru/api/issues.json")
                 .bodyForm(new BasicNameValuePair("subject", newIssue.getSubject()),
                           new BasicNameValuePair("description", newIssue.getDescription())))
                 .returnContent().asString();
