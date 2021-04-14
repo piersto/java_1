@@ -50,13 +50,13 @@ public class ApplicationManager {
             } else if (browser.equals(BrowserType.EDGE)){
                 wd = new EdgeDriver();
             }
+        }
             else {
                 DesiredCapabilities capabilities = new DesiredCapabilities();
                 capabilities.setBrowserName(browser);
                 wd = new RemoteWebDriver(new URL(properties
-                        .getProperty("selenium.server")), 
+                        .getProperty("selenium.server")),
                         capabilities);
-            }
         }
 
 
