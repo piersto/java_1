@@ -29,7 +29,7 @@ public class GroupCreationTests extends TestBase {
         return list.iterator();
     }
 
-    @Test
+    @Test(enabled = false)
     public void testGroupCreation74() {
         app.goTo().groupPage();
         Groups before = app.db().groups();
@@ -71,7 +71,7 @@ public class GroupCreationTests extends TestBase {
         assertThat(app.group().count(), equalTo(before.size() + 1));
         Groups after = app.group().all();
         // Добавляем в старый список ту группу, которую мы только что добавили в приложение
-        assertThat(after, equalTo(before.WithAdded(group.withId(after.stream().
+        assertThat(after, equalTo(before.withAdded(group.withId(after.stream().
                 mapToInt((g) -> g.getId()).max().getAsInt()))));
 
     }

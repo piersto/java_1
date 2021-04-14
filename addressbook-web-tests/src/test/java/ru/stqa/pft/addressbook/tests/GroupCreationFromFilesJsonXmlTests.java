@@ -3,8 +3,6 @@ package ru.stqa.pft.addressbook.tests;
 import com.google.gson.Gson;
 import com.google.gson.reflect.TypeToken;
 import com.thoughtworks.xstream.XStream;
-import com.thoughtworks.xstream.annotations.XStreamOmitField;
-import org.testng.Assert;
 import org.testng.annotations.DataProvider;
 import org.testng.annotations.Test;
 import ru.stqa.pft.addressbook.model.GroupData;
@@ -63,7 +61,7 @@ public class GroupCreationFromFilesJsonXmlTests extends TestBase {
         assertThat(app.group().count(), equalTo(before.size() + 1));
         Groups after = app.group().all();
         // Добавляем в старый список ту группу, которую мы только что добавили в приложение
-        assertThat(after, equalTo(before.WithAdded(group.withId(after.stream().
+        assertThat(after, equalTo(before.withAdded(group.withId(after.stream().
                 mapToInt((g) -> g.getId()).max().getAsInt()))));
     }
 
@@ -78,7 +76,7 @@ public class GroupCreationFromFilesJsonXmlTests extends TestBase {
         assertThat(app.group().count(), equalTo(before.size() + 1));
         Groups after = app.group().all();
         // Добавляем в старый список ту группу, которую мы только что добавили в приложение
-        assertThat(after, equalTo(before.WithAdded(group.withId(after.stream().
+        assertThat(after, equalTo(before.withAdded(group.withId(after.stream().
                 mapToInt((g) -> g.getId()).max().getAsInt()))));
     }
 }
