@@ -42,6 +42,7 @@ public class HbConnectionTest_2 {
         List<GroupData>result = session.createQuery( "from GroupData" ).list();
         for ( GroupData group : result) {
             System.out.println(group);
+            System.out.println("THEASE ARE MY CONTACTS" + group.getContacts());
         }
         session.getTransaction().commit();
         session.close();
@@ -54,6 +55,7 @@ public class HbConnectionTest_2 {
         List<ContactData>result = session.createQuery( "from ContactData" ).list();
         for ( ContactData contact : result) {
             System.out.println(contact);
+            System.out.println(contact.getGroups());
         }
         session.getTransaction().commit();
         session.close();
