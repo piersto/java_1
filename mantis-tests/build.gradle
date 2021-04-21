@@ -21,6 +21,8 @@ dependencies {
     implementation 'org.subethamail:subethasmtp:3.1.7'
     implementation 'ru.lanwen.verbalregex:java-verbal-expressions:1.8'
     implementation 'biz.futureware.mantis:mantis-axis-soap-client:1.2.19'
+    implementation 'mysql:mysql-connector-java:8.0.23'
+    implementation 'org.hibernate:hibernate-core:5.4.22.Final'
 }
 
 

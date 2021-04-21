@@ -35,9 +35,9 @@ public class ContactAddContactToGroupTests extends TestBase {
 
         Contacts contacts = app.db().contacts();
         Groups groups = app.db().groups();
-        for (int i = 0; i < contacts.size(); i++){
 
-        }
+
+
     }
 
     @Test
