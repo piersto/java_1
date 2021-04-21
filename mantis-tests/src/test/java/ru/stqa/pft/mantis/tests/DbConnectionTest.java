@@ -10,12 +10,12 @@ import java.util.ListIterator;
 public class DbConnectionTest {
 
     @Test
-    public String  testDbConnection() {
+    public void testDbConnection() {
         Connection conn = null;
 
         try {
             conn = DriverManager
-                            .getConnection("jdbc:mysql://localhost:3306/bugtracker?user=root&password=");
+                    .getConnection("jdbc:mysql://localhost:3306/bugtracker?user=root&password=");
 
             Statement st = conn.createStatement();
             ResultSet rs = st.executeQuery
@@ -27,19 +27,10 @@ public class DbConnectionTest {
                 ll.add(str);
             }
             ListIterator<String> listIterator = ll.listIterator();
-            while (listIterator.hasNext()) {
-                if (!listIterator.next().equals("administrator")) {
-                    System.out.println(listIterator.next());
-                    return listIterator.next();
-                }
-            }
             rs.close();
             st.close();
             conn.close();
             System.out.println(ll);
-
-
-            // Do something with the Connection
 
         } catch (SQLException ex) {
             // handle any errors
@@ -47,6 +38,5 @@ public class DbConnectionTest {
             System.out.println("SQLState: " + ex.getSQLState());
             System.out.println("VendorError: " + ex.getErrorCode());
         }
-        return null;
     }
 }

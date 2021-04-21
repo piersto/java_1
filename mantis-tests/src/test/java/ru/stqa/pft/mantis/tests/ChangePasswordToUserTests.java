@@ -21,7 +21,7 @@ public class ChangePasswordToUserTests extends TestBase{
         app.mail().start();
     }
 
-    public String testDbConnection() {
+    public String dbConnection() {
         Connection conn = null;
         try {
             conn = DriverManager
@@ -38,7 +38,7 @@ public class ChangePasswordToUserTests extends TestBase{
             ListIterator<String> listIterator = ll.listIterator();
             while (listIterator.hasNext()) {
                 if (!listIterator.next().equals("administrator")) {
-                    System.out.println(listIterator.next());
+
                     String user = listIterator.next();
                     return user;
                 }
@@ -46,7 +46,7 @@ public class ChangePasswordToUserTests extends TestBase{
             rs.close();
             st.close();
             conn.close();
-            
+
         } catch (SQLException ex) {
             // handle any errors
             System.out.println("SQLException: " + ex.getMessage());
