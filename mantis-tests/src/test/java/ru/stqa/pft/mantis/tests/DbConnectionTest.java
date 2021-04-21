@@ -5,11 +5,12 @@ import org.testng.annotations.Test;
 import java.sql.*;
 import java.util.LinkedList;
 import java.util.List;
+import java.util.ListIterator;
 
 public class DbConnectionTest {
 
     @Test
-    public void testDbConnection() {
+    public String  testDbConnection() {
         Connection conn = null;
 
         try {
@@ -25,6 +26,13 @@ public class DbConnectionTest {
                 String str = rs.getString("username");
                 ll.add(str);
             }
+            ListIterator<String> listIterator = ll.listIterator();
+            while (listIterator.hasNext()) {
+                if (!listIterator.next().equals("administrator")) {
+                    System.out.println(listIterator.next());
+                    return listIterator.next();
+                }
+            }
             rs.close();
             st.close();
             conn.close();
@@ -39,5 +47,6 @@ public class DbConnectionTest {
             System.out.println("SQLState: " + ex.getSQLState());
             System.out.println("VendorError: " + ex.getErrorCode());
         }
+        return null;
     }
 }

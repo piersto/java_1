@@ -7,7 +7,11 @@ import ru.lanwen.verbalregex.VerbalExpression;
 import ru.stqa.pft.mantis.model.MailMessage;
 import javax.mail.MessagingException;
 import java.io.IOException;
+import java.sql.*;
+import java.util.LinkedList;
 import java.util.List;
+import java.util.ListIterator;
+
 import static org.testng.AssertJUnit.assertTrue;
 
 public class ChangePasswordToUserTests extends TestBase{
@@ -17,12 +21,47 @@ public class ChangePasswordToUserTests extends TestBase{
         app.mail().start();
     }
 
+    public String testDbConnection() {
+        Connection conn = null;
+        try {
+            conn = DriverManager
+                    .getConnection("jdbc:mysql://localhost:3306/bugtracker?user=root&password=");
+            Statement st = conn.createStatement();
+            ResultSet rs = st.executeQuery
+                    ("select username from mantis_user_table");
+
+            List ll = new LinkedList();
+            while (rs.next()) {
+                String str = rs.getString("username");
+                ll.add(str);
+            }
+            ListIterator<String> listIterator = ll.listIterator();
+            while (listIterator.hasNext()) {
+                if (!listIterator.next().equals("administrator")) {
+                    System.out.println(listIterator.next());
+                    String user = listIterator.next();
+                    return user;
+                }
+            }
+            rs.close();
+            st.close();
+            conn.close();
+            
+        } catch (SQLException ex) {
+            // handle any errors
+            System.out.println("SQLException: " + ex.getMessage());
+            System.out.println("SQLState: " + ex.getSQLState());
+            System.out.println("VendorError: " + ex.getErrorCode());
+        }
+        return null;
+    }
+
     @Test
     public void testChangePasswordToUser() throws IOException, MessagingException {
-
-        String email = "pstoiko@localhost.localdomain";
-        String password = "pass";
         String user = "piersto";
+        String email = user+"@localhost.localdomain";
+        String password = "pass";
+        //String user = "piersto";
         app.admin().openLoginPage();
         app.admin().login();
         app.admin().openMangeUsersPage();
