@@ -16,6 +16,7 @@ public class MailServerTest extends TestBase {
 
     @Test
     public void testRegistration() throws IOException, MessagingException {
+        app.admin().openLoginPage();
     }
 
     @AfterMethod(alwaysRun = true)
