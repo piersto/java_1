@@ -14,8 +14,7 @@ import java.util.List;
 
 import static org.testng.AssertJUnit.assertTrue;
 
-public class ChangePasswordToUserTests extends TestBase{
-    private String username;
+public class ChangePasswordToUserTests extends TestBase {
 
     @BeforeMethod
     public void startMailServer() {
@@ -65,11 +64,11 @@ public class ChangePasswordToUserTests extends TestBase{
         app.admin().initPasswordChange(userFromDb);
         app.admin().logout();
 
-        // Найти среди всех писем то, которое было отправлено на нужный адрес,
-        // пройти по ссылке, изменить пароль
+        // Найти среди всех писем то, которое было отправлено на нужный адрес, пройти по ссылке, изменить пароль
         List<MailMessage> mailMessages = app.mail().waitForMail(1, 30000);
         String confirmationLink = findConfirmationLink(mailMessages, email);
         app.registration().finish(confirmationLink, password);
+        app.admin().openLoginPage();
         assertTrue(app.newSession().login(userFromDb, password));
     }
 
@@ -79,7 +78,7 @@ public class ChangePasswordToUserTests extends TestBase{
         MailMessage mailMessage = mailMessages.stream()
                 .filter((m) -> m.to.equals(email)).findFirst().get();
         VerbalExpression regex = VerbalExpression.regex().find("http://")
-                                                        .nonSpace().oneOrMore().build();
+                .nonSpace().oneOrMore().build();
         return regex.getText(mailMessage.text);
     }
 
