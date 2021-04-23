@@ -31,19 +31,17 @@ public class AdminHelper {
     }
 
     public void initPasswordChange(String user) {
-        // Search for user piersto
+        // Search for user
         wd.findElement(By.id("search")).click();
         wd.findElement(By.id("search")).clear();
         wd.findElement(By.id("search")).sendKeys(user);
         // Click "Apply filter" button
         wd.findElement(By.cssSelector("input[type='submit']")).click();
-        // Click on the first user in the list
-        wd.findElement(By.cssSelector("tbody tr a")).click();
-        String email = wd.findElement(By.id("email-field")).getAttribute("value");
+        // Click on the username in the list
+        wd.findElement(By.linkText(user)).click();
         // Click 'Reset Password' button value="Reset Password"
         wd.findElement(By.cssSelector("fieldset > span > input")).click();
     }
-
     public void logout() {
         wd.get(app.getProperty("web.baseUrl") + "logout_page.php");
     }

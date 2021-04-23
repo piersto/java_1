@@ -7,7 +7,9 @@ import java.util.LinkedList;
 import java.util.List;
 import java.util.ListIterator;
 
-public class DbConnectionTest {
+public class DbConnectionTest_2 {
+
+    public String username;
 
     @Test
     public void testDbConnection() {
@@ -37,5 +39,6 @@ public class DbConnectionTest {
             System.out.println("SQLState: " + ex.getSQLState());
             System.out.println("VendorError: " + ex.getErrorCode());
         }
+
     }
 }
