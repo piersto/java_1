@@ -9,7 +9,7 @@ import ru.stqa.pft.mantis.model.MailMessage;
 import javax.mail.MessagingException;
 import java.io.IOException;
 import java.sql.*;
-import java.util.LinkedList;
+import java.util.ArrayList;
 import java.util.List;
 
 import static org.testng.AssertJUnit.assertTrue;
@@ -21,23 +21,24 @@ public class ChangePasswordToUserTests extends TestBase {
         app.mail().start();
     }
 
-    public String dbConnection() {
+    public List<String> dbConnection() {
         Connection conn = null;
         try {
             conn = DriverManager
                     .getConnection("jdbc:mysql://localhost:3306/bugtracker?user=root&password=");
             Statement st = conn.createStatement();
             ResultSet rs = st.executeQuery
-                    ("select username from mantis_user_table");
+                    ("select username, email from mantis_user_table");
 
-            List<String> ll = new LinkedList<String>();
             while (rs.next()) {
+                List<String> user = new ArrayList<>();
                 String str = rs.getString("username");
-                ll.add(str);
-            }
-            for (String user : ll)
-                if (!"administrator".equalsIgnoreCase(user))
+                String strEmail = rs.getString("email");
+                user.add(str);
+                user.add(strEmail);
+                if (!"administrator".equalsIgnoreCase(str))
                     return user;
+            }
             rs.close();
             st.close();
             conn.close();
@@ -53,11 +54,12 @@ public class ChangePasswordToUserTests extends TestBase {
 
     @Test
     public void testChangePasswordToUser() throws IOException, MessagingException {
-        String userFromDb = dbConnection();
+        String userFromDb = dbConnection().get(0);
+        String emailFromDb = dbConnection().get(1);
         System.out.println(userFromDb);
-        String email = String.format("%s@localhost.localdomain", userFromDb);
-        System.out.println(email);
+        System.out.println(emailFromDb);
         String password = "pass";
+
         app.admin().openLoginPage();
         app.admin().login();
         app.admin().openMangeUsersPage();
@@ -66,9 +68,8 @@ public class ChangePasswordToUserTests extends TestBase {
 
         // Найти среди всех писем то, которое было отправлено на нужный адрес, пройти по ссылке, изменить пароль
         List<MailMessage> mailMessages = app.mail().waitForMail(1, 30000);
-        String confirmationLink = findConfirmationLink(mailMessages, email);
+        String confirmationLink = findConfirmationLink(mailMessages, emailFromDb);
         app.registration().finish(confirmationLink, password);
-        app.admin().openLoginPage();
         assertTrue(app.newSession().login(userFromDb, password));
     }
 
