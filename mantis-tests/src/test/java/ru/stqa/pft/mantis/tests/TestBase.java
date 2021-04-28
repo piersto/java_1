@@ -43,7 +43,7 @@ public class TestBase {
                 ("administrator", "root", id);
         String status = issueData.getStatus().getName();
         System.out.println(status);
-        return status.equals("closed");
+        return !status.equals("closed");
     }
 
     public void skipIfNotFixed(int issueId) throws MalformedURLException, ServiceException, RemoteException {
