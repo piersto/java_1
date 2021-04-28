@@ -10,6 +10,7 @@ import org.testng.annotations.BeforeSuite;
 import ru.stqa.pft.mantis.appmanager.ApplicationManager;
 
 import javax.xml.rpc.ServiceException;
+import java.io.File;
 import java.io.IOException;
 import java.math.BigInteger;
 import java.net.MalformedURLException;
@@ -24,7 +25,7 @@ public class TestBase {
     @BeforeSuite(alwaysRun = true)
     public void setUp() throws IOException {
         app.init();
-        //app.ftp().upload(new File("src/test/resources/config_inc.php"), "config_inc.php", "config_inc.php.bak");
+        app.ftp().upload(new File("src/test/resources/config_inc.php"), "config_inc.php", "config_inc.php.bak");
     }
 
     @AfterSuite(alwaysRun = true)
@@ -41,6 +42,7 @@ public class TestBase {
         IssueData issueData = mc.mc_issue_get
                 ("administrator", "root", id);
         String status = issueData.getStatus().getName();
+        System.out.println(status);
         return status.equals("closed");
     }
 
