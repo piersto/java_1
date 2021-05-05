@@ -6,9 +6,42 @@ public class Issue {
     private int id;
     private String subject;
     private String description;
-    //private String state_name;
+    private String state_name;
 
-    //public String getState_name() {        return state_name;    }
+    public String getState_name() {
+        return state_name;    }
+
+    public int getId() {
+        return id;
+    }
+
+    public String getSubject() {
+        return subject;
+    }
+
+    public String getDescription() {
+        return description;
+    }
+
+    public Issue withState_name(String state_name) {
+        this.state_name = state_name;
+        return this;
+    }
+
+    public Issue withSubject(String subject) {
+        this.subject = subject;
+        return this;
+    }
+
+    public Issue withDescription(String description) {
+        this.description = description;
+        return this;
+    }
+
+    public Issue withId(int id) {
+        this.id = id;
+        return this;
+    }
 
     @Override
     public boolean equals(Object o) {
@@ -21,35 +54,6 @@ public class Issue {
     @Override
     public int hashCode() {
         return Objects.hash(id, subject, description);
-    }
-
-    //public void setState_name(String state_name) {        this.state_name = state_name;    }
-
-    public String getSubject() {
-        return subject;
-    }
-
-    public Issue withSubject(String subject) {
-        this.subject = subject;
-        return this;
-    }
-
-    public String getDescription() {
-        return description;
-    }
-
-    public Issue withDescription(String description) {
-        this.description = description;
-        return this;
-    }
-
-    public int getId() {
-        return id;
-    }
-
-    public Issue withId(int id) {
-        this.id = id;
-        return this;
     }
 
 }
