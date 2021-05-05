@@ -8,8 +8,7 @@ public class Issue {
     private String description;
     private String state_name;
 
-    public String getState_name() {
-        return state_name;    }
+    public String getState_name() { return state_name; }
 
     public int getId() {
         return id;

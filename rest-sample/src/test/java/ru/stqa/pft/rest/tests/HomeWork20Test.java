@@ -16,5 +16,4 @@ public class HomeWork20Test extends TestBase{
     public void testCreateIssue() throws IOException {
         System.out.println("Bug is fixed. За работу!");
     }
-
 }
