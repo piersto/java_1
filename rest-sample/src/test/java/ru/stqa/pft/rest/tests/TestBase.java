@@ -29,15 +29,13 @@ public class TestBase {
 
     private boolean  isIssueOpen(int issueId) throws IOException {
         String issueJson = getExecutor().execute(Request
-                .Get("https://bugify.stqa.ru/api/issues/" + issueId + ".json")).returnContent().asString();
+                .Get(app.getProperty("web.baseUrl") + "api/issues/" + issueId + ".json")).returnContent().asString();
+        System.out.println("This is my json: " + issueJson);
         Gson gson = new Gson();
         Issue issue = gson.fromJson(issueJson, Issue.class);
         String state = issue.getState_name();
-        if (! state.equals("Closed"))
-        {
-            return false;
-        }
-        else return true;
+        System.out.println("This is my state: " + state);
+        return !state.equals("Closed");
     }
 
     public void skipIfNotFixed(int issueId) throws IOException {
