@@ -1,12 +1,6 @@
 package ru.stqa.pft.rest.tests;
 
-import biz.futureware.mantis.rpc.soap.client.IssueData;
-import biz.futureware.mantis.rpc.soap.client.MantisConnectLocator;
-import biz.futureware.mantis.rpc.soap.client.MantisConnectPortType;
 import com.google.gson.Gson;
-import com.google.gson.JsonElement;
-import com.google.gson.JsonParser;
-import com.google.gson.reflect.TypeToken;
 import org.apache.http.client.fluent.Executor;
 import org.apache.http.client.fluent.Request;
 import org.openqa.selenium.remote.BrowserType;
@@ -16,13 +10,7 @@ import org.testng.annotations.BeforeSuite;
 import ru.stqa.pft.rest.appmanager.ApplicationManager;
 import ru.stqa.pft.rest.model.Issue;
 
-import javax.xml.rpc.ServiceException;
 import java.io.IOException;
-import java.math.BigInteger;
-import java.net.MalformedURLException;
-import java.net.URL;
-import java.rmi.RemoteException;
-import java.util.Set;
 
 public class TestBase {
 
@@ -39,16 +27,20 @@ public class TestBase {
                 .auth("288f44776e7bec4bf44fdfeb1e646490", "");
     }
 
-    private Set<Issue> getIssues() throws IOException {
-        String json = getExecutor().execute(Request
-                .Get("https://bugify.stqa.ru/api/issues.json")).returnContent().asString();
-        JsonElement parsed = new JsonParser().parse(json);
-        JsonElement issues = parsed.getAsJsonObject().get("issues");
-        return new Gson().fromJson(issues, new TypeToken<Set<Issue>>(){}.getType());
+    private boolean  isIssueOpen(int issueId) throws IOException {
+        String issueJson = getExecutor().execute(Request
+                .Get("https://bugify.stqa.ru/api/issues/" + issueId + ".json")).returnContent().asString();
+        Gson gson = new Gson();
+        Issue issue = gson.fromJson(issueJson, Issue.class);
+        String state = issue.getState_name();
+        if (! state.equals("Closed"))
+        {
+            return false;
+        }
+        else return true;
     }
 
-
-    public void skipIfNotFixed(int issueId) throws MalformedURLException, ServiceException, RemoteException {
+    public void skipIfNotFixed(int issueId) throws IOException {
         if (isIssueOpen(issueId)) {
             throw new SkipException("Ignored because of issue " + issueId);
         }
