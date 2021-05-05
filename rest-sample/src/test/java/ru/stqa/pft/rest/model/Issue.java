@@ -6,29 +6,24 @@ public class Issue {
     private int id;
     private String subject;
     private String description;
+    //private String state_name;
+
+    //public String getState_name() {        return state_name;    }
 
     @Override
     public boolean equals(Object o) {
         if (this == o) return true;
         if (o == null || getClass() != o.getClass()) return false;
         Issue issue = (Issue) o;
-        return id == issue.id && Objects.equals(subject, issue.subject) && Objects.equals(description, issue.description) && Objects.equals(status, issue.status);
+        return id == issue.id && Objects.equals(subject, issue.subject) && Objects.equals(description, issue.description);
     }
 
     @Override
     public int hashCode() {
-        return Objects.hash(id, subject, description, status);
+        return Objects.hash(id, subject, description);
     }
 
-    public String getStatus() {
-        return status;
-    }
-
-    public void setStatus(String status) {
-        this.status = status;
-    }
-
-    private String status;
+    //public void setState_name(String state_name) {        this.state_name = state_name;    }
 
     public String getSubject() {
         return subject;
