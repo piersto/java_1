@@ -24,7 +24,7 @@ public class TestBase {
 
     private Executor getExecutor() {
         return  Executor.newInstance()
-                .auth("288f44776e7bec4bf44fdfeb1e646490", "");
+                .auth(app.getProperty("web.username"), "");
     }
 
     private boolean  isIssueOpen(int issueId) throws IOException {
