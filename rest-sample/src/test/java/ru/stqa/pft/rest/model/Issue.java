@@ -63,4 +63,5 @@ public class Issue {
     public void setCreator(Creator creator) {
         this.creator = creator;
     }
+
 }

@@ -39,4 +39,5 @@ public class IssueWrapper {
     public void setIssues(List<Issue> issues) {
         this.issues = issues;
     }
+
 }
