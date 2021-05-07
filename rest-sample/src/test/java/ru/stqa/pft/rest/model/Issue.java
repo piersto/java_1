@@ -7,6 +7,7 @@ public class Issue {
     private String subject;
     private String description;
     private String state_name;
+    private Creator creator;
 
     public String getState_name() { return state_name; }
 
@@ -55,4 +56,11 @@ public class Issue {
         return Objects.hash(id, subject, description);
     }
 
+    public Creator getCreator() {
+        return creator;
+    }
+
+    public void setCreator(Creator creator) {
+        this.creator = creator;
+    }
 }
