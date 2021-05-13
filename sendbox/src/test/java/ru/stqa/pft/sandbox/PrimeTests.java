@@ -20,5 +20,4 @@ public class PrimeTests
         long n = Integer.MAX_VALUE;
         Assert.assertFalse(Primes.isPrimeLong(n));
     }
-
 }
