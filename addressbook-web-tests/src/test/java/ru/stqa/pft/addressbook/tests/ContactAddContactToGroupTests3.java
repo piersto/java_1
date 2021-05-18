@@ -36,8 +36,10 @@ public class ContactAddContactToGroupTests3 extends TestBase {
     @Test
     public void testContactAddToGroup() {
         Contacts before = app.db().contacts();
-        ContactData modifiedContact = before.iterator().next();
-        ContactData contact = new ContactData().withId(modifiedContact.getId());
+        //ContactData modifiedContact = before.iterator().next();
+        ContactData contact = modifiedContact;
+
+        //ContactData contact = new ContactData().withId(modifiedContact.getId());
         app.goTo().homePage();
         // Select contact
         app.contact().selectContactById(modifiedContact.getId());
@@ -47,5 +49,4 @@ public class ContactAddContactToGroupTests3 extends TestBase {
         Assert.assertEquals(after.size(), before.size());
         assertThat(after, equalTo(before.without(contact).withAdded(modifiedContact)));
     }
-
 }
