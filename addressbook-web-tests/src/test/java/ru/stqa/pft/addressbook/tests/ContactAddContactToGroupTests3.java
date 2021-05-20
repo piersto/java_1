@@ -15,6 +15,7 @@ import static org.hamcrest.MatcherAssert.assertThat;
 public class ContactAddContactToGroupTests3 extends TestBase {
     private static SessionFactory sessionFactory;
     private ContactData modifiedContact;
+    private int maxId;
 
 
     @BeforeMethod
@@ -25,6 +26,17 @@ public class ContactAddContactToGroupTests3 extends TestBase {
                 .withLastname("Petrova");
         app.contact().create(modifiedContact, true);
         app.goTo().homePage();
+        Contacts result = app.db().contacts();
+        for ( ContactData contact : result) {
+            //int id = contact.getId();
+            for (int i = 0; i < result.size(); i++) {
+                if (contact.getId() > maxId ){
+                    maxId = contact.getId();
+                }
+            }
+        }
+
+
 
         if (app.db().groups().size() == 0) {
             app.goTo().groupPage();
