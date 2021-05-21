@@ -27,16 +27,13 @@ public class ContactAddContactToGroupTests3 extends TestBase {
         app.contact().create(modifiedContact, true);
         app.goTo().homePage();
         Contacts result = app.db().contacts();
+
+        System.out.println(result);
         for ( ContactData contact : result) {
-            //int id = contact.getId();
-            for (int i = 0; i < result.size(); i++) {
-                if (contact.getId() > maxId ){
-                    maxId = contact.getId();
-                }
+            if (contact.getId() > maxId) {
+                maxId = contact.getId();
             }
         }
-
-
 
         if (app.db().groups().size() == 0) {
             app.goTo().groupPage();
