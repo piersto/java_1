@@ -56,6 +56,7 @@ public class ContactAddContactToGroupTests3 extends TestBase {
         app.contact().addContactToGroup();
         Contacts after = app.db().contacts();
         Assert.assertEquals(after.size(), before.size());
+        modifiedContact.withId(maxId);
         assertThat(after, equalTo(before.without(contact).withAdded(modifiedContact)));
     }
 }
