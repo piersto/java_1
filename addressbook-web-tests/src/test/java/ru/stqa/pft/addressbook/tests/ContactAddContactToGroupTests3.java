@@ -23,7 +23,7 @@ public class ContactAddContactToGroupTests3 extends TestBase {
         app.contact().initContactCreation();
         modifiedContact = new ContactData()
                 .withFirstname("Masha")
-                .withLastname("Petrova");
+                .withLastname("Zetrova");
         app.contact().create(modifiedContact, true);
         app.goTo().homePage();
         Contacts result = app.db().contacts();
@@ -51,7 +51,7 @@ public class ContactAddContactToGroupTests3 extends TestBase {
         //ContactData contact = new ContactData().withId(modifiedContact.getId());
         app.goTo().homePage();
         // Select contact
-        app.contact().selectContactById(modifiedContact.getId());
+        app.contact().selectContactById(maxId);
         // Click Add button
         app.contact().addContactToGroup();
         Contacts after = app.db().contacts();
