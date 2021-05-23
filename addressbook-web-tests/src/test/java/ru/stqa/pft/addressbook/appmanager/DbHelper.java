@@ -13,8 +13,7 @@ import java.util.List;
 
 public class DbHelper {
     private final SessionFactory sessionFactory;
-    public DbHelper()
-    {
+    public DbHelper() {
 
     // A SessionFactory is set up once for an application!
     final StandardServiceRegistry registry = new StandardServiceRegistryBuilder()
@@ -37,6 +36,16 @@ public class DbHelper {
         session.beginTransaction();
         List<ContactData> result = session.createQuery
                 ( "from ContactData where deprecated = '0000-00-00'" ).list();
+        session.getTransaction().commit();
+        session.close();
+        return new Contacts(result);
+    }
+
+    public Contacts contactById(int id) {
+        Session session = sessionFactory.openSession();
+        session.beginTransaction();
+        List<ContactData> result = session.createQuery(String.format
+                ("from ContactData where deprecated = '0000-00-00' and id = %s", id)).list();
         session.getTransaction().commit();
         session.close();
         return new Contacts(result);
