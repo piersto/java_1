@@ -7,10 +7,6 @@ import org.testng.annotations.Test;
 import ru.stqa.pft.addressbook.model.ContactData;
 import ru.stqa.pft.addressbook.model.Contacts;
 import ru.stqa.pft.addressbook.model.GroupData;
-import ru.stqa.pft.addressbook.model.Groups;
-
-import static org.hamcrest.CoreMatchers.equalTo;
-import static org.hamcrest.MatcherAssert.assertThat;
 
 public class ContactAddContactToGroupTests3 extends TestBase {
     private static SessionFactory sessionFactory;
@@ -43,20 +39,17 @@ public class ContactAddContactToGroupTests3 extends TestBase {
     }
 
     @Test
-    public void testContactAddToGroup() {
-        Contacts before = app.db().contacts();
-        //ContactData modifiedContact = before.iterator().next();
-        ContactData contact = modifiedContact;
-
-        //ContactData contact = new ContactData().withId(modifiedContact.getId());
+    public void testContactAddToGroup2() {
         app.goTo().homePage();
-        // Select contact
         app.contact().selectContactById(maxId);
-        // Click Add button
         app.contact().addContactToGroup();
-        Contacts after = app.db().contacts();
-        Assert.assertEquals(after.size(), before.size());
-        modifiedContact.withId(maxId);
-        assertThat(after, equalTo(before.without(contact).withAdded(modifiedContact)));
+
+        Contacts modifiedContact = app.db().contactById(maxId);
+        int sizeOfGroupsInContact = 0;
+        for ( ContactData contact : modifiedContact ) {
+            sizeOfGroupsInContact = contact.getGroups().size();
+        }
+        Assert.assertTrue(sizeOfGroupsInContact > 0);
+        System.out.println(modifiedContact);
     }
 }
