@@ -208,5 +208,7 @@ public class ContactHelper extends HelperBase {
                 .withAddress(address);
     }
 
-
+    public void removeContactFromGroup() {
+        click(By.name("remove"));
+    }
 }

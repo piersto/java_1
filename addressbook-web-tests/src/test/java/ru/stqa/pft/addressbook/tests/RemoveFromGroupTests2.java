@@ -1,7 +1,9 @@
 package ru.stqa.pft.addressbook.tests;
 
 import org.hibernate.SessionFactory;
+import org.testng.Assert;
 import org.testng.annotations.BeforeMethod;
+import org.testng.annotations.Test;
 import ru.stqa.pft.addressbook.model.ContactData;
 import ru.stqa.pft.addressbook.model.Contacts;
 import ru.stqa.pft.addressbook.model.GroupData;
@@ -37,13 +39,25 @@ public class RemoveFromGroupTests2 extends TestBase{
         }
 
         app.goTo().homePage();
+        groupId = app.group().getFirstGroupIdInTheDropDown();
         app.contact().selectContactById(maxId);
         app.contact().addContactToGroup();
-
         app.goTo().groupPage();
-        // Get first group id
-        groupId = app.group().getFirstGroupIdInTheDropDown();
-
     }
 
+    @Test
+    public void testContactRemoveContactFromGroup() {
+        app.goTo().homePage();
+        app.group().SelectGroupFromDropDownById(groupId);
+        app.contact().selectContactById(maxId);
+        app.contact().removeContactFromGroup();
+
+        Contacts modifiedContact = app.db().contactById(maxId);
+        int sizeOfGroupsInContact = 0;
+        for ( ContactData contact : modifiedContact ) {
+            sizeOfGroupsInContact = contact.getGroups().size();
+        }
+        Assert.assertEquals(sizeOfGroupsInContact, 0);
+        System.out.println(modifiedContact);
+    }
 }

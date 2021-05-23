@@ -52,4 +52,5 @@ public class ContactAddContactToGroupTests3 extends TestBase {
         Assert.assertTrue(sizeOfGroupsInContact > 0);
         System.out.println(modifiedContact);
     }
+    
 }

@@ -141,4 +141,8 @@ public class GroupHelper extends HelperBase {
         return firstGroupIdInTheDropDown;
 
     }
+    public void SelectGroupFromDropDownById(int id) {
+        wd.findElement(By.cssSelector(" form#right select option[value='" + id +"']")).click();
+    }
 }
+
