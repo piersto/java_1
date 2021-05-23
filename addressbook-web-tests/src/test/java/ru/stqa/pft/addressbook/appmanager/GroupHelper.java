@@ -133,5 +133,12 @@ public class GroupHelper extends HelperBase {
         }
         return new Groups(groupCache);
     }
-    
+
+    public int getFirstGroupIdInTheDropDown() {
+        int firstGroupIdInTheDropDown = Integer.parseInt(wd.findElement(By.cssSelector
+                ("#content > form:nth-child(10) > div.right > select > option:nth-child(1)"))
+                .getAttribute("value"));
+        return firstGroupIdInTheDropDown;
+
+    }
 }
