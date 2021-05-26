@@ -126,6 +126,13 @@ public class ContactHelper extends HelperBase {
         click(By.name("add"));
     }
 
+    public void addContactToGroupWithSpecificId(String groupId) {
+        Select groupsDropDown =
+                new Select(wd.findElement(By.name("to_group")));
+        groupsDropDown.selectByValue(groupId);
+        addContactToGroup();
+    }
+
     public void submitContactModification() { click(By.name("update")); }
 
     public void modify(int index, ContactData contact) {
@@ -211,4 +218,6 @@ public class ContactHelper extends HelperBase {
     public void removeContactFromGroup() {
         click(By.name("remove"));
     }
+
+
 }
