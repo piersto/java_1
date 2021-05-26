@@ -53,6 +53,8 @@ public class ContactRemoveFromGroupTests3 extends TestBase {
 
     @Test
         public  void testContactRemoveFromGroup3() {
-        System.out.println("PASS");
-        }
+        app.goTo().homePage();
+        app.contact();
+
+    }
 }
