@@ -2,14 +2,19 @@ package ru.stqa.pft.addressbook.tests;
 
 import org.hibernate.SessionFactory;
 import org.testng.annotations.BeforeMethod;
+import org.testng.annotations.Test;
 import ru.stqa.pft.addressbook.model.ContactData;
 import ru.stqa.pft.addressbook.model.Contacts;
 import ru.stqa.pft.addressbook.model.GroupData;
 import ru.stqa.pft.addressbook.model.Groups;
 
+import java.util.List;
+
 public class ContactRemoveFromGroupTests3 extends TestBase {
 
     private static SessionFactory sessionFactory;
+    private int contactId;
+    private int groupId;
 
 
     @BeforeMethod
@@ -32,7 +37,21 @@ public class ContactRemoveFromGroupTests3 extends TestBase {
         Contacts contacts = app.db().contacts();
         Groups groups = app.db().groups();
 
+        for ( ContactData contact : contacts) {
+            contactId = contact.getId();
+
+
+
+
+        }
+
 
 
     }
+
+
+    @Test
+        public  void testContactRemoveFromGroup3() {
+        System.out.println("PASS");
+        }
 }
