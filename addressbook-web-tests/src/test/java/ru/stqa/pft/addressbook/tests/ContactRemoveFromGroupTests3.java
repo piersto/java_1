@@ -8,8 +8,6 @@ import ru.stqa.pft.addressbook.model.Contacts;
 import ru.stqa.pft.addressbook.model.GroupData;
 import ru.stqa.pft.addressbook.model.Groups;
 
-import java.util.List;
-
 public class ContactRemoveFromGroupTests3 extends TestBase {
 
     private static SessionFactory sessionFactory;
@@ -42,19 +40,14 @@ public class ContactRemoveFromGroupTests3 extends TestBase {
             contactId = contact.getId();
             Groups groupsInContact = contact.getGroups();
             for (GroupData group : groups) {
-                if (groupsInContact.contains(group)) {
-                    groupId = group.getId();
+                groupId = group.getId();
+                if (! groupsInContact.contains(group)) {
+                    app.goTo().homePage();
+                    app.contact().selectContactById(contactId);
+                    app.contact().addContactToGroupWithSpecificId(String.valueOf(groupId));
                 }
-                else return; // addContactToGroup(contactId, groupId);
             }
-
-
-
-
         }
-
-
-
     }
 
 
