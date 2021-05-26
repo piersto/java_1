@@ -37,8 +37,16 @@ public class ContactRemoveFromGroupTests3 extends TestBase {
         Contacts contacts = app.db().contacts();
         Groups groups = app.db().groups();
 
-        for ( ContactData contact : contacts) {
+
+        for (ContactData contact : contacts) {
             contactId = contact.getId();
+            Groups groupsInContact = contact.getGroups();
+            for (GroupData group : groups) {
+                if (groupsInContact.contains(group)) {
+                    groupId = group.getId();
+                }
+                else return; // addContactToGroup(contactId, groupId);
+            }
 
 
 
