@@ -7,12 +7,15 @@ import org.openqa.selenium.support.ui.Select;
 import org.testng.Assert;
 import ru.stqa.pft.addressbook.model.ContactData;
 import ru.stqa.pft.addressbook.model.Contacts;
+
 import java.util.ArrayList;
 import java.util.List;
 
 public class ContactHelper extends HelperBase {
 
-    public ContactHelper(WebDriver wd) { super(wd);}
+    public ContactHelper(WebDriver wd) {
+        super(wd);
+    }
 
     public void delete(int index) {
         selectContact(index);
@@ -59,6 +62,7 @@ public class ContactHelper extends HelperBase {
         wd.findElements(By.xpath("//img[@alt='Edit']")).get(index).click();
 
     }
+
     public void initContactModificationById(int id) {
         wd.findElement(By.cssSelector(String.format("a[href ='edit.php?id=%s']", id))).click();
     }
@@ -112,8 +116,7 @@ public class ContactHelper extends HelperBase {
                         // Извлекаем группу и берём у неё имя
                         .selectByVisibleText(contactData.getGroups().iterator().next().getName());
             }
-        }
-        else {
+        } else {
             Assert.assertFalse(isElementPresent(By.name("new_group")));
         }
     }
@@ -139,7 +142,9 @@ public class ContactHelper extends HelperBase {
         groupsDropDown.selectByValue(id);
     }
 
-    public void submitContactModification() { click(By.name("update")); }
+    public void submitContactModification() {
+        click(By.name("update"));
+    }
 
     public void modify(int index, ContactData contact) {
         initContactModification(index);
@@ -169,13 +174,14 @@ public class ContactHelper extends HelperBase {
         // Теперь проходим по этим строкам в цикле и берём имя и фамилию
         for (WebElement row : rows) {
             int id = Integer.parseInt(row.findElement(By.cssSelector("td:nth-child(1) input")).
-                                                                    getAttribute("value"));
+                    getAttribute("value"));
             String lastname = row.findElement(By.cssSelector("td:nth-child(2)")).getText();
             String firstname = row.findElement(By.cssSelector("td:nth-child(3)")).getText();
             contacts.add(new ContactData().withId(id).withFirstname(firstname).withLastname(lastname));
         }
         return contacts;
     }
+
     public Contacts all() {
         // Создаём список который будем заполнять
         Contacts contacts = new Contacts();
