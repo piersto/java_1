@@ -54,7 +54,9 @@ public class ContactRemoveFromGroupTests3 extends TestBase {
     @Test
         public  void testContactRemoveFromGroup3() {
         app.goTo().homePage();
-        app.contact();
-
+        // String id = String.valueOf(groupId);
+        app.contact().filterContactsByGroup(String.valueOf(groupId));
+        app.contact().selectContactById(contactId);
+        app.contact().removeContactFromGroup();
     }
 }

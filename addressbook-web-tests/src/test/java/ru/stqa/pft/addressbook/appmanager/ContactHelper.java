@@ -133,6 +133,12 @@ public class ContactHelper extends HelperBase {
         addContactToGroup();
     }
 
+    public void filterContactsByGroup(String id) {
+        Select groupsDropDown =
+                new Select(wd.findElement(By.cssSelector("#right [name='group']")));
+        groupsDropDown.selectByValue(id);
+    }
+
     public void submitContactModification() { click(By.name("update")); }
 
     public void modify(int index, ContactData contact) {
@@ -218,6 +224,4 @@ public class ContactHelper extends HelperBase {
     public void removeContactFromGroup() {
         click(By.name("remove"));
     }
-
-
 }
