@@ -1,6 +1,5 @@
 package ru.stqa.pft.addressbook.tests;
 
-import org.hibernate.SessionFactory;
 import org.testng.Assert;
 import org.testng.annotations.BeforeMethod;
 import org.testng.annotations.Test;
@@ -9,12 +8,11 @@ import ru.stqa.pft.addressbook.model.Contacts;
 import ru.stqa.pft.addressbook.model.GroupData;
 import ru.stqa.pft.addressbook.model.Groups;
 
-public class ContactRemoveFromGroupTests3 extends TestBase {
+import java.util.List;
 
-    private static SessionFactory sessionFactory;
+public class ContactRemoveFromGroupTests5 extends TestBase {
     private int contactId;
     private int groupId;
-
 
     @BeforeMethod
     public void ensurePreconditions() {
@@ -36,32 +34,47 @@ public class ContactRemoveFromGroupTests3 extends TestBase {
         Contacts contacts = app.db().contacts();
         Groups groups = app.db().groups();
 
-        for (ContactData contact : contacts) {
-            contactId = contact.getId();
-            Groups groupsInContact = contact.getGroups();
-            for (GroupData group : groups) {
-                groupId = group.getId();
-                if (!groupsInContact.contains(group)) {
-                    app.goTo().homePage();
-                    app.contact().selectContactById(contactId);
-                    app.contact().addContactToGroupWithSpecificId(String.valueOf(groupId));
-                }
-            }
-        }
+        // Take contact from the list of contacts
+        ContactData contact = contacts.iterator().next();
+        // Get contacts id
+        contactId = contact.getId();
+        // Get groups for the contact
+        Contacts contactGroups = app.db().contactById(contactId);
+        // Get group from the list of groups
+        GroupData group = groups.iterator().next();
+        groupId = group.getId();
+        // If contact's group isn't in the group
+
+
+        // Add contact to group
     }
 
+
     @Test
-    public void testContactRemoveFromGroup3() {
+    public void testContactRemoveFromGroup5() {
         app.goTo().homePage();
         app.contact().filterContactsByGroup(String.valueOf(groupId));
         app.contact().selectContactById(contactId);
         app.contact().removeContactFromGroup();
 
-        Contacts contacts = app.db().contactById(contactId);
-        for (ContactData contact : contacts) {
-            Groups groupsInContact = contact.getGroups();
-            System.out.println("my groups in contact: "+ groupsInContact);
-            Assert.assertFalse(groupsInContact.contains(String.valueOf(groupId)));
-        }
     }
+
 }
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
