@@ -39,14 +39,16 @@ public class ContactRemoveFromGroupTests5 extends TestBase {
         // Get contacts id
         contactId = contact.getId();
         // Get groups for the contact
-        Contacts contactGroups = app.db().contactById(contactId);
-        // Get group from the list of groups
-        GroupData group = groups.iterator().next();
-        groupId = group.getId();
-        // If contact's group isn't in the group
-
-
-        // Add contact to group
+        Groups contactGroups = contact.getGroups();
+        // Verify if contactGroups.size > 0
+        if (contactGroups.size() == 0) {
+            groupId = groups.iterator().next().getId();
+            app.goTo().homePage();
+            app.contact().selectContactById(contactId);
+            app.contact().addContactToGroupWithSpecificId(String.valueOf(groupId));
+        }
+        // Get group id
+        groupId = contactGroups.iterator().next().getId();
     }
 
 
@@ -56,7 +58,7 @@ public class ContactRemoveFromGroupTests5 extends TestBase {
         app.contact().filterContactsByGroup(String.valueOf(groupId));
         app.contact().selectContactById(contactId);
         app.contact().removeContactFromGroup();
-
+        
     }
 
 }
