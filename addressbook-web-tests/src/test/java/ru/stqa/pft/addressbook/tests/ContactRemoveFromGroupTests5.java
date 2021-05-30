@@ -47,7 +47,8 @@ public class ContactRemoveFromGroupTests5 extends TestBase {
             app.contact().selectContactById(contactId);
             app.contact().addContactToGroupWithSpecificId(String.valueOf(groupId));
         }
-        // Get group id
+        else
+            // Get group id
         groupId = contactGroups.iterator().next().getId();
     }
 
@@ -58,7 +59,7 @@ public class ContactRemoveFromGroupTests5 extends TestBase {
         app.contact().filterContactsByGroup(String.valueOf(groupId));
         app.contact().selectContactById(contactId);
         app.contact().removeContactFromGroup();
-        
+
     }
 
 }
