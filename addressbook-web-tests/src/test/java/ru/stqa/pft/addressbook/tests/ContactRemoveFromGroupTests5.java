@@ -54,6 +54,13 @@ public class ContactRemoveFromGroupTests5 extends TestBase {
     public void testContactRemoveFromGroup5() {
         Contacts contacts = app.db().contactById(contactId);
         Groups contactGroupsBefore = contacts.iterator().next().getGroups();
+        GroupData groupUnderTest = new GroupData();
+        for (GroupData g : contactGroupsBefore) {
+            int groupsId = g.getId();
+            if (groupsId == groupId) {
+                groupUnderTest = g;
+            }
+        }
 
         app.goTo().homePage();
         app.contact().filterContactsByGroup(String.valueOf(groupId));
@@ -62,7 +69,9 @@ public class ContactRemoveFromGroupTests5 extends TestBase {
 
         contacts = app.db().contactById(contactId);
         Groups contactGroupsAfter = contacts.iterator().next().getGroups();
-        Assert.assertNotEquals(contactGroupsAfter,contactGroupsBefore);
+        //contactGroupsAfter.add(groupUnderTest);
+        contactGroupsBefore.remove(groupUnderTest);
+        Assert.assertEquals(contactGroupsAfter, contactGroupsBefore);
     }
 }
 
