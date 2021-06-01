@@ -69,7 +69,6 @@ public class ContactRemoveFromGroupTests5 extends TestBase {
 
         contacts = app.db().contactById(contactId);
         Groups contactGroupsAfter = contacts.iterator().next().getGroups();
-        //contactGroupsAfter.add(groupUnderTest);
         contactGroupsBefore.remove(groupUnderTest);
         Assert.assertEquals(contactGroupsAfter, contactGroupsBefore);
     }
