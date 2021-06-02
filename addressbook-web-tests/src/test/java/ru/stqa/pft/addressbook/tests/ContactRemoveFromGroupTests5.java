@@ -8,6 +8,9 @@ import ru.stqa.pft.addressbook.model.Contacts;
 import ru.stqa.pft.addressbook.model.GroupData;
 import ru.stqa.pft.addressbook.model.Groups;
 
+import static org.hamcrest.CoreMatchers.equalTo;
+import static org.hamcrest.MatcherAssert.assertThat;
+
 public class ContactRemoveFromGroupTests5 extends TestBase {
     private int contactId;
     private int groupId;
@@ -69,8 +72,7 @@ public class ContactRemoveFromGroupTests5 extends TestBase {
 
         contacts = app.db().contactById(contactId);
         Groups contactGroupsAfter = contacts.iterator().next().getGroups();
-        contactGroupsBefore.remove(groupUnderTest);
-        Assert.assertEquals(contactGroupsAfter, contactGroupsBefore);
+        assertThat(contactGroupsAfter, equalTo(contactGroupsBefore.without(groupUnderTest)));
     }
 }
 
