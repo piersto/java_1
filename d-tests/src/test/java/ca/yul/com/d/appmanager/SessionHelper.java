@@ -8,11 +8,17 @@ public class SessionHelper {
 
     public SessionHelper(ApplicationManager app) {
         this.app = app;
-        wd = app.wd;
+        wd = app.getDriver();
     }
 
     public void openHomePage() {
-        wd.get(app.getProperty("web.baseUrl") + "/login.php");
+        wd.get(app.getProperty("web.baseUrl"));
+        wd.getTitle();
+    }
+
+    public String getTitle() {
+        String s = wd.getTitle();
+       return s;
     }
 }
 
