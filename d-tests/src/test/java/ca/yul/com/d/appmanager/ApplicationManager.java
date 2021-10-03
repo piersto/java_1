@@ -37,9 +37,9 @@ public class ApplicationManager {
                 (new File(String.format("src/test/resources/%s.properties", target))));
     }
 
-//    public HttpSession newSession() {
-//        return new HttpSession(this);
-//    }
+    public HttpSession newSession() {
+        return new HttpSession(this);
+    }
 
     public String getProperty(String key) {
         return properties.getProperty(key);
