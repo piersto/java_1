@@ -4,6 +4,10 @@ import org.openqa.selenium.By;
 import org.openqa.selenium.NoAlertPresentException;
 import org.openqa.selenium.NoSuchElementException;
 import org.openqa.selenium.WebDriver;
+import org.openqa.selenium.Keys;
+import org.openqa.selenium.interactions.Actions;
+
+
 
 import java.io.File;
 
@@ -11,12 +15,15 @@ public class HelperBase {
 
     protected ApplicationManager app;
     protected WebDriver wd;
+    Actions actions = new Actions(wd);
+
 
     public HelperBase(ApplicationManager app) {
 
         this.app = app;
         this.wd = app.getDriver();
     }
+
 
     protected void click(By locator) {
         wd.findElement(locator).click();
@@ -31,6 +38,17 @@ public class HelperBase {
                 wd.findElement(locator).sendKeys(text);
             }
         }
+    }
+
+    protected void acceptRegionLanguage() {
+        pressTabKey();
+        pressTabKey();
+        pressTabKey();
+        actions.keyDown(Keys.ENTER);
+    }
+
+    private void pressTabKey() {
+        actions.keyDown(Keys.TAB);
     }
 
     protected void attach(By locator, File file) {
