@@ -18,6 +18,7 @@ public class ApplicationManager {
     private WebDriver wd;
     private String browser;
     private SessionHelper sessionHelper;
+    private CarriereHelper carriereHelper;
 
 //    private RegistrationHelper registrationHelper;
 //    private FtpHelper ftp;
@@ -45,13 +46,19 @@ public class ApplicationManager {
         return properties.getProperty(key);
     }
 
-    public SessionHelper admin() {
+    public SessionHelper session() {
         if (sessionHelper == null) {
             sessionHelper = new SessionHelper(this);
         }
         return sessionHelper;
     }
 
+    public CarriereHelper carriere() {
+        if (carriereHelper == null) {
+            carriereHelper = new CarriereHelper(this);
+        }
+        return carriereHelper;
+    }
 //    public RegistrationHelper registration() {
 //        if (registrationHelper == null) {
 //            registrationHelper = new RegistrationHelper(this);
