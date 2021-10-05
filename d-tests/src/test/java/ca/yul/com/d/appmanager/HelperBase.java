@@ -15,7 +15,7 @@ public class HelperBase {
 
     protected ApplicationManager app;
     protected WebDriver wd;
-    Actions actions = new Actions(wd);
+    //Actions actions = new Actions(wd);
 
 
     public HelperBase(ApplicationManager app) {
@@ -40,16 +40,16 @@ public class HelperBase {
         }
     }
 
-    protected void acceptRegionLanguage() {
-        pressTabKey();
-        pressTabKey();
-        pressTabKey();
-        actions.keyDown(Keys.ENTER);
-    }
-
-    private void pressTabKey() {
-        actions.keyDown(Keys.TAB);
-    }
+//    protected void acceptRegionLanguage() {
+//        pressTabKey();
+//        pressTabKey();
+//        pressTabKey();
+//        //actions.keyDown(Keys.ENTER);
+//    }
+//
+//    private void pressTabKey() {
+//        actions.keyDown(Keys.TAB);
+//    }
 
     protected void attach(By locator, File file) {
         if (file != null) {
