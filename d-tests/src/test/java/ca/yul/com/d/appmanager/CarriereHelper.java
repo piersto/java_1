@@ -1,16 +1,14 @@
 package ca.yul.com.d.appmanager;
 
-import com.mysql.cj.util.DnsSrv;
 import org.openqa.selenium.By;
 import org.openqa.selenium.WebDriver;
 
 public class CarriereHelper extends HelperBase {
     private final ApplicationManager app;
     private WebDriver wd;
-    public String tuile = "div[class=\"aem-Grid aem-Grid--xsmall--12 aem-Grid--default--12 \"]>div[class]";
-
-
-
+    public String tuileLocator =
+            "div[class=\"aem-Grid aem-Grid--xsmall--12 aem-Grid--default--12 \"]>div[class]";
+    
     public CarriereHelper(ApplicationManager app) {
         super(app);
         this.app = app;
@@ -29,7 +27,7 @@ public class CarriereHelper extends HelperBase {
 
     public int countTuiles() {
 
-        return wd.findElements(By.cssSelector(tuile)).size();
+        return wd.findElements(By.cssSelector(tuileLocator)).size();
     }
 
     public String getElementsAttribute(String selector, String attribute) {
