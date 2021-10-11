@@ -12,6 +12,7 @@ import java.io.IOException;
 public class HttpSession {
     private CloseableHttpClient httpclient;
     private ApplicationManager app;
+    public String urlToCarrierPage = "/fr/carriere.html";
 
     public HttpSession(ApplicationManager app) {
         this.app = app;

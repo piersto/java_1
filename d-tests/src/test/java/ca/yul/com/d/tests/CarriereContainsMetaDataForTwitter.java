@@ -28,8 +28,8 @@ public class CarriereContainsMetaDataForTwitter extends TestBase{
     public void testContainsMetaDataForTwitterURL() throws IOException {
         HttpSession session = TestBase.app.newSession();
         Assert.assertTrue(session.
-                containsText("<meta property=\"twitter:url\" content=\"https://www.desjardins.com/fr/carriere.html\"/>\n"
-                        ,"/fr/carriere.html"));
+                containsText("<1meta property=\"twitter:url\" content=\"https://www.desjardins.com/fr/carriere.html\"/>\n"
+                        ,session.urlToCarrierPage));
     }
 
     @Test
@@ -37,7 +37,7 @@ public class CarriereContainsMetaDataForTwitter extends TestBase{
         HttpSession session = TestBase.app.newSession();
         Assert.assertTrue(session.
                 containsText("<meta property=\"twitter:url\" content=\"https://www.desjardins.com/fr/carriere.html\"/>\n"
-                        ,"/fr/carriere.html"));
+                        ,session.urlToCarrierPage));
     }
 
     @Test
@@ -45,7 +45,7 @@ public class CarriereContainsMetaDataForTwitter extends TestBase{
         HttpSession session = TestBase.app.newSession();
         Assert.assertTrue(session.
                 containsText("<meta property=\"twitter:image\" content=\"https://www.desjardins.com/fr/carriere.thumb.800.480.png\"/>\n"
-                        ,"/fr/carriere.html"));
+                        ,session.urlToCarrierPage));
     }
 
     @Test
@@ -53,6 +53,6 @@ public class CarriereContainsMetaDataForTwitter extends TestBase{
         HttpSession session = TestBase.app.newSession();
         Assert.assertTrue(session.
                 containsText("<meta property=\"twitter:description\" content=\"Faites carrière dans une organisation vraiment humaine où vous développerez vos compétences et ferez une différence dans la communauté. Postulez maintenant!\"/>\n"
-                        ,"/fr/carriere.html"));
+                        ,session.urlToCarrierPage));
     }
 }
