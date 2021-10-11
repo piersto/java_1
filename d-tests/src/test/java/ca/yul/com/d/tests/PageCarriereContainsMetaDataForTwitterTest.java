@@ -6,7 +6,7 @@ import org.testng.annotations.Test;
 
 import java.io.IOException;
 
-public class CarriereContainsMetaDataForTwitter extends TestBase{
+public class PageCarriereContainsMetaDataForTwitterTest extends TestBase{
 
     @Test
     public void testContainsMetaDataForTwitterTitle() throws IOException {
