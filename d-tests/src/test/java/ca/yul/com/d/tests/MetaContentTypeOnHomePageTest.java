@@ -11,6 +11,6 @@ public class MetaContentTypeOnHomePageTest extends TestBase{
     @Test
     public void testMetaContentType () throws IOException {
         HttpSession session = app.newSession();
-        Assert.assertTrue(session.containsText("<meta http-equiv=\"Content-Type\"",""));
+        Assert.assertTrue(session.containsText("<meta http-equiv=\"Content-Type\""));
     }
 }
