@@ -7,7 +7,7 @@ import org.openqa.selenium.WebDriver;
 public class CarriereHelper extends HelperBase {
     private final ApplicationManager app;
     private WebDriver wd;
-    public String carrierUrl = "/fr/carriere.html";
+    //public String carrierUrl = "/fr/carriere.html";
 
 
     public CarriereHelper(ApplicationManager app) {
@@ -17,7 +17,7 @@ public class CarriereHelper extends HelperBase {
     }
 
     public void openCarrierePage() {
-        wd.get(app.getProperty("web.baseUrl") + carrierUrl);
+        wd.get(app.getProperty("web.baseUrl") + app.getProperty("web.carrierePage"));
         //acceptRegionLanguage();
     }
 
