@@ -32,8 +32,8 @@ public class HttpSession {
         }
     }
 
-    public boolean containsText(String text) throws IOException {
-        HttpGet get = new HttpGet(app.getProperty("web.baseUrl"));
+    public boolean containsText(String text, String pageURL) throws IOException {
+        HttpGet get = new HttpGet(app.getProperty("web.baseUrl") + pageURL);
         CloseableHttpResponse response = httpclient.execute(get);
         String body = geTextFrom(response);
         return body.contains(String.format(text));

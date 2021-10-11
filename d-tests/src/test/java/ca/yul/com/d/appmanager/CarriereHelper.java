@@ -1,11 +1,14 @@
 package ca.yul.com.d.appmanager;
 
+import com.mysql.cj.util.DnsSrv;
 import org.openqa.selenium.By;
 import org.openqa.selenium.WebDriver;
 
 public class CarriereHelper extends HelperBase {
     private final ApplicationManager app;
     private WebDriver wd;
+    public String carrierUrl = "/fr/carriere.html";
+
 
     public CarriereHelper(ApplicationManager app) {
         super(app);
@@ -14,8 +17,7 @@ public class CarriereHelper extends HelperBase {
     }
 
     public void openCarrierePage() {
-
-        wd.get("https://www.desjardins.com/fr/carriere.html");
+        wd.get(app.getProperty("web.baseUrl") + carrierUrl);
         //acceptRegionLanguage();
     }
 
