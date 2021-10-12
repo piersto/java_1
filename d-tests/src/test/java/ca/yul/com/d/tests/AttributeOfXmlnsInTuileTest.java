@@ -2,10 +2,10 @@ package ca.yul.com.d.tests;
 
 import org.testng.annotations.Test;
 
-public class AttributeOfBlaBlaBlaTest extends TestBase {
+public class AttributeOfXmlnsInTuileTest extends TestBase {
 
     @Test
-    public void testAttributeOfBlaBlaBla() throws InterruptedException {
+    public void testAttributeOfXmlnsInTuile() throws InterruptedException {
         app.carriere().openCarrierePage();
         String attributeUnderTest =
                 app.carriere().getElementsAttribute
