@@ -20,6 +20,7 @@ public class ApplicationManager {
     private SessionHelper sessionHelper;
     private CarriereHelper carriereHelper;
 
+
 //    private RegistrationHelper registrationHelper;
 //    private FtpHelper ftp;
 //    private MailHelper mailHelper;

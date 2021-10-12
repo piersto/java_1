@@ -5,7 +5,7 @@ import org.testng.annotations.Test;
 public class AttributeOfBlaBlaBlaTest extends TestBase {
 
     @Test
-    public void testAttributeOfBlaBlaBla() {
+    public void testAttributeOfBlaBlaBla() throws InterruptedException {
         app.carriere().openCarrierePage();
         String attributeUnderTest =
                 app.carriere().getElementsAttribute

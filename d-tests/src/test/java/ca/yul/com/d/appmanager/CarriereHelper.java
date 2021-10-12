@@ -8,15 +8,16 @@ public class CarriereHelper extends HelperBase {
     private WebDriver wd;
     public String tuileLocator =
             "div[class=\"aem-Grid aem-Grid--xsmall--12 aem-Grid--default--12 \"]>div[class]";
-    
+
     public CarriereHelper(ApplicationManager app) {
         super(app);
         this.app = app;
         wd = app.getDriver();
     }
 
-    public void openCarrierePage() {
+    public void openCarrierePage() throws InterruptedException {
         wd.get(app.getProperty("web.baseUrl") + app.getProperty("web.carrierePage"));
+        Thread.sleep(50);
         //acceptRegionLanguage();
     }
 
